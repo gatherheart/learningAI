@@ -1089,6 +1089,80 @@
           "answerReason": "The whole curriculum is about the connections between components, not isolated vocabulary words."
         }
       }
+    },
+    "30_overfitting_generalization": {
+      "title": "Overfitting and Generalization",
+      "description": "A model can fit the training set well yet generalize poorly to unseen data.\n\n```text\ntrain good != deploy good\n```\n\nGeneralization is a core ML goal, not a side detail.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "What is overfitting?",
+          "options": [
+            "Having too few parameters.",
+            "Using a GPU for training.",
+            "Learning the training set too specifically and failing to generalize well."
+          ],
+          "explanations": [
+            "Too few parameters is a different issue.",
+            "Hardware choice is unrelated.",
+            "Correct. Overfitting is a generalization failure."
+          ],
+          "answerReason": "A model can look strong on training data and still fail on new examples."
+        },
+        "q3": {
+          "question": "Why is this a deployment concern?",
+          "options": [
+            "Because production only uses the training set.",
+            "Because real users send unseen inputs, not the exact training distribution slice you optimized on.",
+            "Because overfitting changes Python syntax."
+          ],
+          "explanations": [
+            "Production inputs are not just the training set.",
+            "Correct. Deployment quality depends on unseen data behavior.",
+            "Syntax is unrelated."
+          ],
+          "answerReason": "Real systems care about how the model behaves beyond the training set."
+        }
+      }
+    },
+    "34_hallucination_grounding": {
+      "title": "Hallucination and Grounding",
+      "description": "A language model can produce fluent output that is still wrong.\n\n```text\nconfidence != correctness\n```\n\nReliable systems need grounding, evaluation, and product constraints around the model.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why is hallucination mitigation not only a prompt-writing problem?",
+          "options": [
+            "Because retrieval quality, evaluation, tool use, and product constraints also shape factual behavior.",
+            "Because hallucinations disappear at temperature zero.",
+            "Because only users cause hallucinations."
+          ],
+          "explanations": [
+            "Correct. System design matters too.",
+            "That is too strong.",
+            "Users are not the only factor."
+          ],
+          "answerReason": "Prompts matter, but reliable factual behavior usually needs broader system design."
+        },
+        "q3": {
+          "question": "What does grounding try to improve?",
+          "options": [
+            "How many fonts the UI uses.",
+            "Only GPU memory usage.",
+            "Whether outputs stay tied to evidence or trusted context rather than unsupported guesses."
+          ],
+          "explanations": [
+            "Fonts are unrelated.",
+            "GPU memory is a different concern.",
+            "Correct. Grounding is about evidence-backed behavior."
+          ],
+          "answerReason": "Grounding reduces unsupported generation by tying answers to better context."
+        }
+      }
     }
   }
 }

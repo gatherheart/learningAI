@@ -642,5 +642,51 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "30_overfitting_generalization",
+    "bin": "30_overfitting_generalization",
+    "topic": "eval",
+    "code": "print(\"train score high\")\nprint(\"test score worse\")",
+    "expectedOutput": "train score high\ntest score worse\n",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 2
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "34_hallucination_grounding",
+    "bin": "34_hallucination_grounding",
+    "topic": "llm",
+    "code": "print(\"model sounds confident\")\nprint(\"grounding still matters\")",
+    "expectedOutput": "model sounds confident\ngrounding still matters\n",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 2
+      }
+    ]
   }
 ]
