@@ -1,7 +1,30 @@
 [
   {
-    "id": "01_vector_dot",
-    "bin": "01_vector_dot",
+    "id": "01_tensors_shapes",
+    "bin": "01_tensors_shapes",
+    "topic": "basics",
+    "code": "vector = [1.0, 2.0, 3.0]\nprint(len(vector))\nprint(vector[0])",
+    "expectedOutput": "3\n1.0",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "02_vector_dot",
+    "bin": "02_vector_dot",
     "topic": "math",
     "code": "a = [1, 2]\nb = [3, 4]\nresult = a[0] * b[0] + a[1] * b[1]\nprint(result)",
     "expectedOutput": "11",
@@ -18,14 +41,14 @@
       {
         "id": "q3",
         "type": "multiple-choice",
-        "answer": 0
+        "answer": 1
       }
     ]
   },
   {
-    "id": "02_perceptron",
-    "bin": "02_perceptron",
-    "topic": "nn",
+    "id": "03_perceptron",
+    "bin": "03_perceptron",
+    "topic": "math",
     "code": "x1, x2 = 1.0, 0.0\nw1, w2 = 0.8, 0.2\nbias = -0.5\nscore = w1 * x1 + w2 * x2 + bias\nprint(score > 0)",
     "expectedOutput": "True",
     "quizzes": [
@@ -46,8 +69,31 @@
     ]
   },
   {
-    "id": "03_gradient_descent",
-    "bin": "03_gradient_descent",
+    "id": "04_linear_regression_loss",
+    "bin": "04_linear_regression_loss",
+    "topic": "loss",
+    "code": "prediction = 8.0\ntarget = 5.0\nloss = (prediction - target) ** 2\nprint(loss)",
+    "expectedOutput": "9.0",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 2
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "05_gradient_descent",
+    "bin": "05_gradient_descent",
     "topic": "optim",
     "code": "weight = 5.0\nlr = 0.1\ngrad = 2.0\nweight = weight - lr * grad\nprint(weight)",
     "expectedOutput": "4.8",
@@ -59,7 +105,7 @@
       {
         "id": "q2",
         "type": "multiple-choice",
-        "answer": 0
+        "answer": 1
       },
       {
         "id": "q3",
@@ -69,11 +115,11 @@
     ]
   },
   {
-    "id": "04_softmax",
-    "bin": "04_softmax",
-    "topic": "prob",
-    "code": "scores = [1.0, 2.0]\nimport math\nvalues = [math.exp(x) for x in scores]\ntotal = sum(values)\nprint(round(values[0] / total, 3) < round(values[1] / total, 3))",
-    "expectedOutput": "True",
+    "id": "06_backprop_chain_rule",
+    "bin": "06_backprop_chain_rule",
+    "topic": "optim",
+    "code": "x = 3.0\ny = x * 2\nz = y + 1\nprint(z)",
+    "expectedOutput": "7.0",
     "quizzes": [
       {
         "id": "q1",
@@ -92,8 +138,100 @@
     ]
   },
   {
-    "id": "05_attention_scores",
-    "bin": "05_attention_scores",
+    "id": "07_relu_sigmoid",
+    "bin": "07_relu_sigmoid",
+    "topic": "activations",
+    "code": "x = -3\nrelu = max(0, x)\nprint(relu)",
+    "expectedOutput": "0",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 2
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "08_softmax_cross_entropy",
+    "bin": "08_softmax_cross_entropy",
+    "topic": "prob",
+    "code": "scores = [1.0, 2.0]\nimport math\nvalues = [math.exp(x) for x in scores]\ntotal = sum(values)\nprint(round(values[0] / total, 3) < round(values[1] / total, 3))",
+    "expectedOutput": "True",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "09_tokenization",
+    "bin": "09_tokenization",
+    "topic": "tokens",
+    "code": "text = \"hello world\"\ntokens = text.split(\" \")\nprint(len(tokens))\nprint(tokens[0])",
+    "expectedOutput": "2\nhello",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "10_embeddings",
+    "bin": "10_embeddings",
+    "topic": "embeddings",
+    "code": "embedding_table = [[0.1, 0.2], [0.5, 0.9], [1.0, 1.5]]\ntoken_id = 1\nvector = embedding_table[token_id]\nprint(vector[0])\nprint(vector[1])",
+    "expectedOutput": "0.5\n0.9",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 2
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "11_attention_scores",
+    "bin": "11_attention_scores",
     "topic": "attention",
     "code": "q = [1, 0]\nk = [1, 2]\nscore = q[0] * k[0] + q[1] * k[1]\nprint(score)",
     "expectedOutput": "1",
@@ -115,8 +253,54 @@
     ]
   },
   {
-    "id": "06_transformer_block",
-    "bin": "06_transformer_block",
+    "id": "12_scaled_masked_attention",
+    "bin": "12_scaled_masked_attention",
+    "topic": "attention",
+    "code": "dimension = 16\nimport math\nscale = math.sqrt(dimension)\nprint(int(scale))",
+    "expectedOutput": "4",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "13_multi_head_attention",
+    "bin": "13_multi_head_attention",
+    "topic": "attention",
+    "code": "heads = 8\nhead_dim = 64\nprint(heads * head_dim)",
+    "expectedOutput": "512",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 2
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "14_transformer_block",
+    "bin": "14_transformer_block",
     "topic": "transformer",
     "code": "x = 10\nattention_delta = 3\nx = x + attention_delta\nprint(x)",
     "expectedOutput": "13",
@@ -133,16 +317,16 @@
       {
         "id": "q3",
         "type": "multiple-choice",
-        "answer": 0
+        "answer": 2
       }
     ]
   },
   {
-    "id": "07_training_loop",
-    "bin": "07_training_loop",
+    "id": "15_batches_optimizer",
+    "bin": "15_batches_optimizer",
     "topic": "training",
-    "code": "steps = [\"forward\", \"loss\", \"backward\", \"step\"]\nprint(len(steps))",
-    "expectedOutput": "4",
+    "code": "batch_size = 32\nnum_batches = 4\nprint(batch_size * num_batches)",
+    "expectedOutput": "128",
     "quizzes": [
       {
         "id": "q1",
@@ -151,18 +335,18 @@
       {
         "id": "q2",
         "type": "multiple-choice",
-        "answer": 0
+        "answer": 1
       },
       {
         "id": "q3",
         "type": "multiple-choice",
-        "answer": 1
+        "answer": 0
       }
     ]
   },
   {
-    "id": "08_llm_next_token",
-    "bin": "08_llm_next_token",
+    "id": "16_llm_next_token",
+    "bin": "16_llm_next_token",
     "topic": "llm",
     "code": "tokens_seen = 5\nnext_choices = 32000\nprint(tokens_seen < next_choices)",
     "expectedOutput": "True",
@@ -179,7 +363,7 @@
       {
         "id": "q3",
         "type": "multiple-choice",
-        "answer": 0
+        "answer": 1
       }
     ]
   }

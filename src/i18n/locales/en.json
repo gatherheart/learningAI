@@ -6,7 +6,7 @@
     "search": "Search lessons, topics, or ids",
     "keyboardHint": "Finish each lesson quiz set to unlock the next lesson.",
     "heroTitle": "Learn AI and LLM building blocks from code-level examples, not slogans.",
-    "heroBody": "This track starts with vectors and gradients, then moves through perceptrons, softmax, attention, transformer blocks, and training loops. The goal is to understand what each line is computing and why.",
+    "heroBody": "This track starts from tensors, linear models, and loss functions, then moves through backpropagation, optimization, tokenization, embeddings, attention, transformer blocks, batching, and autoregressive language modeling. The goal is to build the missing ladder from first principles to modern LLM components.",
     "startLearning": "Start learning",
     "lessonNotFound": "Lesson not found.",
     "courseComplete": "Every lesson is complete.",
@@ -29,7 +29,7 @@
     "howItWorks2": "Use the embedded editor to annotate or tweak the snippet while keeping the lesson context nearby.",
     "howItWorks3": "Finish the quiz set, then continue in the external workspace when you want a larger sandbox.",
     "previewLabel": "preview",
-    "previewStatus": "Track tensors, shapes, gradients, and data flow through the model step by step.",
+    "previewStatus": "Start from tensors and losses, then climb toward attention, transformer blocks, and LLM training flow.",
     "homeTip": "Use the embedded editor to annotate the math, then jump to Colab when you want to run full experiments or expand the model.",
     "howItWorks": "How it works",
     "lessonList": "Lesson list",
@@ -37,93 +37,171 @@
     "learnByDoing": "Learn by doing"
   },
   "topics": {
+    "basics": "basics",
     "math": "math",
-    "nn": "neural nets",
+    "loss": "losses",
     "optim": "optimization",
+    "activations": "activations",
     "prob": "probability",
+    "tokens": "tokenization",
+    "embeddings": "embeddings",
     "attention": "attention",
     "transformer": "transformers",
     "training": "training",
     "llm": "llms"
   },
   "lessons": {
-    "01_vector_dot": {
-      "title": "Dot Products as Similarity",
-      "description": "Many ML computations reduce to weighted sums, and the dot product is the basic example.\n\n```python\na = [1, 2]\nb = [3, 4]\n```\n\nThe dot product multiplies aligned components and sums the results.",
+    "01_tensors_shapes": {
+      "title": "Tensors, Scalars, Vectors, and Shapes",
+      "description": "Most ML code manipulates tensors with shapes. A scalar has shape `()`, a vector has one axis, and a matrix has two axes.\n\n```python\nvector = [1.0, 2.0, 3.0]\n```\n\nShape reasoning is the base layer for everything else.",
       "quizzes": {
         "q1": {
           "question": "What is printed?"
         },
         "q2": {
-          "question": "Why does the dot product appear so often in ML models?",
+          "question": "Why do shapes matter in ML code?",
           "options": [
-            "It measures weighted alignment between vectors and forms the core of linear layers.",
-            "It is only used for image resizing.",
-            "It automatically normalizes all features to unit length."
+            "They only matter for plotting charts.",
+            "They determine which operations are valid and how data flows through layers.",
+            "They replace the need for model parameters."
           ],
           "explanations": [
-            "Yes. Linear models and neural layers rely on weighted sums constantly.",
-            "It is far more general than image resizing.",
-            "Normalization is a separate operation."
+            "Shapes matter much more broadly than plotting.",
+            "Correct. Shape compatibility determines whether operations make sense.",
+            "Parameters are still needed."
           ],
-          "answerReason": "Scoring similarity and forming weighted combinations are central operations throughout ML."
+          "answerReason": "A huge amount of ML debugging is really shape debugging."
+        },
+        "q3": {
+          "question": "What is the main conceptual difference between a scalar and a vector?",
+          "options": [
+            "A scalar is a single value; a vector is an ordered collection along one axis.",
+            "A scalar always lives on the CPU while a vector always lives on the GPU.",
+            "A vector cannot contain numbers."
+          ],
+          "explanations": [
+            "Correct. Scalars and vectors differ by dimensional structure.",
+            "Device placement is a separate concern.",
+            "Vectors are usually numeric collections."
+          ],
+          "answerReason": "Before model architecture, you need a clear mental model of the data structures being transformed."
+        }
+      }
+    },
+    "02_vector_dot": {
+      "title": "Dot Products as Weighted Similarity",
+      "description": "Many ML computations reduce to weighted sums, and the dot product is the simplest example.\n\n```python\na = [1, 2]\nb = [3, 4]\n```\n\nMultiply aligned components and sum the results.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why does the dot product appear constantly in ML models?",
+          "options": [
+            "It forms the weighted-sum scoring core of linear layers and similarity calculations.",
+            "It is only used for image resizing.",
+            "It always produces probabilities."
+          ],
+          "explanations": [
+            "Correct. Weighted sums and alignment scores show up everywhere.",
+            "It is far broader than image resizing.",
+            "Dot products are not probabilities by themselves."
+          ],
+          "answerReason": "Linear models and neural layers are built on this weighted-combination idea."
         },
         "q3": {
           "question": "Why is the dot product a natural operation for a linear model?",
           "options": [
-            "It combines feature values and weights into one weighted sum score.",
-            "It automatically trains the model without labels.",
-            "It guarantees the result is between 0 and 1."
+            "Because it removes the need for weights.",
+            "Because it combines feature values and weights into one score.",
+            "Because it normalizes all features automatically."
           ],
           "explanations": [
-            "Correct. A linear layer is fundamentally a weighted sum plus bias.",
-            "Training still requires an optimization procedure and data.",
-            "Dot products are not probability outputs by themselves."
+            "Weights are still part of the computation.",
+            "Correct. Dot product is exactly a weighted sum across aligned dimensions.",
+            "Normalization is a separate operation."
           ],
-          "answerReason": "The weighted sum is the core scoring operation before any activation or normalization is applied."
+          "answerReason": "A linear model asks: how much should each feature contribute to the score? The dot product answers that directly."
         }
       }
     },
-    "02_perceptron": {
-      "title": "A Perceptron Applies Weights and a Threshold",
-      "description": "A perceptron computes a weighted sum and then applies a decision rule.\n\n```python\nscore = w1 * x1 + w2 * x2 + bias\n```",
+    "03_perceptron": {
+      "title": "Perceptrons, Weights, and Bias",
+      "description": "A perceptron computes a weighted sum and shifts it with a bias.\n\n```python\nscore = w1 * x1 + w2 * x2 + bias\n```\n\nThat score is then interpreted through a threshold or activation.",
       "quizzes": {
         "q1": {
           "question": "What is printed?"
         },
         "q2": {
-          "question": "What changes when you adjust the bias?",
+          "question": "What role does the bias play?",
           "options": [
-            "It shifts the decision threshold without changing the input features themselves.",
-            "It sorts the training dataset before learning.",
+            "It shifts the decision boundary without changing the raw input features.",
+            "It sorts the training data before learning.",
             "It removes the need for weights."
           ],
           "explanations": [
-            "Correct. Bias shifts the activation boundary.",
-            "Sorting data is unrelated to bias.",
-            "Weights remain essential."
+            "Correct. Bias offsets the activation score.",
+            "Sorting is unrelated.",
+            "Weights are still essential."
           ],
-          "answerReason": "Bias lets a neuron activate even when all inputs are zero or stay off despite positive inputs."
+          "answerReason": "Bias lets the model activate even when inputs are zero or stay off despite positive weighted input."
         },
         "q3": {
-          "question": "What role do the weights play in a perceptron?",
+          "question": "What role do the weights play?",
           "options": [
-            "They are only used to print the model after training.",
-            "They scale how strongly each input contributes to the decision score.",
+            "They exist only for pretty printing the model.",
+            "They scale how strongly each input contributes to the score.",
             "They force all inputs to contribute equally."
           ],
           "explanations": [
-            "Weights are part of the computation itself, not just reporting.",
-            "Correct. Larger magnitude weights change the score more strongly.",
-            "Equal contribution would defeat the purpose of learned weighting."
+            "Weights participate directly in the computation, not just reporting.",
+            "Correct. Weight magnitude changes each feature’s influence.",
+            "Equal contribution would defeat learned weighting."
           ],
-          "answerReason": "Weights express feature importance by changing how much each input moves the activation score."
+          "answerReason": "Weights express feature importance by controlling how much each input moves the score."
         }
       }
     },
-    "03_gradient_descent": {
-      "title": "Gradient Descent Moves Opposite the Gradient",
-      "description": "If the gradient points uphill, subtracting it moves parameters toward lower loss.\n\n```python\nweight = weight - lr * grad\n```",
+    "04_linear_regression_loss": {
+      "title": "Predictions Need a Loss Function",
+      "description": "A model output becomes trainable only once you compare it with a target through a loss.\n\n```python\nloss = (prediction - target) ** 2\n```\n\nFor regression, squared error is a common starting point.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why is a loss function needed?",
+          "options": [
+            "To convert tensors into strings.",
+            "To replace model parameters.",
+            "To measure how wrong the prediction is so learning has a direction."
+          ],
+          "explanations": [
+            "Formatting is unrelated.",
+            "Parameters still exist.",
+            "Correct. Without a loss, there is no objective to improve."
+          ],
+          "answerReason": "A model can produce numbers, but training needs a quantitative notion of error."
+        },
+        "q3": {
+          "question": "What does squared error emphasize?",
+          "options": [
+            "Larger prediction mistakes become disproportionately more costly.",
+            "All mistakes cost exactly the same.",
+            "Only positive mistakes count."
+          ],
+          "explanations": [
+            "Correct. Squaring magnifies larger residuals.",
+            "Squared error is not constant-cost.",
+            "Negative residuals also matter once squared."
+          ],
+          "answerReason": "The shape of the loss influences how strongly optimization reacts to different kinds of mistakes."
+        }
+      }
+    },
+    "05_gradient_descent": {
+      "title": "Gradient Descent Moves Downhill",
+      "description": "If the gradient points in the direction of steepest increase, subtracting it moves parameters downhill locally.\n\n```python\nweight = weight - lr * grad\n```",
       "quizzes": {
         "q1": {
           "question": "What is printed after one update?"
@@ -131,36 +209,110 @@
         "q2": {
           "question": "Why do we subtract the gradient during minimization?",
           "options": [
-            "Because the gradient points in the direction of steepest increase of the loss.",
-            "Because subtraction makes training deterministic on any dataset.",
-            "Because gradients are always negative numbers."
+            "Because gradients are always negative.",
+            "Because the gradient points toward increasing loss.",
+            "Because subtraction makes training deterministic."
           ],
           "explanations": [
-            "Yes. Moving opposite the gradient is the local downhill direction.",
-            "Determinism depends on many other factors.",
-            "Gradients can be positive, negative, or zero."
+            "Gradients can be positive, negative, or zero.",
+            "Correct. Moving opposite the gradient is the local downhill move.",
+            "Determinism depends on other factors too."
           ],
-          "answerReason": "The sign matters: to reduce loss, update in the opposite direction from increasing loss."
+          "answerReason": "The sign of the update matters because we want to reduce the loss, not increase it."
         },
         "q3": {
-          "question": "What does the learning rate control in gradient descent?",
+          "question": "What does the learning rate control?",
           "options": [
-            "Whether the model has gradients at all.",
-            "Whether the loss function is convex.",
+            "Whether gradients exist at all.",
+            "Whether the loss is convex.",
             "How large each parameter update step is."
           ],
           "explanations": [
-            "Gradients come from the model and loss, not from the learning rate setting.",
-            "Convexity is a property of the optimization landscape, not the step size knob.",
-            "Correct. The learning rate scales the update magnitude."
+            "Gradients come from the model and loss.",
+            "Convexity is a property of the objective landscape.",
+            "Correct. The learning rate scales the step size."
           ],
-          "answerReason": "Too large can overshoot; too small can make training crawl."
+          "answerReason": "Too small can slow learning; too large can overshoot or destabilize updates."
         }
       }
     },
-    "04_softmax": {
-      "title": "Softmax Turns Logits into a Distribution",
-      "description": "Softmax converts arbitrary scores into positive values that sum to 1.\n\n```python\nprobs = exp(logits) / sum(exp(logits))\n```\n\nThat makes it useful for multiclass prediction.",
+    "06_backprop_chain_rule": {
+      "title": "Backpropagation Uses the Chain Rule",
+      "description": "Deep networks are compositions of functions, so gradients are propagated backward using the chain rule.\n\n```text\nif z = f(y) and y = g(x), then dz/dx depends on dz/dy and dy/dx\n```\n\nBackprop is structured gradient bookkeeping across the computation graph.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why is the chain rule central to backpropagation?",
+          "options": [
+            "Because model outputs depend on nested intermediate computations.",
+            "Because it alphabetizes parameters before training.",
+            "Because it removes the need for a loss function."
+          ],
+          "explanations": [
+            "Correct. Composed functions require composed derivatives.",
+            "Alphabetical ordering is unrelated.",
+            "Loss is still required."
+          ],
+          "answerReason": "Neural nets are built from layers, so gradients must pass through one transformation after another."
+        },
+        "q3": {
+          "question": "What is backprop fundamentally computing?",
+          "options": [
+            "Only the final prediction.",
+            "How each parameter influenced the final loss through intermediate operations.",
+            "A new training dataset."
+          ],
+          "explanations": [
+            "Prediction happens in the forward pass.",
+            "Correct. Backprop traces influence backward through the graph.",
+            "Backprop computes gradients, not data."
+          ],
+          "answerReason": "Training works because parameter updates depend on each parameter’s contribution to error."
+        }
+      }
+    },
+    "07_relu_sigmoid": {
+      "title": "Activations Add Nonlinearity",
+      "description": "Without nonlinear activations, stacked linear layers collapse into one linear transformation.\n\n```python\nrelu = max(0, x)\n```\n\nReLU and sigmoid serve different purposes and have different gradient behavior.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why are activation functions needed in neural networks?",
+          "options": [
+            "To sort the training data.",
+            "To eliminate model parameters.",
+            "To let the network represent nonlinear relationships."
+          ],
+          "explanations": [
+            "Sorting is unrelated.",
+            "Parameters still matter.",
+            "Correct. Nonlinearity is what makes deep networks more expressive than one linear layer."
+          ],
+          "answerReason": "Without nonlinear activations, depth does not buy the expressive behavior people want from neural networks."
+        },
+        "q3": {
+          "question": "Why is ReLU often popular in practice?",
+          "options": [
+            "It is simple and avoids the severe saturation behavior of sigmoid in many regions.",
+            "It converts any model into a probability distribution.",
+            "It guarantees perfect gradients everywhere."
+          ],
+          "explanations": [
+            "Correct. ReLU’s piecewise behavior is simple and effective in many settings.",
+            "Probabilities require something like sigmoid/softmax depending on the task.",
+            "ReLU still has zero-gradient regions."
+          ],
+          "answerReason": "Activation choice affects optimization behavior, not just output range."
+        }
+      }
+    },
+    "08_softmax_cross_entropy": {
+      "title": "Softmax and Cross-Entropy",
+      "description": "Softmax turns logits into a normalized distribution, and cross-entropy measures how well that distribution matches the target class.\n\n```python\nprobs = exp(logits) / sum(exp(logits))\n```",
       "quizzes": {
         "q1": {
           "question": "What is printed?"
@@ -168,36 +320,110 @@
         "q2": {
           "question": "Why do larger logits get larger softmax probabilities?",
           "options": [
-            "Exponentiation preserves ordering and amplifies differences before normalization.",
-            "Softmax first sorts classes alphabetically.",
+            "Softmax sorts classes alphabetically first.",
+            "Exponentiation preserves ordering and amplifies score differences before normalization.",
             "Softmax clips all logits to the same value."
           ],
           "explanations": [
-            "Correct. Bigger logits produce larger exponentials.",
-            "Class names do not determine probabilities.",
-            "Softmax does not flatten everything equally."
+            "Class names do not control probability.",
+            "Correct. Bigger logits create bigger exponentials before normalization.",
+            "Softmax does not flatten every class equally."
           ],
-          "answerReason": "Normalization rescales the scores, but the exponential step is what makes higher logits dominate more strongly."
+          "answerReason": "Normalization rescales, but the exponential step is what lets high logits dominate more strongly."
         },
         "q3": {
-          "question": "Why is softmax commonly used at the output of a multiclass classifier?",
+          "question": "Why is softmax commonly paired with cross-entropy for multiclass classification?",
           "options": [
-            "It makes every class equally likely by design.",
-            "It converts raw class scores into a normalized probability distribution.",
-            "It removes the need for a loss function."
+            "Because softmax alone trains the model automatically.",
+            "Because cross-entropy removes the need for logits.",
+            "Because one produces class probabilities and the other scores how wrong those probabilities are against the target."
           ],
           "explanations": [
-            "Softmax preserves score differences; it does not flatten them equally.",
-            "Correct. The outputs become positive and sum to 1.",
-            "You still need a loss such as cross-entropy for training."
+            "Softmax does not provide a training objective by itself.",
+            "Cross-entropy is defined over predicted probabilities/logits relationships, not instead of them.",
+            "Correct. Prediction distribution and training objective play complementary roles."
           ],
-          "answerReason": "Softmax is useful when you want comparable class probabilities from arbitrary logits."
+          "answerReason": "You need both a way to express class confidence and a way to punish incorrect confidence."
         }
       }
     },
-    "05_attention_scores": {
-      "title": "Attention Scores from Query and Key",
-      "description": "Attention starts by comparing a query vector with key vectors.\n\n```python\nscore = q @ k\n```\n\nThe larger the compatibility score, the more weight that token can receive after softmax.",
+    "09_tokenization": {
+      "title": "Tokenization Before Modeling",
+      "description": "Language models do not ingest raw strings directly. Text is broken into tokens, and tokens map to integer ids.\n\n```text\n\"hello world\" -> [token ids]\n```\n\nTokenization choice affects vocabulary size, efficiency, and what the model must learn.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why does tokenization matter before training an LLM?",
+          "options": [
+            "The model needs discrete units it can embed, score, and predict.",
+            "It is only for pretty-printing outputs.",
+            "It removes the need for a vocabulary."
+          ],
+          "explanations": [
+            "Correct. Tokenization defines the discrete symbols the model operates over.",
+            "Tokenization is part of the modeling pipeline, not just output formatting.",
+            "Tokenization and vocabulary are tightly connected."
+          ],
+          "answerReason": "Before embeddings or attention, the model needs a workable discrete representation of text."
+        },
+        "q3": {
+          "question": "What tradeoff does tokenization influence?",
+          "options": [
+            "Only GPU fan speed.",
+            "Vocabulary size, sequence length, and what kinds of patterns can be represented compactly.",
+            "Whether gradients exist."
+          ],
+          "explanations": [
+            "Hardware fan speed is irrelevant.",
+            "Correct. Token granularity has real modeling and efficiency consequences.",
+            "Gradients are a training property, not a tokenizer property."
+          ],
+          "answerReason": "Different tokenizers change how much structure the model sees in each symbol and how long sequences become."
+        }
+      }
+    },
+    "10_embeddings": {
+      "title": "Embeddings Turn Token Ids into Vectors",
+      "description": "A token id by itself is just an index. An embedding layer turns that index into a learned dense vector.\n\n```text\ntoken id -> embedding lookup -> vector\n```\n\nThose vectors become the model’s starting representation of language units.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why is an embedding layer needed?",
+          "options": [
+            "Because token ids are already meaningful geometric vectors.",
+            "Because it converts gradients into text.",
+            "Because the model needs learned continuous representations rather than treating ids as raw numeric magnitudes."
+          ],
+          "explanations": [
+            "Token ids are arbitrary identifiers, not geometry by themselves.",
+            "Embeddings are about representation, not direct text conversion.",
+            "Correct. Learned vectors give the model a useful space for similarity and composition."
+          ],
+          "answerReason": "Embedding lookup is the bridge from discrete symbols to continuous model computation."
+        },
+        "q3": {
+          "question": "Why would using raw token ids directly be a bad representation?",
+          "options": [
+            "The numeric closeness of ids is arbitrary and does not represent semantic similarity.",
+            "Ids are always too large to fit in memory.",
+            "Raw ids automatically create attention weights."
+          ],
+          "explanations": [
+            "Correct. Id numbers are labels, not learned meaning.",
+            "Memory is not the main conceptual issue here.",
+            "Attention needs vector representations to compare meaningfully."
+          ],
+          "answerReason": "Embeddings let the model learn structure instead of inheriting meaningless integer distances."
+        }
+      }
+    },
+    "11_attention_scores": {
+      "title": "Attention Scores from Query-Key Alignment",
+      "description": "Self-attention begins by comparing a query vector with key vectors.\n\n```python\nscore = q @ k\n```\n\nLarger scores usually mean the token is more relevant to the current query context.",
       "quizzes": {
         "q1": {
           "question": "What is printed?"
@@ -210,105 +436,179 @@
             "The model skips the value vectors entirely."
           ],
           "explanations": [
-            "Yes. The score ranks relevance before normalization.",
+            "Correct. Scores rank relevance before normalization.",
             "Attention scores do not change sequence length directly.",
-            "Values are still needed to produce the mixed output."
+            "Values are still needed for the final weighted mix."
           ],
-          "answerReason": "Scores are not the final output; they decide how strongly each value vector contributes."
+          "answerReason": "The score is not the output itself; it is the relevance signal used to compute weights."
         },
         "q3": {
-          "question": "Why are the raw query-key scores usually followed by softmax?",
+          "question": "Why are raw attention scores usually followed by softmax?",
           "options": [
-            "To change keys into labels.",
             "To remove the need for value vectors.",
+            "To change keys into labels.",
             "To turn relative relevance scores into normalized attention weights."
           ],
           "explanations": [
-            "Attention scores are not labels.",
-            "Values are still required for the weighted combination output.",
+            "Values are still needed after scoring.",
+            "Scores are not labels.",
             "Correct. Softmax converts scores into a usable weighting distribution."
           ],
-          "answerReason": "Scores rank relevance, but weights are needed to mix the value vectors meaningfully."
+          "answerReason": "Raw comparisons become useful mixing coefficients only after normalization."
         }
       }
     },
-    "06_transformer_block": {
-      "title": "Residual Paths Preserve Signal",
-      "description": "Transformer blocks add residual connections so the layer can refine a representation instead of replacing it entirely.\n\n```python\nx = x + attention(x)\n```",
+    "12_scaled_masked_attention": {
+      "title": "Scaling and Masking in Attention",
+      "description": "Transformers usually scale attention scores and may apply masks before softmax.\n\n```text\nscaled scores = (QK^T) / sqrt(d_k)\n```\n\nScaling stabilizes score magnitude, and masking can block future positions or padding tokens.",
       "quizzes": {
         "q1": {
           "question": "What is printed?"
         },
         "q2": {
-          "question": "Why are residual connections important in deep models?",
+          "question": "Why divide attention scores by `sqrt(d_k)`?",
           "options": [
-            "They make it easier to preserve and refine information across many layers.",
-            "They remove the need for normalization and nonlinearities.",
-            "They force every layer to learn the exact same function."
+            "To convert the model into a CNN.",
+            "To keep score magnitudes from growing too large as key/query dimension increases.",
+            "To remove the need for softmax."
           ],
           "explanations": [
-            "Correct. Residuals help optimization and information flow.",
-            "Residuals complement, not replace, other components.",
-            "Layers can still learn different transformations."
+            "Architecture type is unrelated.",
+            "Correct. Large dot products can make softmax too peaky and gradients less stable.",
+            "Softmax is still used."
           ],
-          "answerReason": "Deep networks train more reliably when each layer can learn a correction on top of an existing signal."
+          "answerReason": "Score scaling is a numerical-stability trick tied to vector dimensionality."
         },
         "q3": {
-          "question": "What is the key intuition behind a residual connection like `x = x + delta`?",
+          "question": "What is the purpose of a causal mask in an autoregressive decoder?",
           "options": [
-            "A layer can learn a correction on top of the existing representation instead of rebuilding it from scratch.",
-            "The network stops using the old representation entirely.",
-            "The model becomes linear no matter what else is inside the block."
+            "It prevents a position from attending to future tokens that should not be visible yet.",
+            "It forces every token to attend equally to all previous tokens.",
+            "It removes tokenization from the model."
           ],
           "explanations": [
-            "Correct. Residual learning preserves signal while enabling refinement.",
-            "Residuals do the opposite: they preserve access to the old representation.",
-            "Other nonlinear components still matter."
+            "Correct. Autoregressive training/generation requires hiding future information.",
+            "Masks constrain visibility, not equalize weights.",
+            "Tokenization is a separate preprocessing stage."
           ],
-          "answerReason": "Residual paths make deep optimization easier because useful information can keep flowing through many layers."
+          "answerReason": "Without a causal mask, next-token prediction training would leak future information backward into earlier positions."
         }
       }
     },
-    "07_training_loop": {
-      "title": "The Training Loop Repeats Forward, Loss, Backward, Step",
-      "description": "Most model training repeats the same cycle: compute predictions, compute loss, backpropagate gradients, and update parameters.\n\n```python\noptimizer.zero_grad()\nloss.backward()\noptimizer.step()\n```",
+    "13_multi_head_attention": {
+      "title": "Why Multi-Head Attention Exists",
+      "description": "A single attention mechanism can focus on one pattern. Multiple heads let the model project into multiple subspaces and capture different relationships in parallel.\n\n```text\nhead1, head2, ... -> concatenate -> mix\n```",
       "quizzes": {
         "q1": {
           "question": "What is printed?"
         },
         "q2": {
-          "question": "Why does `optimizer.step()` come after `loss.backward()`?",
+          "question": "Why use multiple attention heads instead of only one?",
           "options": [
-            "The optimizer needs gradients computed from the backward pass before it can update weights.",
-            "Backward only works after the weights have already changed.",
-            "The order is arbitrary."
+            "To eliminate the need for embeddings.",
+            "To make every head compute the same pattern redundantly.",
+            "To let the model capture different kinds of relationships in parallel subspaces."
           ],
           "explanations": [
-            "Yes. No gradients means no informed parameter update.",
-            "Backward computes gradients from the current forward pass first.",
-            "The order is not arbitrary."
+            "Embeddings are still required.",
+            "The point is diversity, not redundancy.",
+            "Correct. Different heads can specialize in different signal patterns."
           ],
-          "answerReason": "Updates depend on gradients, so the graph must be differentiated before the optimizer changes parameters."
+          "answerReason": "Multi-head attention increases representational flexibility by letting attention look from multiple angles."
         },
         "q3": {
+          "question": "What happens after the per-head attention outputs are computed?",
+          "options": [
+            "They are deleted immediately.",
+            "They are combined, typically by concatenation followed by a learned projection.",
+            "They are turned into tokenizer rules."
+          ],
+          "explanations": [
+            "The outputs are used, not discarded.",
+            "Correct. Multi-head structure eventually merges back into one representation stream.",
+            "Tokenization is a separate stage."
+          ],
+          "answerReason": "Heads are useful because their outputs are recombined into a richer joint representation."
+        }
+      }
+    },
+    "14_transformer_block": {
+      "title": "Residuals, Norms, and Feed-Forward Blocks",
+      "description": "A transformer block is more than attention alone. It typically includes attention, residual connections, normalization, and a position-wise feed-forward network.\n\n```python\nx = x + attention_delta\n```\n\nResidual paths help preserve signal while later sublayers refine it.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why are residual connections important in deep transformer stacks?",
+          "options": [
+            "They let layers learn corrections on top of existing representations instead of rebuilding everything from scratch.",
+            "They remove the need for any nonlinear operations.",
+            "They force every layer to compute the exact same function."
+          ],
+          "explanations": [
+            "Correct. Residual learning improves optimization and information flow.",
+            "Residuals complement, not replace, nonlinear layers and normalization.",
+            "Layers can still learn very different transformations."
+          ],
+          "answerReason": "Residual paths help deep networks preserve useful signal while adding refinements gradually."
+        },
+        "q3": {
+          "question": "Why is the feed-forward network still important even after attention?",
+          "options": [
+            "Because attention cannot produce vectors.",
+            "Because it tokenizes the input again.",
+            "Because attention mixes information across positions, while the feed-forward sublayer applies learned nonlinear transformation at each position."
+          ],
+          "explanations": [
+            "Attention does produce vector outputs.",
+            "The transformer does not re-tokenize here.",
+            "Correct. The block needs both cross-position mixing and per-position transformation capacity."
+          ],
+          "answerReason": "Attention is not the whole transformer; the feed-forward part adds substantial modeling power too."
+        }
+      }
+    },
+    "15_batches_optimizer": {
+      "title": "Mini-Batches, Optimizers, and Gradient Reset",
+      "description": "Training rarely uses one example at a time for large models. Mini-batches improve throughput, and optimizers update parameters from accumulated gradients.\n\n```python\noptimizer.zero_grad()\nloss.backward()\noptimizer.step()\n```",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
           "question": "Why is `zero_grad()` part of many training loops?",
           "options": [
             "Because backpropagation deletes the model after each batch.",
-            "Because frameworks often accumulate gradients, so old gradient values must be cleared before the next step.",
-            "Because it forces the optimizer to pick a new architecture."
+            "Because gradients often accumulate unless you clear them before the next step.",
+            "Because it chooses a new architecture each iteration."
           ],
           "explanations": [
             "The model is not deleted after each batch.",
-            "Correct. Accumulated gradients can corrupt the intended update if they are not reset.",
-            "Optimizer state and architecture choice are unrelated here."
+            "Correct. Stale accumulated gradients can corrupt the intended update.",
+            "Architecture search is unrelated."
           ],
-          "answerReason": "If gradients are accumulated unintentionally, each update reflects multiple batches instead of the one you think you are training on."
+          "answerReason": "Many frameworks accumulate gradients by default, so reset behavior matters."
+        },
+        "q3": {
+          "question": "Why use mini-batches instead of one example at a time for large training jobs?",
+          "options": [
+            "They improve hardware utilization and provide a more efficient gradient estimate per optimizer step.",
+            "They make loss functions unnecessary.",
+            "They guarantee perfect generalization."
+          ],
+          "explanations": [
+            "Correct. Batching is about computational efficiency and gradient statistics.",
+            "Loss functions are still essential.",
+            "Generalization is not guaranteed by batching."
+          ],
+          "answerReason": "Batching is part of the systems side of training, not just the math side."
         }
       }
     },
-    "08_llm_next_token": {
-      "title": "LLMs Predict the Next Token Distribution",
-      "description": "An LLM does not retrieve one hard-coded answer. It repeatedly predicts a probability distribution over the next token.\n\n```text\ncontext -> logits -> probabilities -> sampled/selected next token\n```",
+    "16_llm_next_token": {
+      "title": "Autoregressive Next-Token Prediction",
+      "description": "An LLM does not emit one whole answer at once. It predicts a distribution over the next token, selects one token, appends it to context, and repeats.\n\n```text\ncontext -> logits -> probabilities -> next token -> longer context\n```",
       "quizzes": {
         "q1": {
           "question": "What is printed?"
@@ -317,29 +617,29 @@
           "question": "What is the model output immediately before token selection?",
           "options": [
             "A vector of logits over the vocabulary.",
-            "A full paragraph string already chosen by the model.",
-            "The final training loss from the dataset."
+            "A final paragraph string already fixed in full.",
+            "The dataset loss value."
           ],
           "explanations": [
-            "Correct. Token selection happens from logits or their normalized probabilities.",
-            "The paragraph is built token by token, not emitted all at once.",
+            "Correct. Generation works one next-token distribution at a time.",
+            "Text is built token by token, not chosen as one finished paragraph in advance.",
             "Training loss is not the direct generation output."
           ],
-          "answerReason": "Generation is incremental: each step produces scores for the next token, then the process repeats."
+          "answerReason": "Logits are the per-step scoring output; decoding decides how one token is chosen from them."
         },
         "q3": {
-          "question": "Why is next-token prediction enough to train a large language model on broad text corpora?",
+          "question": "Why is next-token prediction such a powerful training objective for language models?",
           "options": [
-            "Because predicting the next token forces the model to learn patterns about syntax, semantics, and context from the text itself.",
-            "Because the model memorizes one fixed answer for every prompt length.",
-            "Because token prediction removes the need for any training objective."
+            "Because it memorizes one fixed answer per prompt length.",
+            "Because every token in text becomes a supervised target conditioned on its context, forcing the model to learn syntax, semantics, and long-range patterns.",
+            "Because it removes the need for an objective function."
           ],
           "explanations": [
-            "Correct. The supervision signal comes from the text sequence itself.",
-            "Generalization is broader than memorizing one fixed answer per length.",
-            "Next-token prediction is itself the training objective."
+            "Generalization is richer than memorizing one fixed answer for each length.",
+            "Correct. The text itself provides dense supervision step by step.",
+            "Next-token prediction is itself the objective."
           ],
-          "answerReason": "Autoregressive training squeezes a lot of structure out of plain text because every token becomes a supervised target conditioned on context."
+          "answerReason": "Autoregressive prediction squeezes a huge amount of structure out of plain text because every position becomes training signal."
         }
       }
     }

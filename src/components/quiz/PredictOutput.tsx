@@ -37,7 +37,7 @@ export function PredictOutput({ lessonId, quizId, expectedOutput, onSolved }: Pr
         {t(`lessons.${lessonId}.quizzes.${quizId}.question`)}
       </div>
       <textarea
-        value={alreadyDone ? expectedOutput : value}
+        value={value}
         onChange={(e) => setValue(e.target.value)}
         readOnly={alreadyDone}
         rows={Math.max(3, expectedOutput.split("\n").length)}

@@ -14,7 +14,7 @@ function isDark() {
   return document.documentElement.classList.contains("dark");
 }
 
-export function CodeBlock({ code, expectedOutput }: Props) {
+export function CodeBlock({ code }: Props) {
   const { t } = useTranslation();
   const [dark, setDark] = useState(isDark());
   const [draft, setDraft] = useState(code);
@@ -56,15 +56,6 @@ export function CodeBlock({ code, expectedOutput }: Props) {
         basicSetup={{ lineNumbers: true, foldGutter: false, highlightActiveLine: false }}
         theme={dark ? "dark" : "light"}
       />
-      <div className="border-t border-white/10 bg-zinc-950/95 p-4">
-        <div className="mb-3 flex items-center justify-between gap-3">
-          <div className="text-xs uppercase tracking-[0.18em] text-zinc-500">{t("ui.output")}</div>
-          <div className="text-[11px] text-zinc-500">{t("ui.outputReady")}</div>
-        </div>
-        <section className="rounded-[22px] border border-white/10 bg-black/25 p-4">
-          <pre className="app-scrollbar min-h-28 overflow-x-auto whitespace-pre-wrap text-sm leading-6 text-emerald-100">{expectedOutput || t("ui.outputPlaceholder")}</pre>
-        </section>
-      </div>
     </div>
   );
 }
