@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Sidebar } from "@/components/Sidebar";
 import { Lesson } from "@/components/Lesson";
 import { Home } from "@/components/Home";
+import { Interview } from "@/components/Interview";
 
 const lessons = lessonsData as LessonT[];
 
@@ -17,6 +18,7 @@ export function App() {
           <Sidebar lessons={lessons} />
           <Routes>
             <Route path="/" element={<Home lessons={lessons} />} />
+            <Route path="/interview" element={<Interview />} />
             <Route path="/lesson/:id" element={<Lesson lessons={lessons} />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

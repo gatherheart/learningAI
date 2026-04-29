@@ -2,8 +2,9 @@ import { useMemo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import type { Lesson } from "@/types";
-import { isLessonUnlocked, lessonProgress } from "@/lib/store";
+import { interviewSolved, isLessonUnlocked, lessonProgress } from "@/lib/store";
 import { useProgressVersion } from "@/lib/useProgressVersion";
+import { interviewQuestions } from "@/data/interview";
 
 interface Props {
   lessons: Lesson[];
@@ -16,6 +17,7 @@ export function Sidebar({ lessons }: Props) {
 
   const totalDone = useMemo(() => lessons.filter((lesson) => lessonProgress(lesson.id, lesson.quizzes.length).done).length, [lessons, progressVersion]);
   const percent = lessons.length === 0 ? 0 : Math.round((totalDone / lessons.length) * 100);
+  const solvedInterview = useMemo(() => interviewQuestions.filter((question) => interviewSolved(question.id)).length, [progressVersion]);
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -88,6 +90,41 @@ export function Sidebar({ lessons }: Props) {
               </NavLink>
             );
           })}
+          <NavLink
+            to="/interview"
+            className={({ isActive }) =>
+              [
+                "block rounded-[22px] border px-4 py-4 transition",
+                "border-sky-400/18 bg-sky-500/8 hover:border-sky-300/35 hover:bg-sky-500/12",
+                isActive && "border-sky-300/55 bg-sky-500/14 shadow-lg shadow-sky-950/25",
+              ]
+                .filter(Boolean)
+                .join(" ")
+            }
+          >
+            <div className="mb-2 flex items-center justify-between gap-3">
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.14em] text-sky-100/70">
+                  interview mode
+                </div>
+                <div className="text-sm font-medium text-zinc-100">Interview Deep Dive</div>
+              </div>
+              <div className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[11px] text-zinc-300">
+                {solvedInterview}/{interviewQuestions.length}
+              </div>
+            </div>
+            <div className="mb-3 text-sm leading-6 text-zinc-300">
+              Harder junior, mid, and senior interview questions on tradeoffs, runtime behavior, and architecture.
+            </div>
+            <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-sky-400 to-cyan-300"
+                style={{
+                  width: `${Math.round((solvedInterview / interviewQuestions.length) * 100) || 0}%`,
+                }}
+              />
+            </div>
+          </NavLink>
         </div>
       </div>
     </aside>

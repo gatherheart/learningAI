@@ -6,7 +6,7 @@
     "search": "Search lessons, topics, or ids",
     "keyboardHint": "Finish each lesson quiz set to unlock the next lesson.",
     "heroTitle": "Learn AI and LLM building blocks from code-level examples, not slogans.",
-    "heroBody": "This track starts from tensors, linear models, and loss functions, then moves through backpropagation, optimization, tokenization, embeddings, attention, transformer blocks, batching, and autoregressive language modeling. The goal is to build the missing ladder from first principles to modern LLM components.",
+    "heroBody": "This track covers AI from tensors, linear models, and losses through backpropagation, optimization, tokenization, embeddings, attention, transformer blocks, batching, evaluation, inference, and alignment-adjacent ideas. The goal is to build the missing ladder from first principles to modern LLM systems.",
     "startLearning": "Start learning",
     "lessonNotFound": "Lesson not found.",
     "courseComplete": "Every lesson is complete.",
@@ -29,7 +29,7 @@
     "howItWorks2": "Use the embedded editor to annotate or tweak the snippet while keeping the lesson context nearby.",
     "howItWorks3": "Finish the quiz set, then continue in the external workspace when you want a larger sandbox.",
     "previewLabel": "preview",
-    "previewStatus": "Start from tensors and losses, then climb toward attention, transformer blocks, and LLM training flow.",
+    "previewStatus": "Start from tensors and losses, then climb toward attention, transformer stacks, evaluation, and LLM system behavior.",
     "homeTip": "Use the embedded editor to annotate the math, then jump to Colab when you want to run full experiments or expand the model.",
     "howItWorks": "How it works",
     "lessonList": "Lesson list",
@@ -48,29 +48,32 @@
     "attention": "attention",
     "transformer": "transformers",
     "training": "training",
-    "llm": "llms"
+    "llm": "llms",
+    "eval": "evaluation",
+    "data": "data pipelines",
+    "alignment": "alignment"
   },
   "lessons": {
     "01_tensors_shapes": {
-      "title": "Tensors, Scalars, Vectors, and Shapes",
-      "description": "Most ML code manipulates tensors with shapes. A scalar has shape `()`, a vector has one axis, and a matrix has two axes.\n\n```python\nvector = [1.0, 2.0, 3.0]\n```\n\nShape reasoning is the base layer for everything else.",
+      "title": "Tensors and Shapes",
+      "description": "Most ML code manipulates tensors with shapes. Shape reasoning is the base layer for everything else.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
           "question": "Why do shapes matter in ML code?",
           "options": [
-            "They only matter for plotting charts.",
+            "They only matter for plotting.",
             "They determine which operations are valid and how data flows through layers.",
-            "They replace the need for model parameters."
+            "They replace model parameters."
           ],
           "explanations": [
             "Shapes matter much more broadly than plotting.",
             "Correct. Shape compatibility determines whether operations make sense.",
             "Parameters are still needed."
           ],
-          "answerReason": "A huge amount of ML debugging is really shape debugging."
+          "answerReason": "A large share of ML debugging is really shape debugging."
         },
         "q3": {
           "question": "What is the main conceptual difference between a scalar and a vector?",
@@ -81,19 +84,19 @@
           ],
           "explanations": [
             "Correct. Scalars and vectors differ by dimensional structure.",
-            "Device placement is a separate concern.",
-            "Vectors are usually numeric collections."
+            "Device placement is separate.",
+            "Vectors are numeric collections."
           ],
-          "answerReason": "Before model architecture, you need a clear mental model of the data structures being transformed."
+          "answerReason": "Before architecture, you need a clear mental model of the data structures being transformed."
         }
       }
     },
     "02_vector_dot": {
-      "title": "Dot Products as Weighted Similarity",
-      "description": "Many ML computations reduce to weighted sums, and the dot product is the simplest example.\n\n```python\na = [1, 2]\nb = [3, 4]\n```\n\nMultiply aligned components and sum the results.",
+      "title": "Dot Products",
+      "description": "Many ML computations reduce to weighted sums, and the dot product is the simplest example.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
           "question": "Why does the dot product appear constantly in ML models?",
@@ -104,70 +107,70 @@
           ],
           "explanations": [
             "Correct. Weighted sums and alignment scores show up everywhere.",
-            "It is far broader than image resizing.",
+            "It is much broader than image resizing.",
             "Dot products are not probabilities by themselves."
           ],
           "answerReason": "Linear models and neural layers are built on this weighted-combination idea."
         },
         "q3": {
-          "question": "Why is the dot product a natural operation for a linear model?",
+          "question": "Why is the dot product natural for a linear model?",
           "options": [
             "Because it removes the need for weights.",
             "Because it combines feature values and weights into one score.",
             "Because it normalizes all features automatically."
           ],
           "explanations": [
-            "Weights are still part of the computation.",
+            "Weights still matter.",
             "Correct. Dot product is exactly a weighted sum across aligned dimensions.",
-            "Normalization is a separate operation."
+            "Normalization is separate."
           ],
-          "answerReason": "A linear model asks: how much should each feature contribute to the score? The dot product answers that directly."
+          "answerReason": "A linear model asks how much each feature should contribute to the score."
         }
       }
     },
-    "03_perceptron": {
-      "title": "Perceptrons, Weights, and Bias",
-      "description": "A perceptron computes a weighted sum and shifts it with a bias.\n\n```python\nscore = w1 * x1 + w2 * x2 + bias\n```\n\nThat score is then interpreted through a threshold or activation.",
+    "03_matrix_multiplication": {
+      "title": "Matrix Multiplication",
+      "description": "A dense neural layer is repeated dot products. Matrix multiplication is the batched version of linear scoring.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
-          "question": "What role does the bias play?",
+          "question": "Why is matrix multiplication central to neural networks?",
           "options": [
-            "It shifts the decision boundary without changing the raw input features.",
-            "It sorts the training data before learning.",
-            "It removes the need for weights."
+            "It only formats tensors for printing.",
+            "It replaces loss functions.",
+            "It applies many weighted sums across inputs efficiently."
           ],
           "explanations": [
-            "Correct. Bias offsets the activation score.",
-            "Sorting is unrelated.",
-            "Weights are still essential."
+            "Formatting is unrelated.",
+            "Losses are still needed.",
+            "Correct. Linear layers are built from many weighted sums."
           ],
-          "answerReason": "Bias lets the model activate even when inputs are zero or stay off despite positive weighted input."
+          "answerReason": "Dense layers become matrix operations because the same pattern repeats across neurons and batches."
         },
         "q3": {
-          "question": "What role do the weights play?",
+          "question": "What does a shape mismatch usually mean here?",
           "options": [
-            "They exist only for pretty printing the model.",
-            "They scale how strongly each input contributes to the score.",
-            "They force all inputs to contribute equally."
+            "The intended dimensions for combining features and weights do not line up.",
+            "The optimizer is broken.",
+            "The GPU is always out of memory."
           ],
           "explanations": [
-            "Weights participate directly in the computation, not just reporting.",
-            "Correct. Weight magnitude changes each feature’s influence.",
-            "Equal contribution would defeat learned weighting."
+            "Correct. The dimensions do not agree for the operation you asked for.",
+            "Optimization is separate.",
+            "OOM is a different problem."
           ],
-          "answerReason": "Weights express feature importance by controlling how much each input moves the score."
+          "answerReason": "Many model bugs reduce to asking for an operation whose dimensions do not fit the intended mapping."
         }
       }
     },
     "04_linear_regression_loss": {
-      "title": "Predictions Need a Loss Function",
-      "description": "A model output becomes trainable only once you compare it with a target through a loss.\n\n```python\nloss = (prediction - target) ** 2\n```\n\nFor regression, squared error is a common starting point.",
+      "title": "Predictions Need Losses",
+      "description": "A model output becomes trainable only once you compare it with a target through a loss.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
           "question": "Why is a loss function needed?",
@@ -181,12 +184,12 @@
             "Parameters still exist.",
             "Correct. Without a loss, there is no objective to improve."
           ],
-          "answerReason": "A model can produce numbers, but training needs a quantitative notion of error."
+          "answerReason": "Training needs a quantitative notion of error."
         },
         "q3": {
           "question": "What does squared error emphasize?",
           "options": [
-            "Larger prediction mistakes become disproportionately more costly.",
+            "Larger mistakes become disproportionately more costly.",
             "All mistakes cost exactly the same.",
             "Only positive mistakes count."
           ],
@@ -195,16 +198,16 @@
             "Squared error is not constant-cost.",
             "Negative residuals also matter once squared."
           ],
-          "answerReason": "The shape of the loss influences how strongly optimization reacts to different kinds of mistakes."
+          "answerReason": "The shape of the loss influences how strongly optimization reacts to different mistakes."
         }
       }
     },
     "05_gradient_descent": {
-      "title": "Gradient Descent Moves Downhill",
-      "description": "If the gradient points in the direction of steepest increase, subtracting it moves parameters downhill locally.\n\n```python\nweight = weight - lr * grad\n```",
+      "title": "Gradient Descent",
+      "description": "If the gradient points toward increasing loss, subtracting it moves parameters downhill locally.",
       "quizzes": {
         "q1": {
-          "question": "What is printed after one update?"
+          "question": "What is the output?"
         },
         "q2": {
           "question": "Why do we subtract the gradient during minimization?",
@@ -218,7 +221,7 @@
             "Correct. Moving opposite the gradient is the local downhill move.",
             "Determinism depends on other factors too."
           ],
-          "answerReason": "The sign of the update matters because we want to reduce the loss, not increase it."
+          "answerReason": "The sign matters because we want to reduce, not increase, the loss."
         },
         "q3": {
           "question": "What does the learning rate control?",
@@ -229,26 +232,26 @@
           ],
           "explanations": [
             "Gradients come from the model and loss.",
-            "Convexity is a property of the objective landscape.",
-            "Correct. The learning rate scales the step size."
+            "Convexity is a property of the landscape.",
+            "Correct. The learning rate scales the update."
           ],
-          "answerReason": "Too small can slow learning; too large can overshoot or destabilize updates."
+          "answerReason": "Too small slows learning; too large can overshoot or destabilize it."
         }
       }
     },
     "06_backprop_chain_rule": {
-      "title": "Backpropagation Uses the Chain Rule",
-      "description": "Deep networks are compositions of functions, so gradients are propagated backward using the chain rule.\n\n```text\nif z = f(y) and y = g(x), then dz/dx depends on dz/dy and dy/dx\n```\n\nBackprop is structured gradient bookkeeping across the computation graph.",
+      "title": "Backpropagation and the Chain Rule",
+      "description": "Deep networks are compositions of functions, so gradients are propagated backward using the chain rule.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
           "question": "Why is the chain rule central to backpropagation?",
           "options": [
             "Because model outputs depend on nested intermediate computations.",
-            "Because it alphabetizes parameters before training.",
-            "Because it removes the need for a loss function."
+            "Because it alphabetizes parameters.",
+            "Because it removes the need for a loss."
           ],
           "explanations": [
             "Correct. Composed functions require composed derivatives.",
@@ -262,48 +265,48 @@
           "options": [
             "Only the final prediction.",
             "How each parameter influenced the final loss through intermediate operations.",
-            "A new training dataset."
+            "A new dataset."
           ],
           "explanations": [
             "Prediction happens in the forward pass.",
             "Correct. Backprop traces influence backward through the graph.",
-            "Backprop computes gradients, not data."
+            "It computes gradients, not data."
           ],
-          "answerReason": "Training works because parameter updates depend on each parameter’s contribution to error."
+          "answerReason": "Updates work because parameters are judged by their contribution to error."
         }
       }
     },
     "07_relu_sigmoid": {
       "title": "Activations Add Nonlinearity",
-      "description": "Without nonlinear activations, stacked linear layers collapse into one linear transformation.\n\n```python\nrelu = max(0, x)\n```\n\nReLU and sigmoid serve different purposes and have different gradient behavior.",
+      "description": "Without nonlinear activations, stacked linear layers collapse into one linear transformation.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
-          "question": "Why are activation functions needed in neural networks?",
+          "question": "Why are activation functions needed?",
           "options": [
-            "To sort the training data.",
+            "To sort training data.",
             "To eliminate model parameters.",
             "To let the network represent nonlinear relationships."
           ],
           "explanations": [
             "Sorting is unrelated.",
             "Parameters still matter.",
-            "Correct. Nonlinearity is what makes deep networks more expressive than one linear layer."
+            "Correct. Nonlinearity is what makes deep networks expressive."
           ],
-          "answerReason": "Without nonlinear activations, depth does not buy the expressive behavior people want from neural networks."
+          "answerReason": "Without nonlinear activations, depth does not buy the behavior people want from neural networks."
         },
         "q3": {
-          "question": "Why is ReLU often popular in practice?",
+          "question": "Why is ReLU often popular?",
           "options": [
-            "It is simple and avoids the severe saturation behavior of sigmoid in many regions.",
-            "It converts any model into a probability distribution.",
+            "It is simple and avoids severe sigmoid-like saturation in many regions.",
+            "It converts every model into a probability distribution.",
             "It guarantees perfect gradients everywhere."
           ],
           "explanations": [
-            "Correct. ReLU’s piecewise behavior is simple and effective in many settings.",
-            "Probabilities require something like sigmoid/softmax depending on the task.",
+            "Correct. ReLU is simple and often trains well.",
+            "Probabilities require other output choices.",
             "ReLU still has zero-gradient regions."
           ],
           "answerReason": "Activation choice affects optimization behavior, not just output range."
@@ -312,10 +315,10 @@
     },
     "08_softmax_cross_entropy": {
       "title": "Softmax and Cross-Entropy",
-      "description": "Softmax turns logits into a normalized distribution, and cross-entropy measures how well that distribution matches the target class.\n\n```python\nprobs = exp(logits) / sum(exp(logits))\n```",
+      "description": "Softmax turns logits into a normalized distribution, and cross-entropy scores how wrong that distribution is for the target class.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
           "question": "Why do larger logits get larger softmax probabilities?",
@@ -329,30 +332,141 @@
             "Correct. Bigger logits create bigger exponentials before normalization.",
             "Softmax does not flatten every class equally."
           ],
-          "answerReason": "Normalization rescales, but the exponential step is what lets high logits dominate more strongly."
+          "answerReason": "Normalization rescales, but the exponential step makes high logits dominate more strongly."
         },
         "q3": {
-          "question": "Why is softmax commonly paired with cross-entropy for multiclass classification?",
+          "question": "Why is softmax commonly paired with cross-entropy?",
           "options": [
             "Because softmax alone trains the model automatically.",
             "Because cross-entropy removes the need for logits.",
             "Because one produces class probabilities and the other scores how wrong those probabilities are against the target."
           ],
           "explanations": [
-            "Softmax does not provide a training objective by itself.",
-            "Cross-entropy is defined over predicted probabilities/logits relationships, not instead of them.",
+            "Softmax does not provide the whole training objective.",
+            "Cross-entropy complements logits/probabilities.",
             "Correct. Prediction distribution and training objective play complementary roles."
           ],
-          "answerReason": "You need both a way to express class confidence and a way to punish incorrect confidence."
+          "answerReason": "You need both a way to express confidence and a way to punish wrong confidence."
         }
       }
     },
-    "09_tokenization": {
-      "title": "Tokenization Before Modeling",
-      "description": "Language models do not ingest raw strings directly. Text is broken into tokens, and tokens map to integer ids.\n\n```text\n\"hello world\" -> [token ids]\n```\n\nTokenization choice affects vocabulary size, efficiency, and what the model must learn.",
+    "09_regularization": {
+      "title": "Regularization and Overfitting",
+      "description": "Good training is not only about fitting the training set. Regularization helps control overfitting and improve generalization.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why is regularization used?",
+          "options": [
+            "To reduce overfitting and improve generalization.",
+            "To remove the need for data.",
+            "To guarantee perfect accuracy."
+          ],
+          "explanations": [
+            "Correct. Regularization constrains or perturbs learning to improve generalization.",
+            "Data is still essential.",
+            "No method guarantees perfection."
+          ],
+          "answerReason": "A model that memorizes training noise can look good on paper and fail in deployment."
+        },
+        "q3": {
+          "question": "What does it usually mean if training loss is much lower than validation loss?",
+          "options": [
+            "The optimizer is always broken.",
+            "The model may be overfitting the training data.",
+            "The dataset has no labels."
+          ],
+          "explanations": [
+            "The optimizer may be fine.",
+            "Correct. This gap is a common overfitting signal.",
+            "Labels may exist just fine."
+          ],
+          "answerReason": "Generalization quality is measured on held-out data, not only on the training set."
+        }
+      }
+    },
+    "10_optimizers": {
+      "title": "Optimizers",
+      "description": "Different optimizers update parameters differently, even though they all use gradient information.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why do optimizers differ if they all use gradients?",
+          "options": [
+            "Because gradients are optional.",
+            "Because only Adam uses learning rates.",
+            "Because they store and transform gradient history differently when deciding updates."
+          ],
+          "explanations": [
+            "Gradients are the core input.",
+            "Many optimizers use learning rates.",
+            "Correct. Update rules differ in how they use current and past gradient information."
+          ],
+          "answerReason": "An optimizer is an update policy, not just a gradient transport mechanism."
+        },
+        "q3": {
+          "question": "Why does optimizer choice matter?",
+          "options": [
+            "It affects stability, convergence speed, and how training behaves across different objectives.",
+            "It changes tokenization rules.",
+            "It removes the need for batching."
+          ],
+          "explanations": [
+            "Correct. Update policy shapes training dynamics.",
+            "Tokenization is unrelated.",
+            "Batching is still useful."
+          ],
+          "answerReason": "Optimization is not only about correctness; it is also about training behavior."
+        }
+      }
+    },
+    "11_batching_normalization": {
+      "title": "Batching and Normalization",
+      "description": "Mini-batches improve throughput, and normalization techniques can stabilize activations or gradient flow in deep models.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why use mini-batches?",
+          "options": [
+            "They improve hardware utilization and provide more efficient gradient estimates per step.",
+            "They make losses unnecessary.",
+            "They guarantee perfect generalization."
+          ],
+          "explanations": [
+            "Correct. Batching is a systems and statistics choice.",
+            "Losses are still essential.",
+            "Generalization is not guaranteed by batching."
+          ],
+          "answerReason": "Batching affects both hardware efficiency and optimization noise."
+        },
+        "q3": {
+          "question": "Why are normalization layers often useful?",
+          "options": [
+            "They replace all model parameters.",
+            "They remove the need for activations.",
+            "They can make training dynamics more stable by controlling representation scale or distribution."
+          ],
+          "explanations": [
+            "Normalization complements parameters; it does not replace them.",
+            "Activations still matter.",
+            "Correct. Stabilizing internal representations can improve optimization."
+          ],
+          "answerReason": "Training deep models is partly an optimization problem, not only an architecture problem."
+        }
+      }
+    },
+    "12_tokenization": {
+      "title": "Tokenization",
+      "description": "Language models do not ingest raw strings directly. Text is broken into tokens and tokens map to integer ids.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
         },
         "q2": {
           "question": "Why does tokenization matter before training an LLM?",
@@ -363,7 +477,7 @@
           ],
           "explanations": [
             "Correct. Tokenization defines the discrete symbols the model operates over.",
-            "Tokenization is part of the modeling pipeline, not just output formatting.",
+            "It is part of the model pipeline, not just output formatting.",
             "Tokenization and vocabulary are tightly connected."
           ],
           "answerReason": "Before embeddings or attention, the model needs a workable discrete representation of text."
@@ -372,7 +486,7 @@
           "question": "What tradeoff does tokenization influence?",
           "options": [
             "Only GPU fan speed.",
-            "Vocabulary size, sequence length, and what kinds of patterns can be represented compactly.",
+            "Vocabulary size, sequence length, and what patterns are represented compactly.",
             "Whether gradients exist."
           ],
           "explanations": [
@@ -380,33 +494,33 @@
             "Correct. Token granularity has real modeling and efficiency consequences.",
             "Gradients are a training property, not a tokenizer property."
           ],
-          "answerReason": "Different tokenizers change how much structure the model sees in each symbol and how long sequences become."
+          "answerReason": "Different tokenizers change how much structure each symbol carries and how long sequences become."
         }
       }
     },
-    "10_embeddings": {
-      "title": "Embeddings Turn Token Ids into Vectors",
-      "description": "A token id by itself is just an index. An embedding layer turns that index into a learned dense vector.\n\n```text\ntoken id -> embedding lookup -> vector\n```\n\nThose vectors become the model’s starting representation of language units.",
+    "13_embeddings": {
+      "title": "Embeddings",
+      "description": "A token id is just an index. An embedding layer maps that index into a learned dense vector.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
           "question": "Why is an embedding layer needed?",
           "options": [
             "Because token ids are already meaningful geometric vectors.",
             "Because it converts gradients into text.",
-            "Because the model needs learned continuous representations rather than treating ids as raw numeric magnitudes."
+            "Because the model needs learned continuous representations rather than arbitrary numeric ids."
           ],
           "explanations": [
-            "Token ids are arbitrary identifiers, not geometry by themselves.",
-            "Embeddings are about representation, not direct text conversion.",
-            "Correct. Learned vectors give the model a useful space for similarity and composition."
+            "Token ids are arbitrary identifiers, not geometry.",
+            "Embeddings are about representation, not text conversion.",
+            "Correct. Learned vectors create a useful space for similarity and composition."
           ],
-          "answerReason": "Embedding lookup is the bridge from discrete symbols to continuous model computation."
+          "answerReason": "Embedding lookup is the bridge from discrete symbols to continuous computation."
         },
         "q3": {
-          "question": "Why would using raw token ids directly be a bad representation?",
+          "question": "Why would raw token ids be a bad representation?",
           "options": [
             "The numeric closeness of ids is arbitrary and does not represent semantic similarity.",
             "Ids are always too large to fit in memory.",
@@ -414,30 +528,67 @@
           ],
           "explanations": [
             "Correct. Id numbers are labels, not learned meaning.",
-            "Memory is not the main conceptual issue here.",
+            "Memory is not the core conceptual issue.",
             "Attention needs vector representations to compare meaningfully."
           ],
           "answerReason": "Embeddings let the model learn structure instead of inheriting meaningless integer distances."
         }
       }
     },
-    "11_attention_scores": {
-      "title": "Attention Scores from Query-Key Alignment",
-      "description": "Self-attention begins by comparing a query vector with key vectors.\n\n```python\nscore = q @ k\n```\n\nLarger scores usually mean the token is more relevant to the current query context.",
+    "14_positional_encoding": {
+      "title": "Position Must Be Represented",
+      "description": "Self-attention alone does not inherently know token order. Position information must be injected so the model can distinguish sequence order.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why is positional information needed in transformers?",
+          "options": [
+            "Because token ids are too short.",
+            "Because attention compares items in a set-like way unless order information is added.",
+            "Because it removes the need for embeddings."
+          ],
+          "explanations": [
+            "Token id length is not the key issue.",
+            "Correct. Without positional signal, order is not directly encoded.",
+            "Embeddings are still needed."
+          ],
+          "answerReason": "Transformers need an explicit way to represent sequence order."
+        },
+        "q3": {
+          "question": "What problem appears if a model has no useful positional signal?",
+          "options": [
+            "It can struggle to distinguish sequences that contain the same tokens in different orders.",
+            "It forgets how to multiply matrices.",
+            "It stops producing logits."
+          ],
+          "explanations": [
+            "Correct. Order-sensitive meaning becomes hard to represent.",
+            "Matrix multiplication is unrelated.",
+            "The architecture can still produce logits."
+          ],
+          "answerReason": "Language meaning often depends on order, so order must appear in the representation."
+        }
+      }
+    },
+    "15_attention_scores": {
+      "title": "Attention Scores",
+      "description": "Self-attention begins by comparing a query vector with key vectors. Larger scores usually mean greater relevance.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
         },
         "q2": {
           "question": "What does a larger query-key score usually mean?",
           "options": [
             "The query is more aligned with that key, so that token can receive more attention weight.",
             "The sequence becomes shorter.",
-            "The model skips the value vectors entirely."
+            "The model skips the value vectors."
           ],
           "explanations": [
             "Correct. Scores rank relevance before normalization.",
-            "Attention scores do not change sequence length directly.",
+            "Scores do not change sequence length directly.",
             "Values are still needed for the final weighted mix."
           ],
           "answerReason": "The score is not the output itself; it is the relevance signal used to compute weights."
@@ -458,188 +609,484 @@
         }
       }
     },
-    "12_scaled_masked_attention": {
-      "title": "Scaling and Masking in Attention",
-      "description": "Transformers usually scale attention scores and may apply masks before softmax.\n\n```text\nscaled scores = (QK^T) / sqrt(d_k)\n```\n\nScaling stabilizes score magnitude, and masking can block future positions or padding tokens.",
+    "16_scaled_masked_attention": {
+      "title": "Scaling and Masking",
+      "description": "Transformers usually scale attention scores and may apply masks before softmax.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
           "question": "Why divide attention scores by `sqrt(d_k)`?",
           "options": [
             "To convert the model into a CNN.",
-            "To keep score magnitudes from growing too large as key/query dimension increases.",
+            "To keep score magnitudes from growing too large as vector dimension increases.",
             "To remove the need for softmax."
           ],
           "explanations": [
             "Architecture type is unrelated.",
-            "Correct. Large dot products can make softmax too peaky and gradients less stable.",
+            "Correct. Large dot products can make softmax too peaky.",
             "Softmax is still used."
           ],
           "answerReason": "Score scaling is a numerical-stability trick tied to vector dimensionality."
         },
         "q3": {
-          "question": "What is the purpose of a causal mask in an autoregressive decoder?",
+          "question": "What is the purpose of a causal mask in autoregressive decoding?",
           "options": [
-            "It prevents a position from attending to future tokens that should not be visible yet.",
+            "It prevents a position from attending to future tokens that should not yet be visible.",
             "It forces every token to attend equally to all previous tokens.",
             "It removes tokenization from the model."
           ],
           "explanations": [
-            "Correct. Autoregressive training/generation requires hiding future information.",
-            "Masks constrain visibility, not equalize weights.",
-            "Tokenization is a separate preprocessing stage."
+            "Correct. Autoregressive training and generation require hiding future information.",
+            "Masks constrain visibility; they do not equalize weights.",
+            "Tokenization is separate."
           ],
-          "answerReason": "Without a causal mask, next-token prediction training would leak future information backward into earlier positions."
+          "answerReason": "Without a causal mask, next-token prediction would leak future information backward into earlier positions."
         }
       }
     },
-    "13_multi_head_attention": {
-      "title": "Why Multi-Head Attention Exists",
-      "description": "A single attention mechanism can focus on one pattern. Multiple heads let the model project into multiple subspaces and capture different relationships in parallel.\n\n```text\nhead1, head2, ... -> concatenate -> mix\n```",
+    "17_multi_head_attention": {
+      "title": "Multi-Head Attention",
+      "description": "Multiple heads let the model project into multiple subspaces and capture different relationships in parallel.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
-          "question": "Why use multiple attention heads instead of only one?",
+          "question": "Why use multiple attention heads instead of one?",
           "options": [
-            "To eliminate the need for embeddings.",
+            "To eliminate embeddings.",
             "To make every head compute the same pattern redundantly.",
-            "To let the model capture different kinds of relationships in parallel subspaces."
+            "To let the model capture different relationships in parallel subspaces."
           ],
           "explanations": [
             "Embeddings are still required.",
             "The point is diversity, not redundancy.",
-            "Correct. Different heads can specialize in different signal patterns."
+            "Correct. Different heads can specialize in different signals."
           ],
-          "answerReason": "Multi-head attention increases representational flexibility by letting attention look from multiple angles."
+          "answerReason": "Multi-head attention increases representational flexibility."
         },
         "q3": {
-          "question": "What happens after the per-head attention outputs are computed?",
+          "question": "What usually happens after per-head attention outputs are computed?",
           "options": [
             "They are deleted immediately.",
-            "They are combined, typically by concatenation followed by a learned projection.",
+            "They are combined, often by concatenation followed by a learned projection.",
             "They are turned into tokenizer rules."
           ],
           "explanations": [
             "The outputs are used, not discarded.",
-            "Correct. Multi-head structure eventually merges back into one representation stream.",
-            "Tokenization is a separate stage."
+            "Correct. Multi-head structure eventually merges back into one stream.",
+            "Tokenization is separate."
           ],
-          "answerReason": "Heads are useful because their outputs are recombined into a richer joint representation."
+          "answerReason": "Heads are useful because their outputs are recombined into a richer representation."
         }
       }
     },
-    "14_transformer_block": {
-      "title": "Residuals, Norms, and Feed-Forward Blocks",
-      "description": "A transformer block is more than attention alone. It typically includes attention, residual connections, normalization, and a position-wise feed-forward network.\n\n```python\nx = x + attention_delta\n```\n\nResidual paths help preserve signal while later sublayers refine it.",
+    "18_transformer_block": {
+      "title": "Transformer Block Structure",
+      "description": "A transformer block typically includes attention, residual connections, normalization, and a feed-forward network.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
-          "question": "Why are residual connections important in deep transformer stacks?",
+          "question": "Why are residual connections important?",
           "options": [
             "They let layers learn corrections on top of existing representations instead of rebuilding everything from scratch.",
-            "They remove the need for any nonlinear operations.",
+            "They remove the need for nonlinear operations.",
             "They force every layer to compute the exact same function."
           ],
           "explanations": [
             "Correct. Residual learning improves optimization and information flow.",
-            "Residuals complement, not replace, nonlinear layers and normalization.",
-            "Layers can still learn very different transformations."
+            "Residuals complement, not replace, nonlinear layers.",
+            "Layers can still learn different transformations."
           ],
-          "answerReason": "Residual paths help deep networks preserve useful signal while adding refinements gradually."
+          "answerReason": "Residual paths help deep networks preserve signal while adding refinements gradually."
         },
         "q3": {
-          "question": "Why is the feed-forward network still important even after attention?",
+          "question": "Why is the feed-forward network still important after attention?",
           "options": [
             "Because attention cannot produce vectors.",
             "Because it tokenizes the input again.",
             "Because attention mixes information across positions, while the feed-forward sublayer applies learned nonlinear transformation at each position."
           ],
           "explanations": [
-            "Attention does produce vector outputs.",
+            "Attention does produce vectors.",
             "The transformer does not re-tokenize here.",
             "Correct. The block needs both cross-position mixing and per-position transformation capacity."
           ],
-          "answerReason": "Attention is not the whole transformer; the feed-forward part adds substantial modeling power too."
+          "answerReason": "Attention is not the whole transformer; the feed-forward part adds substantial modeling power."
         }
       }
     },
-    "15_batches_optimizer": {
-      "title": "Mini-Batches, Optimizers, and Gradient Reset",
-      "description": "Training rarely uses one example at a time for large models. Mini-batches improve throughput, and optimizers update parameters from accumulated gradients.\n\n```python\noptimizer.zero_grad()\nloss.backward()\noptimizer.step()\n```",
+    "19_pretraining_objective": {
+      "title": "Pretraining Objective",
+      "description": "Pretraining gives the model broad language competence by optimizing a large-scale prediction objective across diverse text.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
-          "question": "Why is `zero_grad()` part of many training loops?",
+          "question": "Why is large-scale pretraining powerful?",
           "options": [
-            "Because backpropagation deletes the model after each batch.",
-            "Because gradients often accumulate unless you clear them before the next step.",
-            "Because it chooses a new architecture each iteration."
+            "Because every token becomes supervised signal conditioned on context.",
+            "Because it memorizes one fixed answer for each prompt length.",
+            "Because it removes the need for an objective."
           ],
           "explanations": [
-            "The model is not deleted after each batch.",
-            "Correct. Stale accumulated gradients can corrupt the intended update.",
-            "Architecture search is unrelated."
+            "Correct. The text itself provides dense supervision token by token.",
+            "Generalization is broader than memorizing one answer per length.",
+            "The prediction objective is exactly what drives learning."
           ],
-          "answerReason": "Many frameworks accumulate gradients by default, so reset behavior matters."
+          "answerReason": "Pretraining works because natural text provides massive conditional prediction signal."
         },
         "q3": {
-          "question": "Why use mini-batches instead of one example at a time for large training jobs?",
+          "question": "What does pretraining primarily give the model before task-specific tuning?",
           "options": [
-            "They improve hardware utilization and provide a more efficient gradient estimate per optimizer step.",
-            "They make loss functions unnecessary.",
-            "They guarantee perfect generalization."
+            "A guarantee of perfect factuality.",
+            "A broad internal representation of language patterns and world-correlated textual structure.",
+            "A fixed one-line answer for every question."
           ],
           "explanations": [
-            "Correct. Batching is about computational efficiency and gradient statistics.",
-            "Loss functions are still essential.",
-            "Generalization is not guaranteed by batching."
+            "Pretraining does not guarantee perfect truthfulness.",
+            "Correct. It builds broad statistical competence rather than certainty.",
+            "Generation stays dynamic and context-dependent."
           ],
-          "answerReason": "Batching is part of the systems side of training, not just the math side."
+          "answerReason": "Pretraining is about broad representation learning, not hard-coded lookup."
         }
       }
     },
-    "16_llm_next_token": {
-      "title": "Autoregressive Next-Token Prediction",
-      "description": "An LLM does not emit one whole answer at once. It predicts a distribution over the next token, selects one token, appends it to context, and repeats.\n\n```text\ncontext -> logits -> probabilities -> next token -> longer context\n```",
+    "20_fine_tuning": {
+      "title": "Fine-Tuning",
+      "description": "Fine-tuning adapts a pretrained model toward a narrower task, dataset, style, or behavior objective.",
       "quizzes": {
         "q1": {
-          "question": "What is printed?"
+          "question": "What is the output?"
         },
         "q2": {
-          "question": "What is the model output immediately before token selection?",
+          "question": "Why fine-tune a pretrained model instead of always training from scratch?",
           "options": [
-            "A vector of logits over the vocabulary.",
-            "A final paragraph string already fixed in full.",
-            "The dataset loss value."
+            "Because pretraining is useless.",
+            "Because fine-tuning removes the need for data.",
+            "Because it reuses broad pretrained structure and adapts it to a narrower objective more efficiently."
           ],
           "explanations": [
-            "Correct. Generation works one next-token distribution at a time.",
-            "Text is built token by token, not chosen as one finished paragraph in advance.",
-            "Training loss is not the direct generation output."
+            "Pretraining is highly valuable.",
+            "Fine-tuning still depends on suitable data and objectives.",
+            "Correct. Reuse of broad prior structure is the major advantage."
           ],
-          "answerReason": "Logits are the per-step scoring output; decoding decides how one token is chosen from them."
+          "answerReason": "Fine-tuning stands on top of pretrained competence instead of rebuilding everything from zero."
         },
         "q3": {
-          "question": "Why is next-token prediction such a powerful training objective for language models?",
+          "question": "What is the main role of fine-tuning in a model pipeline?",
           "options": [
-            "Because it memorizes one fixed answer per prompt length.",
-            "Because every token in text becomes a supervised target conditioned on its context, forcing the model to learn syntax, semantics, and long-range patterns.",
-            "Because it removes the need for an objective function."
+            "To steer a broadly capable model toward more specific behavior or tasks.",
+            "To remove all need for evaluation.",
+            "To delete the pretrained representation."
           ],
           "explanations": [
-            "Generalization is richer than memorizing one fixed answer for each length.",
-            "Correct. The text itself provides dense supervision step by step.",
-            "Next-token prediction is itself the objective."
+            "Correct. Fine-tuning is adaptation, not total replacement.",
+            "Evaluation is still necessary.",
+            "The pretrained structure is usually the starting point."
           ],
-          "answerReason": "Autoregressive prediction squeezes a huge amount of structure out of plain text because every position becomes training signal."
+          "answerReason": "Fine-tuning narrows and reshapes broad capability rather than creating it from nothing."
+        }
+      }
+    },
+    "21_evaluation_metrics": {
+      "title": "Evaluation Metrics",
+      "description": "You cannot judge a model only by training loss. Real systems need task-appropriate metrics and evaluation sets.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why are explicit evaluation metrics needed?",
+          "options": [
+            "Because models cannot produce numbers.",
+            "Because the notion of “good” depends on the task.",
+            "Because evaluation removes the need for datasets."
+          ],
+          "explanations": [
+            "Models do produce numeric outputs.",
+            "Correct. Good performance must be defined against task-appropriate criteria.",
+            "Evaluation still requires data."
+          ],
+          "answerReason": "A model can optimize one number and still fail the thing you care about."
+        },
+        "q3": {
+          "question": "Why can training loss alone be misleading?",
+          "options": [
+            "A lower training loss does not necessarily imply good behavior on held-out data or the real task objective.",
+            "Training loss directly measures human preference.",
+            "Training loss and deployment quality are always identical."
+          ],
+          "explanations": [
+            "Correct. Generalization and task success must be checked separately.",
+            "Human preference is a different evaluation dimension.",
+            "They are not automatically identical."
+          ],
+          "answerReason": "You need evaluation that measures the behavior you truly want, not just the optimization target."
+        }
+      }
+    },
+    "22_inference_sampling": {
+      "title": "Inference and Sampling",
+      "description": "At inference time, logits must be decoded into token choices. Decoding strategy changes style, diversity, and determinism.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why does decoding strategy matter?",
+          "options": [
+            "Because choosing among token probabilities affects diversity, determinism, and output behavior.",
+            "Because it changes the training dataset retroactively.",
+            "Because it removes the need for logits."
+          ],
+          "explanations": [
+            "Correct. Sampling, greedy decoding, and related strategies shape generation behavior.",
+            "Inference does not rewrite training data.",
+            "Logits are still the starting point."
+          ],
+          "answerReason": "Model output is not only about the learned parameters; it is also about how token choices are made at inference time."
+        },
+        "q3": {
+          "question": "What is a common tradeoff when increasing generation randomness?",
+          "options": [
+            "It guarantees more factual answers.",
+            "It may increase diversity while also increasing the chance of wandering or unstable outputs.",
+            "It disables the vocabulary."
+          ],
+          "explanations": [
+            "Randomness does not guarantee factuality.",
+            "Correct. Diversity and stability often trade off.",
+            "The vocabulary still exists."
+          ],
+          "answerReason": "Decoding is part of product behavior, not just a technical afterthought."
+        }
+      }
+    },
+    "23_rlhf_alignment": {
+      "title": "Alignment and Preference Optimization",
+      "description": "Modern assistant-like behavior is shaped not only by pretraining, but also by later objectives based on human preference or instruction-following targets.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why add preference-based post-training after pretraining?",
+          "options": [
+            "Because pretraining already optimizes exactly for assistant helpfulness and safety.",
+            "Because alignment removes the need for evaluation.",
+            "Because raw next-token prediction alone does not fully specify the behavior users want from an assistant."
+          ],
+          "explanations": [
+            "Pretraining gives broad capability, not the full target behavior profile.",
+            "Evaluation is still necessary.",
+            "Correct. Post-training helps steer capability toward desired behavior."
+          ],
+          "answerReason": "Capability and desirable behavior are related but not identical objectives."
+        },
+        "q3": {
+          "question": "What is the core idea behind preference-based training?",
+          "options": [
+            "Use signals about which outputs are preferred to push the model toward more desirable behavior.",
+            "Delete the pretrained model entirely.",
+            "Make logits disappear."
+          ],
+          "explanations": [
+            "Correct. Preferences become an additional training signal.",
+            "The pretrained model is adapted, not discarded.",
+            "Logits remain part of the model’s internal scoring."
+          ],
+          "answerReason": "Alignment methods add another layer of objective shaping beyond plain next-token prediction."
+        }
+      }
+    },
+    "24_data_quality": {
+      "title": "Data Quality and Curation",
+      "description": "Model quality depends strongly on data quality. Bad labels, noisy samples, leakage, or skewed distributions can corrupt learned behavior.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why is data quality central to model quality?",
+          "options": [
+            "Because data never affects what the model learns.",
+            "Because the model can only learn patterns present, emphasized, or mislabeled in the data.",
+            "Because better data eliminates the need for architecture."
+          ],
+          "explanations": [
+            "Data is exactly what the model learns from.",
+            "Correct. Data quality shapes learned behavior deeply.",
+            "Architecture still matters."
+          ],
+          "answerReason": "A strong model trained on weak or corrupted data can still learn weak or corrupted behavior."
+        },
+        "q3": {
+          "question": "What is data leakage in evaluation?",
+          "options": [
+            "A GPU overheating event.",
+            "A tokenizer with too many subwords.",
+            "Information from evaluation or future data sneaking into training or feature construction, making results look better than they really are."
+          ],
+          "explanations": [
+            "Hardware heat is unrelated.",
+            "Tokenizer size is unrelated.",
+            "Correct. Leakage creates falsely optimistic evaluation."
+          ],
+          "answerReason": "Leakage is dangerous because it can make a model look far better than it will behave in real deployment."
+        }
+      }
+    },
+    "25_rag_systems": {
+      "title": "Retrieval-Augmented Generation",
+      "description": "Some LLM systems retrieve external documents at inference time so generation can condition on fresher or narrower context than pretraining alone provides.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why use retrieval in an LLM system?",
+          "options": [
+            "To inject relevant external context at inference time instead of relying only on model parameters.",
+            "To remove the need for tokenization.",
+            "To make the model stop using attention."
+          ],
+          "explanations": [
+            "Correct. Retrieval can add fresh or domain-specific context.",
+            "Tokenization is still required.",
+            "Attention still matters."
+          ],
+          "answerReason": "Retrieval is a systems design choice that complements parametric model knowledge."
+        },
+        "q3": {
+          "question": "What problem is RAG often trying to improve?",
+          "options": [
+            "How many colors the UI uses.",
+            "Grounding answers in specific retrieved context rather than relying only on the model’s internal memory.",
+            "Whether matrix multiplication exists."
+          ],
+          "explanations": [
+            "UI color is unrelated.",
+            "Correct. Retrieval can improve specificity and grounding when the right documents are found.",
+            "Linear algebra is unrelated."
+          ],
+          "answerReason": "RAG is partly a knowledge access architecture, not only a model-weights story."
+        }
+      }
+    },
+    "26_inference_efficiency": {
+      "title": "Inference Efficiency",
+      "description": "Serving large models is a systems problem involving memory footprint, throughput, latency, batching, caching, and hardware utilization.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why is inference efficiency a separate engineering concern from model quality?",
+          "options": [
+            "Because better models never cost more to serve.",
+            "Because serving only depends on UI design.",
+            "Because even a strong model can be impractical if latency, memory, or throughput are unacceptable."
+          ],
+          "explanations": [
+            "Better models may cost substantially more to serve.",
+            "Serving is far more than UI work.",
+            "Correct. Deployment quality includes systems constraints."
+          ],
+          "answerReason": "A model’s usefulness depends on whether it can run within real product constraints."
+        },
+        "q3": {
+          "question": "What is batching during inference often trying to improve?",
+          "options": [
+            "Hardware utilization and throughput by serving multiple requests together when appropriate.",
+            "How the tokenizer splits words.",
+            "Whether gradients exist."
+          ],
+          "explanations": [
+            "Correct. Batching can improve throughput, though latency tradeoffs may appear.",
+            "Tokenization is separate.",
+            "Gradients are not the issue at inference."
+          ],
+          "answerReason": "Serving design is about tradeoffs between throughput, latency, and resource usage."
+        }
+      }
+    },
+    "27_failure_modes": {
+      "title": "Failure Modes and Limits",
+      "description": "Good curricula must cover what models do wrong too: hallucination, overconfidence, distribution shift, reward hacking, and brittle generalization.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why study failure modes explicitly?",
+          "options": [
+            "Because failures are irrelevant once the model trains.",
+            "Because understanding limits is necessary for evaluation, deployment safety, and realistic expectations.",
+            "Because failure modes only exist in small models."
+          ],
+          "explanations": [
+            "Failures matter throughout deployment.",
+            "Correct. Model capability without limit-awareness is not enough.",
+            "Large models have failure modes too."
+          ],
+          "answerReason": "A real curriculum should teach where the model breaks, not only where it works."
+        },
+        "q3": {
+          "question": "What is hallucination in LLM behavior?",
+          "options": [
+            "Confidently producing unsupported or fabricated content that sounds plausible.",
+            "A faster matrix multiply.",
+            "A type of optimizer step."
+          ],
+          "explanations": [
+            "Correct. Hallucination is a behavior problem in generated content.",
+            "Linear algebra speed is unrelated.",
+            "Optimization is unrelated."
+          ],
+          "answerReason": "A model can sound coherent and still be wrong, which is why evaluation and grounding matter."
+        }
+      }
+    },
+    "28_end_to_end_view": {
+      "title": "End-to-End View",
+      "description": "A modern AI system is not only a model. It is data, preprocessing, objective, optimization, evaluation, inference, and product constraints working together.",
+      "quizzes": {
+        "q1": {
+          "question": "What is the output?"
+        },
+        "q2": {
+          "question": "Why is an end-to-end perspective important?",
+          "options": [
+            "Because model behavior comes from the whole pipeline, not only from one architecture diagram.",
+            "Because architecture never matters.",
+            "Because data can be ignored once training starts."
+          ],
+          "explanations": [
+            "Correct. Real systems emerge from many linked choices.",
+            "Architecture still matters a lot.",
+            "Data remains foundational."
+          ],
+          "answerReason": "A model is one component inside a larger training and deployment system."
+        },
+        "q3": {
+          "question": "What is the main lesson of a full AI curriculum compared with an intro-only one?",
+          "options": [
+            "That all models are basically the same.",
+            "That understanding real systems requires connecting math, data, architecture, optimization, and deployment behavior.",
+            "That only tokenization matters."
+          ],
+          "explanations": [
+            "A serious curriculum should distinguish many important components.",
+            "Correct. Broad understanding comes from connecting the pieces.",
+            "Tokenization is only one part."
+          ],
+          "answerReason": "The whole curriculum is about the connections between components, not isolated vocabulary words."
         }
       }
     }

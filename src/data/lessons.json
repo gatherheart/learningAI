@@ -46,11 +46,11 @@
     ]
   },
   {
-    "id": "03_perceptron",
-    "bin": "03_perceptron",
+    "id": "03_matrix_multiplication",
+    "bin": "03_matrix_multiplication",
     "topic": "math",
-    "code": "x1, x2 = 1.0, 0.0\nw1, w2 = 0.8, 0.2\nbias = -0.5\nscore = w1 * x1 + w2 * x2 + bias\nprint(score > 0)",
-    "expectedOutput": "True",
+    "code": "rows = 2\ncols = 3\nprint(rows * cols)",
+    "expectedOutput": "6",
     "quizzes": [
       {
         "id": "q1",
@@ -59,12 +59,12 @@
       {
         "id": "q2",
         "type": "multiple-choice",
-        "answer": 0
+        "answer": 2
       },
       {
         "id": "q3",
         "type": "multiple-choice",
-        "answer": 1
+        "answer": 0
       }
     ]
   },
@@ -184,8 +184,77 @@
     ]
   },
   {
-    "id": "09_tokenization",
-    "bin": "09_tokenization",
+    "id": "09_regularization",
+    "bin": "09_regularization",
+    "topic": "loss",
+    "code": "train_loss = 0.2\nval_loss = 0.5\nprint(train_loss < val_loss)",
+    "expectedOutput": "True",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "10_optimizers",
+    "bin": "10_optimizers",
+    "topic": "optim",
+    "code": "steps = 3\nprint(steps)",
+    "expectedOutput": "3",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 2
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "11_batching_normalization",
+    "bin": "11_batching_normalization",
+    "topic": "training",
+    "code": "batch_size = 32\nnum_batches = 4\nprint(batch_size * num_batches)",
+    "expectedOutput": "128",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "12_tokenization",
+    "bin": "12_tokenization",
     "topic": "tokens",
     "code": "text = \"hello world\"\ntokens = text.split(\" \")\nprint(len(tokens))\nprint(tokens[0])",
     "expectedOutput": "2\nhello",
@@ -207,8 +276,8 @@
     ]
   },
   {
-    "id": "10_embeddings",
-    "bin": "10_embeddings",
+    "id": "13_embeddings",
+    "bin": "13_embeddings",
     "topic": "embeddings",
     "code": "embedding_table = [[0.1, 0.2], [0.5, 0.9], [1.0, 1.5]]\ntoken_id = 1\nvector = embedding_table[token_id]\nprint(vector[0])\nprint(vector[1])",
     "expectedOutput": "0.5\n0.9",
@@ -230,8 +299,31 @@
     ]
   },
   {
-    "id": "11_attention_scores",
-    "bin": "11_attention_scores",
+    "id": "14_positional_encoding",
+    "bin": "14_positional_encoding",
+    "topic": "embeddings",
+    "code": "positions = [0, 1, 2]\nprint(positions[1])",
+    "expectedOutput": "1",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "15_attention_scores",
+    "bin": "15_attention_scores",
     "topic": "attention",
     "code": "q = [1, 0]\nk = [1, 2]\nscore = q[0] * k[0] + q[1] * k[1]\nprint(score)",
     "expectedOutput": "1",
@@ -253,8 +345,8 @@
     ]
   },
   {
-    "id": "12_scaled_masked_attention",
-    "bin": "12_scaled_masked_attention",
+    "id": "16_scaled_masked_attention",
+    "bin": "16_scaled_masked_attention",
     "topic": "attention",
     "code": "dimension = 16\nimport math\nscale = math.sqrt(dimension)\nprint(int(scale))",
     "expectedOutput": "4",
@@ -276,8 +368,8 @@
     ]
   },
   {
-    "id": "13_multi_head_attention",
-    "bin": "13_multi_head_attention",
+    "id": "17_multi_head_attention",
+    "bin": "17_multi_head_attention",
     "topic": "attention",
     "code": "heads = 8\nhead_dim = 64\nprint(heads * head_dim)",
     "expectedOutput": "512",
@@ -299,8 +391,8 @@
     ]
   },
   {
-    "id": "14_transformer_block",
-    "bin": "14_transformer_block",
+    "id": "18_transformer_block",
+    "bin": "18_transformer_block",
     "topic": "transformer",
     "code": "x = 10\nattention_delta = 3\nx = x + attention_delta\nprint(x)",
     "expectedOutput": "13",
@@ -322,11 +414,57 @@
     ]
   },
   {
-    "id": "15_batches_optimizer",
-    "bin": "15_batches_optimizer",
+    "id": "19_pretraining_objective",
+    "bin": "19_pretraining_objective",
+    "topic": "llm",
+    "code": "tokens_seen = 5\nprint(tokens_seen > 0)",
+    "expectedOutput": "True",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "20_fine_tuning",
+    "bin": "20_fine_tuning",
     "topic": "training",
-    "code": "batch_size = 32\nnum_batches = 4\nprint(batch_size * num_batches)",
-    "expectedOutput": "128",
+    "code": "base = 100\nadapt = 5\nprint(base + adapt)",
+    "expectedOutput": "105",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 2
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "21_evaluation_metrics",
+    "bin": "21_evaluation_metrics",
+    "topic": "eval",
+    "code": "accuracy = 0.8\nthreshold = 0.5\nprint(accuracy > threshold)",
+    "expectedOutput": "True",
     "quizzes": [
       {
         "id": "q1",
@@ -345,11 +483,149 @@
     ]
   },
   {
-    "id": "16_llm_next_token",
-    "bin": "16_llm_next_token",
+    "id": "22_inference_sampling",
+    "bin": "22_inference_sampling",
     "topic": "llm",
-    "code": "tokens_seen = 5\nnext_choices = 32000\nprint(tokens_seen < next_choices)",
+    "code": "tokens = [\"a\", \"b\", \"c\"]\nprint(len(tokens))",
+    "expectedOutput": "3",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "23_rlhf_alignment",
+    "bin": "23_rlhf_alignment",
+    "topic": "alignment",
+    "code": "stages = 2\nprint(stages)",
+    "expectedOutput": "2",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 2
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "24_data_quality",
+    "bin": "24_data_quality",
+    "topic": "data",
+    "code": "clean = True\nprint(clean)",
     "expectedOutput": "True",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "25_rag_systems",
+    "bin": "25_rag_systems",
+    "topic": "llm",
+    "code": "docs = 4\nprint(docs)",
+    "expectedOutput": "4",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "26_inference_efficiency",
+    "bin": "26_inference_efficiency",
+    "topic": "training",
+    "code": "latency_ms = 120\nprint(latency_ms > 100)",
+    "expectedOutput": "True",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 2
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "27_failure_modes",
+    "bin": "27_failure_modes",
+    "topic": "eval",
+    "code": "failures = 5\nprint(failures > 0)",
+    "expectedOutput": "True",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "28_end_to_end_view",
+    "bin": "28_end_to_end_view",
+    "topic": "llm",
+    "code": "parts = 7\nprint(parts)",
+    "expectedOutput": "7",
     "quizzes": [
       {
         "id": "q1",
