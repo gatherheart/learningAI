@@ -1,0 +1,235 @@
+{
+  "ui": {
+    "appName": "Learning AI",
+    "lessons": "Lessons",
+    "quizzes": "Quizzes",
+    "search": "Search lessons, topics, or ids",
+    "keyboardHint": "Finish each lesson quiz set to unlock the next lesson.",
+    "heroTitle": "Learn AI and LLM building blocks from code-level examples, not slogans.",
+    "heroBody": "This track starts with vectors and gradients, then moves through perceptrons, softmax, attention, transformer blocks, and training loops. The goal is to understand what each line is computing and why.",
+    "startLearning": "Start learning",
+    "lessonNotFound": "Lesson not found.",
+    "courseComplete": "Every lesson is complete.",
+    "lessonComplete": "Lesson complete. The next lesson is now unlocked.",
+    "correct": "Correct!",
+    "tryAgain": "Try again",
+    "check": "Check",
+    "predictPlaceholder": "Type the expected output here",
+    "incorrectReasonFallback": "That choice does not match what the code or concept is doing.",
+    "resetCode": "Reset code",
+    "openWorkspace": "Open Colab",
+    "workspaceName": "Google Colab",
+    "workspaceFile": "main.py",
+    "workspaceNote": "This editor is for reading and tweaking the example. Use the external workspace for full execution and larger experiments.",
+    "output": "Expected output",
+    "outputReady": "Read the code, then verify your answer in the quiz.",
+    "outputPlaceholder": "Output is shown by the lesson metadata below.",
+    "theme": "Theme",
+    "howItWorks1": "Open a lesson and read the explanation next to a focused code sample.",
+    "howItWorks2": "Use the embedded editor to annotate or tweak the snippet while keeping the lesson context nearby.",
+    "howItWorks3": "Finish the quiz set, then continue in the external workspace when you want a larger sandbox.",
+    "previewLabel": "preview",
+    "previewStatus": "Track tensors, shapes, gradients, and data flow through the model step by step.",
+    "homeTip": "Use the embedded editor to annotate the math, then jump to Colab when you want to run full experiments or expand the model.",
+    "howItWorks": "How it works",
+    "lessonList": "Lesson list",
+    "progress": "Progress",
+    "learnByDoing": "Learn by doing"
+  },
+  "topics": {
+    "math": "math",
+    "nn": "neural nets",
+    "optim": "optimization",
+    "prob": "probability",
+    "attention": "attention",
+    "transformer": "transformers",
+    "training": "training",
+    "llm": "llms"
+  },
+  "lessons": {
+    "01_vector_dot": {
+      "title": "Dot Products as Similarity",
+      "description": "Many ML computations reduce to weighted sums, and the dot product is the basic example.\n\n```python\na = [1, 2]\nb = [3, 4]\n```\n\nThe dot product multiplies aligned components and sums the results.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why does the dot product appear so often in ML models?",
+          "options": [
+            "It measures weighted alignment between vectors and forms the core of linear layers.",
+            "It is only used for image resizing.",
+            "It automatically normalizes all features to unit length."
+          ],
+          "explanations": [
+            "Yes. Linear models and neural layers rely on weighted sums constantly.",
+            "It is far more general than image resizing.",
+            "Normalization is a separate operation."
+          ],
+          "answerReason": "Scoring similarity and forming weighted combinations are central operations throughout ML."
+        }
+      }
+    },
+    "02_perceptron": {
+      "title": "A Perceptron Applies Weights and a Threshold",
+      "description": "A perceptron computes a weighted sum and then applies a decision rule.\n\n```python\nscore = w1 * x1 + w2 * x2 + bias\n```",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "What changes when you adjust the bias?",
+          "options": [
+            "It shifts the decision threshold without changing the input features themselves.",
+            "It sorts the training dataset before learning.",
+            "It removes the need for weights."
+          ],
+          "explanations": [
+            "Correct. Bias shifts the activation boundary.",
+            "Sorting data is unrelated to bias.",
+            "Weights remain essential."
+          ],
+          "answerReason": "Bias lets a neuron activate even when all inputs are zero or stay off despite positive inputs."
+        }
+      }
+    },
+    "03_gradient_descent": {
+      "title": "Gradient Descent Moves Opposite the Gradient",
+      "description": "If the gradient points uphill, subtracting it moves parameters toward lower loss.\n\n```python\nweight = weight - lr * grad\n```",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed after one update?"
+        },
+        "q2": {
+          "question": "Why do we subtract the gradient during minimization?",
+          "options": [
+            "Because the gradient points in the direction of steepest increase of the loss.",
+            "Because subtraction makes training deterministic on any dataset.",
+            "Because gradients are always negative numbers."
+          ],
+          "explanations": [
+            "Yes. Moving opposite the gradient is the local downhill direction.",
+            "Determinism depends on many other factors.",
+            "Gradients can be positive, negative, or zero."
+          ],
+          "answerReason": "The sign matters: to reduce loss, update in the opposite direction from increasing loss."
+        }
+      }
+    },
+    "04_softmax": {
+      "title": "Softmax Turns Logits into a Distribution",
+      "description": "Softmax converts arbitrary scores into positive values that sum to 1.\n\n```python\nprobs = exp(logits) / sum(exp(logits))\n```\n\nThat makes it useful for multiclass prediction.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why do larger logits get larger softmax probabilities?",
+          "options": [
+            "Exponentiation preserves ordering and amplifies differences before normalization.",
+            "Softmax first sorts classes alphabetically.",
+            "Softmax clips all logits to the same value."
+          ],
+          "explanations": [
+            "Correct. Bigger logits produce larger exponentials.",
+            "Class names do not determine probabilities.",
+            "Softmax does not flatten everything equally."
+          ],
+          "answerReason": "Normalization rescales the scores, but the exponential step is what makes higher logits dominate more strongly."
+        }
+      }
+    },
+    "05_attention_scores": {
+      "title": "Attention Scores from Query and Key",
+      "description": "Attention starts by comparing a query vector with key vectors.\n\n```python\nscore = q @ k\n```\n\nThe larger the compatibility score, the more weight that token can receive after softmax.",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "What does a larger query-key score usually mean?",
+          "options": [
+            "The query is more aligned with that key, so that token can receive more attention weight.",
+            "The sequence becomes shorter.",
+            "The model skips the value vectors entirely."
+          ],
+          "explanations": [
+            "Yes. The score ranks relevance before normalization.",
+            "Attention scores do not change sequence length directly.",
+            "Values are still needed to produce the mixed output."
+          ],
+          "answerReason": "Scores are not the final output; they decide how strongly each value vector contributes."
+        }
+      }
+    },
+    "06_transformer_block": {
+      "title": "Residual Paths Preserve Signal",
+      "description": "Transformer blocks add residual connections so the layer can refine a representation instead of replacing it entirely.\n\n```python\nx = x + attention(x)\n```",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why are residual connections important in deep models?",
+          "options": [
+            "They make it easier to preserve and refine information across many layers.",
+            "They remove the need for normalization and nonlinearities.",
+            "They force every layer to learn the exact same function."
+          ],
+          "explanations": [
+            "Correct. Residuals help optimization and information flow.",
+            "Residuals complement, not replace, other components.",
+            "Layers can still learn different transformations."
+          ],
+          "answerReason": "Deep networks train more reliably when each layer can learn a correction on top of an existing signal."
+        }
+      }
+    },
+    "07_training_loop": {
+      "title": "The Training Loop Repeats Forward, Loss, Backward, Step",
+      "description": "Most model training repeats the same cycle: compute predictions, compute loss, backpropagate gradients, and update parameters.\n\n```python\noptimizer.zero_grad()\nloss.backward()\noptimizer.step()\n```",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "Why does `optimizer.step()` come after `loss.backward()`?",
+          "options": [
+            "The optimizer needs gradients computed from the backward pass before it can update weights.",
+            "Backward only works after the weights have already changed.",
+            "The order is arbitrary."
+          ],
+          "explanations": [
+            "Yes. No gradients means no informed parameter update.",
+            "Backward computes gradients from the current forward pass first.",
+            "The order is not arbitrary."
+          ],
+          "answerReason": "Updates depend on gradients, so the graph must be differentiated before the optimizer changes parameters."
+        }
+      }
+    },
+    "08_llm_next_token": {
+      "title": "LLMs Predict the Next Token Distribution",
+      "description": "An LLM does not retrieve one hard-coded answer. It repeatedly predicts a probability distribution over the next token.\n\n```text\ncontext -> logits -> probabilities -> sampled/selected next token\n```",
+      "quizzes": {
+        "q1": {
+          "question": "What is printed?"
+        },
+        "q2": {
+          "question": "What is the model output immediately before token selection?",
+          "options": [
+            "A vector of logits over the vocabulary.",
+            "A full paragraph string already chosen by the model.",
+            "The final training loss from the dataset."
+          ],
+          "explanations": [
+            "Correct. Token selection happens from logits or their normalized probabilities.",
+            "The paragraph is built token by token, not emitted all at once.",
+            "Training loss is not the direct generation output."
+          ],
+          "answerReason": "Generation is incremental: each step produces scores for the next token, then the process repeats."
+        }
+      }
+    }
+  }
+}

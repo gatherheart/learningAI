@@ -1,0 +1,19 @@
+# Node
+node_modules
+dist
+*.log
+
+# Rust
+lessons/target
+**/*.rs.bk
+
+# Generated
+src/data/lessons.json
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+
+# OS / editor
+.DS_Store
+.vscode
+.idea

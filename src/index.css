@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  background-color: #09090b;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    radial-gradient(circle at top, rgba(249, 115, 22, 0.18), transparent 28%),
+    linear-gradient(180deg, #18181b 0%, #09090b 100%);
+  background-size: 36px 36px, 36px 36px, auto, auto;
+}
+
+body {
+  font-family: "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  @apply bg-zinc-950 text-zinc-100;
+  background-color: #09090b;
+}
+
+#root {
+  position: relative;
+  isolation: isolate;
+  background: transparent;
+}
+
+code,
+pre,
+.font-mono {
+  font-family: "JetBrains Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+::selection {
+  background: rgba(251, 146, 60, 0.35);
+  color: #fff7ed;
+}
+
+.app-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(251, 146, 60, 0.45) rgba(24, 24, 27, 0.4);
+}
+
+.app-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.app-scrollbar::-webkit-scrollbar-track {
+  background: rgba(24, 24, 27, 0.35);
+}
+
+.app-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(251, 146, 60, 0.45);
+}
+
+.app-panel {
+  @apply rounded-[28px] border border-white/10 bg-zinc-950 shadow-2xl shadow-black/30;
+}
