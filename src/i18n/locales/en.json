@@ -67,6 +67,20 @@
             "Normalization is a separate operation."
           ],
           "answerReason": "Scoring similarity and forming weighted combinations are central operations throughout ML."
+        },
+        "q3": {
+          "question": "Why is the dot product a natural operation for a linear model?",
+          "options": [
+            "It combines feature values and weights into one weighted sum score.",
+            "It automatically trains the model without labels.",
+            "It guarantees the result is between 0 and 1."
+          ],
+          "explanations": [
+            "Correct. A linear layer is fundamentally a weighted sum plus bias.",
+            "Training still requires an optimization procedure and data.",
+            "Dot products are not probability outputs by themselves."
+          ],
+          "answerReason": "The weighted sum is the core scoring operation before any activation or normalization is applied."
         }
       }
     },
@@ -90,6 +104,20 @@
             "Weights remain essential."
           ],
           "answerReason": "Bias lets a neuron activate even when all inputs are zero or stay off despite positive inputs."
+        },
+        "q3": {
+          "question": "What role do the weights play in a perceptron?",
+          "options": [
+            "They are only used to print the model after training.",
+            "They scale how strongly each input contributes to the decision score.",
+            "They force all inputs to contribute equally."
+          ],
+          "explanations": [
+            "Weights are part of the computation itself, not just reporting.",
+            "Correct. Larger magnitude weights change the score more strongly.",
+            "Equal contribution would defeat the purpose of learned weighting."
+          ],
+          "answerReason": "Weights express feature importance by changing how much each input moves the activation score."
         }
       }
     },
@@ -113,6 +141,20 @@
             "Gradients can be positive, negative, or zero."
           ],
           "answerReason": "The sign matters: to reduce loss, update in the opposite direction from increasing loss."
+        },
+        "q3": {
+          "question": "What does the learning rate control in gradient descent?",
+          "options": [
+            "Whether the model has gradients at all.",
+            "Whether the loss function is convex.",
+            "How large each parameter update step is."
+          ],
+          "explanations": [
+            "Gradients come from the model and loss, not from the learning rate setting.",
+            "Convexity is a property of the optimization landscape, not the step size knob.",
+            "Correct. The learning rate scales the update magnitude."
+          ],
+          "answerReason": "Too large can overshoot; too small can make training crawl."
         }
       }
     },
@@ -136,6 +178,20 @@
             "Softmax does not flatten everything equally."
           ],
           "answerReason": "Normalization rescales the scores, but the exponential step is what makes higher logits dominate more strongly."
+        },
+        "q3": {
+          "question": "Why is softmax commonly used at the output of a multiclass classifier?",
+          "options": [
+            "It makes every class equally likely by design.",
+            "It converts raw class scores into a normalized probability distribution.",
+            "It removes the need for a loss function."
+          ],
+          "explanations": [
+            "Softmax preserves score differences; it does not flatten them equally.",
+            "Correct. The outputs become positive and sum to 1.",
+            "You still need a loss such as cross-entropy for training."
+          ],
+          "answerReason": "Softmax is useful when you want comparable class probabilities from arbitrary logits."
         }
       }
     },
@@ -159,6 +215,20 @@
             "Values are still needed to produce the mixed output."
           ],
           "answerReason": "Scores are not the final output; they decide how strongly each value vector contributes."
+        },
+        "q3": {
+          "question": "Why are the raw query-key scores usually followed by softmax?",
+          "options": [
+            "To change keys into labels.",
+            "To remove the need for value vectors.",
+            "To turn relative relevance scores into normalized attention weights."
+          ],
+          "explanations": [
+            "Attention scores are not labels.",
+            "Values are still required for the weighted combination output.",
+            "Correct. Softmax converts scores into a usable weighting distribution."
+          ],
+          "answerReason": "Scores rank relevance, but weights are needed to mix the value vectors meaningfully."
         }
       }
     },
@@ -182,6 +252,20 @@
             "Layers can still learn different transformations."
           ],
           "answerReason": "Deep networks train more reliably when each layer can learn a correction on top of an existing signal."
+        },
+        "q3": {
+          "question": "What is the key intuition behind a residual connection like `x = x + delta`?",
+          "options": [
+            "A layer can learn a correction on top of the existing representation instead of rebuilding it from scratch.",
+            "The network stops using the old representation entirely.",
+            "The model becomes linear no matter what else is inside the block."
+          ],
+          "explanations": [
+            "Correct. Residual learning preserves signal while enabling refinement.",
+            "Residuals do the opposite: they preserve access to the old representation.",
+            "Other nonlinear components still matter."
+          ],
+          "answerReason": "Residual paths make deep optimization easier because useful information can keep flowing through many layers."
         }
       }
     },
@@ -205,6 +289,20 @@
             "The order is not arbitrary."
           ],
           "answerReason": "Updates depend on gradients, so the graph must be differentiated before the optimizer changes parameters."
+        },
+        "q3": {
+          "question": "Why is `zero_grad()` part of many training loops?",
+          "options": [
+            "Because backpropagation deletes the model after each batch.",
+            "Because frameworks often accumulate gradients, so old gradient values must be cleared before the next step.",
+            "Because it forces the optimizer to pick a new architecture."
+          ],
+          "explanations": [
+            "The model is not deleted after each batch.",
+            "Correct. Accumulated gradients can corrupt the intended update if they are not reset.",
+            "Optimizer state and architecture choice are unrelated here."
+          ],
+          "answerReason": "If gradients are accumulated unintentionally, each update reflects multiple batches instead of the one you think you are training on."
         }
       }
     },
@@ -228,6 +326,20 @@
             "Training loss is not the direct generation output."
           ],
           "answerReason": "Generation is incremental: each step produces scores for the next token, then the process repeats."
+        },
+        "q3": {
+          "question": "Why is next-token prediction enough to train a large language model on broad text corpora?",
+          "options": [
+            "Because predicting the next token forces the model to learn patterns about syntax, semantics, and context from the text itself.",
+            "Because the model memorizes one fixed answer for every prompt length.",
+            "Because token prediction removes the need for any training objective."
+          ],
+          "explanations": [
+            "Correct. The supervision signal comes from the text sequence itself.",
+            "Generalization is broader than memorizing one fixed answer per length.",
+            "Next-token prediction is itself the training objective."
+          ],
+          "answerReason": "Autoregressive training squeezes a lot of structure out of plain text because every token becomes a supervised target conditioned on context."
         }
       }
     }

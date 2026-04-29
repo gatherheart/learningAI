@@ -1,0 +1,186 @@
+[
+  {
+    "id": "01_vector_dot",
+    "bin": "01_vector_dot",
+    "topic": "math",
+    "code": "a = [1, 2]\nb = [3, 4]\nresult = a[0] * b[0] + a[1] * b[1]\nprint(result)",
+    "expectedOutput": "11",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "02_perceptron",
+    "bin": "02_perceptron",
+    "topic": "nn",
+    "code": "x1, x2 = 1.0, 0.0\nw1, w2 = 0.8, 0.2\nbias = -0.5\nscore = w1 * x1 + w2 * x2 + bias\nprint(score > 0)",
+    "expectedOutput": "True",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "03_gradient_descent",
+    "bin": "03_gradient_descent",
+    "topic": "optim",
+    "code": "weight = 5.0\nlr = 0.1\ngrad = 2.0\nweight = weight - lr * grad\nprint(weight)",
+    "expectedOutput": "4.8",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "04_softmax",
+    "bin": "04_softmax",
+    "topic": "prob",
+    "code": "scores = [1.0, 2.0]\nimport math\nvalues = [math.exp(x) for x in scores]\ntotal = sum(values)\nprint(round(values[0] / total, 3) < round(values[1] / total, 3))",
+    "expectedOutput": "True",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "05_attention_scores",
+    "bin": "05_attention_scores",
+    "topic": "attention",
+    "code": "q = [1, 0]\nk = [1, 2]\nscore = q[0] * k[0] + q[1] * k[1]\nprint(score)",
+    "expectedOutput": "1",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "06_transformer_block",
+    "bin": "06_transformer_block",
+    "topic": "transformer",
+    "code": "x = 10\nattention_delta = 3\nx = x + attention_delta\nprint(x)",
+    "expectedOutput": "13",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "07_training_loop",
+    "bin": "07_training_loop",
+    "topic": "training",
+    "code": "steps = [\"forward\", \"loss\", \"backward\", \"step\"]\nprint(len(steps))",
+    "expectedOutput": "4",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "08_llm_next_token",
+    "bin": "08_llm_next_token",
+    "topic": "llm",
+    "code": "tokens_seen = 5\nnext_choices = 32000\nprint(tokens_seen < next_choices)",
+    "expectedOutput": "True",
+    "quizzes": [
+      {
+        "id": "q1",
+        "type": "predict-output"
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "answer": 0
+      }
+    ]
+  }
+]
