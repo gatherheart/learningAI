@@ -8,12 +8,17 @@ export type QuizType =
 export interface QuizPredictOutput {
   id: string;
   type: "predict-output";
+  question: string;
 }
 
 export interface QuizMultipleChoice {
   id: string;
   type: "multiple-choice";
+  question: string;
+  options: string[];
+  explanations: string[];
   answer: number;
+  answerReason?: string;
 }
 
 export interface QuizFillInBlank {
@@ -47,6 +52,11 @@ export interface Lesson {
   id: string;
   bin: string;
   topic: string;
+  title: string;
+  description: string;
+  source: string;
+  sourceUrl: string;
+  publishedAt: string;
   code: string;
   expectedOutput: string;
   quizzes: Quiz[];

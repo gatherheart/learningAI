@@ -40,8 +40,8 @@ export function Lesson({ lessons }: Props) {
               <span className="rounded-full border border-orange-400/30 bg-orange-500/10 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-orange-200">lesson {String(lessonIndex + 1).padStart(2, "0")}</span>
               <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-zinc-400">{t(`topics.${lesson.topic}`)}</span>
             </div>
-            <h1 className="text-3xl font-bold tracking-tight text-zinc-50 lg:text-4xl">{t(`lessons.${lesson.id}.title`)}</h1>
-            <LessonDescription content={t(`lessons.${lesson.id}.description`) as string} />
+            <h1 className="text-3xl font-bold tracking-tight text-zinc-50 lg:text-4xl">{lesson.title}</h1>
+            <LessonDescription content={lesson.description} />
           </div>
           <div className="rounded-[30px] border border-white/10 bg-[#0d1117] p-5 shadow-2xl shadow-black/20">
             <div className="mb-4 flex items-center justify-between">
@@ -54,6 +54,8 @@ export function Lesson({ lessons }: Props) {
             <div className="space-y-3 font-mono text-sm leading-7 text-zinc-300">
               <div><span className="text-emerald-300">$</span> {lesson.bin}</div>
               <div className="text-zinc-500">expected topic: {t(`topics.${lesson.topic}`)}</div>
+              <div className="text-zinc-500">published: {lesson.publishedAt || "N/A"}</div>
+              <div className="text-zinc-500 break-all">source: {lesson.sourceUrl ? <a className="text-orange-200 hover:text-orange-100" href={lesson.sourceUrl} target="_blank" rel="noreferrer">{lesson.source}</a> : <span>{lesson.source}</span>}</div>
               <div className="text-orange-200">Open the external workspace if you want to run or extend the code outside this lesson page.</div>
               <div className={progress.done ? "text-emerald-300" : "text-amber-200"}>{progress.done ? "status: unlocked next lesson" : "status: quizzes still pending"}</div>
               <div className="text-zinc-500">keyboard: left/right arrows for lesson navigation</div>
@@ -75,9 +77,9 @@ export function Lesson({ lessons }: Props) {
             {lesson.quizzes.map((quiz) => {
               switch (quiz.type) {
                 case "predict-output":
-                  return <PredictOutput key={`${lesson.id}-${quiz.id}`} lessonId={lesson.id} quizId={quiz.id} expectedOutput={lesson.expectedOutput} onSolved={refresh} />;
+                  return <PredictOutput key={`${lesson.id}-${quiz.id}`} lessonId={lesson.id} quizId={quiz.id} question={quiz.question} expectedOutput={lesson.expectedOutput} onSolved={refresh} />;
                 case "multiple-choice":
-                  return <MultipleChoice key={`${lesson.id}-${quiz.id}`} lessonId={lesson.id} quizId={quiz.id} answer={quiz.answer} onSolved={refresh} />;
+                  return <MultipleChoice key={`${lesson.id}-${quiz.id}`} lessonId={lesson.id} quizId={quiz.id} question={quiz.question} options={quiz.options} explanations={quiz.explanations} answer={quiz.answer} answerReason={quiz.answerReason} onSolved={refresh} />;
                 default:
                   return null;
               }

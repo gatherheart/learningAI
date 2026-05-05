@@ -25,7 +25,7 @@ export function Sidebar({ lessons }: Props) {
       .map((lesson, index) => ({ lesson, index }))
       .filter(({ lesson }) => {
         if (!normalized) return true;
-        const title = String(t(`lessons.${lesson.id}.title`)).toLowerCase();
+        const title = lesson.title.toLowerCase();
         const topic = String(t(`topics.${lesson.topic}`)).toLowerCase();
         return title.includes(normalized) || topic.includes(normalized) || lesson.id.toLowerCase().includes(normalized);
       });
@@ -77,7 +77,7 @@ export function Sidebar({ lessons }: Props) {
                 <div className="mb-3 flex items-center justify-between gap-3">
                   <div>
                     <div className="mb-1 font-mono text-xs text-zinc-500">{lesson.id}</div>
-                    <div className="text-sm font-medium text-zinc-100">{t(`lessons.${lesson.id}.title`)}</div>
+                    <div className="text-sm font-medium text-zinc-100">{lesson.title}</div>
                   </div>
                   <div className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[11px] text-zinc-400">
                     {progress.done ? "done" : `${progress.completed}/${progress.total}`}

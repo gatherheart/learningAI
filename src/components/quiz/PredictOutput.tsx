@@ -4,6 +4,7 @@ import { isQuizCompleted, markQuizCompleted } from "@/lib/store";
 
 interface Props {
   lessonId: string;
+  question: string;
   quizId: string;
   expectedOutput: string;
   onSolved: () => void;
@@ -13,7 +14,7 @@ function normalize(s: string) {
   return s.replace(/\r\n/g, "\n").trimEnd();
 }
 
-export function PredictOutput({ lessonId, quizId, expectedOutput, onSolved }: Props) {
+export function PredictOutput({ lessonId, question, quizId, expectedOutput, onSolved }: Props) {
   const { t } = useTranslation();
   const alreadyDone = isQuizCompleted(lessonId, quizId);
   const [value, setValue] = useState("");
@@ -34,7 +35,7 @@ export function PredictOutput({ lessonId, quizId, expectedOutput, onSolved }: Pr
   return (
     <div className="rounded-[24px] border border-white/10 bg-zinc-950/80 p-4">
       <div className="mb-2 text-sm font-semibold text-zinc-100">
-        {t(`lessons.${lessonId}.quizzes.${quizId}.question`)}
+        {question}
       </div>
       <textarea
         value={value}

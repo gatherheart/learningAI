@@ -51,7 +51,23 @@
     "llm": "llms",
     "eval": "evaluation",
     "data": "data pipelines",
-    "alignment": "alignment"
+    "alignment": "alignment",
+    "overview": "overview",
+    "linear_algebra": "linear algebra",
+    "probability": "probability and statistics",
+    "evaluation": "evaluation",
+    "classical_ml": "classical machine learning",
+    "clustering": "clustering and representation learning",
+    "optimization": "optimization",
+    "deep_learning": "deep learning",
+    "computer_vision": "computer vision",
+    "nlp": "natural language processing",
+    "transformers": "sequence models and transformers",
+    "llms": "llm systems",
+    "recommenders": "recommender systems",
+    "time_series": "time series",
+    "generative_ai": "generative ai",
+    "reinforcement_learning": "reinforcement learning"
   },
   "lessons": {
     "01_tensors_shapes": {

@@ -58,7 +58,7 @@ export function Home({ lessons }: Props) {
                       <span className="font-mono text-xs text-zinc-500">{String(index + 1).padStart(2, "0")}</span>
                       <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500">{done ? "done" : "open"}</span>
                     </div>
-                    <div className="text-sm font-medium text-zinc-100">{t(`lessons.${lesson.id}.title`)}</div>
+                    <div className="text-sm font-medium text-zinc-100">{lesson.title}</div>
                     <div className="mt-2 text-xs uppercase tracking-[0.18em] text-zinc-500">{t(`topics.${lesson.topic}`)}</div>
                   </Link>
                 );

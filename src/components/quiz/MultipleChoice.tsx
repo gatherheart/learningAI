@@ -5,28 +5,30 @@ import { isQuizCompleted, markQuizCompleted } from "@/lib/store";
 interface Props {
   lessonId: string;
   quizId: string;
+  question: string;
+  options: string[];
+  explanations: string[];
   answer: number;
+  answerReason?: string;
   onSolved: () => void;
 }
 
-export function MultipleChoice({ lessonId, quizId, answer, onSolved }: Props) {
+export function MultipleChoice({
+  lessonId,
+  quizId,
+  question,
+  options,
+  explanations,
+  answer,
+  answerReason = "",
+  onSolved,
+}: Props) {
   const { t } = useTranslation();
   const alreadyDone = isQuizCompleted(lessonId, quizId);
   const [selected, setSelected] = useState<number | null>(alreadyDone ? answer : null);
   const [state, setState] = useState<"idle" | "wrong" | "right">(
     alreadyDone ? "right" : "idle",
   );
-
-  const options = t(`lessons.${lessonId}.quizzes.${quizId}.options`, {
-    returnObjects: true,
-  }) as string[];
-  const rawExplanations = t(`lessons.${lessonId}.quizzes.${quizId}.explanations`, {
-    returnObjects: true,
-  });
-  const explanations = Array.isArray(rawExplanations) ? (rawExplanations as string[]) : [];
-  const answerReasonKey = `lessons.${lessonId}.quizzes.${quizId}.answerReason`;
-  const answerReasonValue = t(answerReasonKey);
-  const answerReason = answerReasonValue === answerReasonKey ? "" : answerReasonValue;
   const wrongReason =
     selected !== null && explanations[selected]
       ? explanations[selected]
@@ -45,7 +47,7 @@ export function MultipleChoice({ lessonId, quizId, answer, onSolved }: Props) {
   return (
     <div className="rounded-[24px] border border-white/10 bg-zinc-950/80 p-4">
       <div className="mb-3 text-sm font-semibold text-zinc-100">
-        {t(`lessons.${lessonId}.quizzes.${quizId}.question`)}
+        {question}
       </div>
       <div className="space-y-2">
         {Array.isArray(options) &&
