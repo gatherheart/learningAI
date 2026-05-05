@@ -54,8 +54,6 @@ export interface Lesson {
   topic: string;
   title: string;
   description: string;
-  source: string;
-  sourceUrl: string;
   publishedAt: string;
   code: string;
   expectedOutput: string;

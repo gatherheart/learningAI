@@ -27,7 +27,7 @@ export function Sidebar({ lessons }: Props) {
         if (!normalized) return true;
         const title = lesson.title.toLowerCase();
         const topic = String(t(`topics.${lesson.topic}`)).toLowerCase();
-        return title.includes(normalized) || topic.includes(normalized) || lesson.id.toLowerCase().includes(normalized);
+        return title.includes(normalized) || topic.includes(normalized);
       });
   }, [lessons, query, t]);
 
@@ -76,7 +76,9 @@ export function Sidebar({ lessons }: Props) {
               >
                 <div className="mb-3 flex items-center justify-between gap-3">
                   <div>
-                    <div className="mb-1 font-mono text-xs text-zinc-500">{lesson.id}</div>
+                    <div className="mb-1 font-mono text-xs text-zinc-500">
+                      lesson {String(index + 1).padStart(2, "0")}
+                    </div>
                     <div className="text-sm font-medium text-zinc-100">{lesson.title}</div>
                   </div>
                   <div className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[11px] text-zinc-400">
