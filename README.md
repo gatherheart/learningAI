@@ -2,6 +2,10 @@
 
 Interactive course app for AI, neural networks, attention, transformers, and training flow.
 
+## Live Site
+
+- https://gatherheart.github.io/learningAI
+
 ## Runtime
 
 - Node.js 25.9.0
