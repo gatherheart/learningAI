@@ -49,7 +49,7 @@ export function FillInBlank({ lessonId, quizId, template, blanks, onSolved }: Pr
                 }
                 readOnly={alreadyDone}
                 size={Math.max(blanks[i].length + 2, 4)}
-                className="mx-0.5 inline-block border-b-2 border-orange-400 bg-orange-500/10 px-1 font-mono text-zinc-100 focus:bg-zinc-900 focus:outline-none"
+                className="mx-0.5 inline-block border-b-2 border-blue-400 bg-blue-500/10 px-1 font-mono text-zinc-100 focus:bg-zinc-900 focus:outline-none"
               />
             )}
           </span>
@@ -59,18 +59,18 @@ export function FillInBlank({ lessonId, quizId, template, blanks, onSolved }: Pr
         {!alreadyDone && (
           <button
             onClick={check}
-            className="rounded-2xl bg-orange-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-orange-400"
+            className="rounded-2xl bg-blue-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-400"
           >
             {t("ui.check")}
           </button>
         )}
         {state === "right" && (
-          <span className="text-sm font-medium text-emerald-300">
+          <span className="text-sm font-medium text-cyan-300">
             ✓ {t("ui.correct")}
           </span>
         )}
         {state === "wrong" && (
-          <span className="text-sm font-medium text-red-300">
+          <span className="text-sm font-medium text-indigo-300">
             ✗ {t("ui.tryAgain")}
           </span>
         )}

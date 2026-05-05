@@ -49,7 +49,7 @@ export function SpotTheBug({ lessonId, quizId, code, buggyLine, onSolved }: Prop
               onClick={() => setSelected(lineNum)}
               className={`flex w-full text-left px-3 py-0.5 ${
                 isSelected
-                  ? "bg-orange-500/12 ring-1 ring-orange-400/60"
+                  ? "bg-blue-500/12 ring-1 ring-blue-400/60"
                   : "hover:bg-white/[0.06]"
               } ${alreadyDone ? "cursor-default" : "cursor-pointer"}`}
             >
@@ -64,18 +64,18 @@ export function SpotTheBug({ lessonId, quizId, code, buggyLine, onSolved }: Prop
           <button
             onClick={check}
             disabled={selected === null}
-            className="rounded-2xl bg-orange-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-orange-400 disabled:bg-zinc-700"
+            className="rounded-2xl bg-blue-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-400 disabled:bg-zinc-700"
           >
             {t("ui.check")}
           </button>
         )}
         {state === "right" && (
-          <span className="text-sm font-medium text-emerald-300">
+          <span className="text-sm font-medium text-cyan-300">
             ✓ {t("ui.correct")}
           </span>
         )}
         {state === "wrong" && (
-          <span className="text-sm font-medium text-red-300">
+          <span className="text-sm font-medium text-indigo-300">
             ✗ {t("ui.tryAgain")}
           </span>
         )}

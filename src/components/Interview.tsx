@@ -71,14 +71,14 @@ function InterviewCard({ question }: { question: InterviewQuestion }) {
             Check
           </button>
         )}
-        {state === "right" && <span className="text-sm font-medium text-emerald-300">✓ Correct!</span>}
+        {state === "right" && <span className="text-sm font-medium text-cyan-300">✓ Correct!</span>}
       </div>
       {state !== "idle" && (
         <div
           className={`mt-4 rounded-[22px] border px-4 py-3 text-sm leading-7 ${
             state === "right"
-              ? "border-emerald-400/25 bg-emerald-500/10 text-emerald-100"
-              : "border-red-400/25 bg-red-500/10 text-red-100"
+              ? "border-cyan-400/25 bg-cyan-500/10 text-cyan-100"
+              : "border-indigo-400/25 bg-indigo-500/10 text-indigo-100"
           }`}
         >
           {question.explanation}

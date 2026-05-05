@@ -66,9 +66,9 @@ export function OrderStatements({ lessonId, quizId, answer, onSolved }: Props) {
               type="button"
               onClick={() => remove(itemIdx)}
               disabled={alreadyDone}
-              className="flex w-full items-start gap-2 rounded-2xl border border-orange-400/25 bg-orange-500/10 px-3 py-1.5 text-left font-mono text-sm text-zinc-100"
+              className="flex w-full items-start gap-2 rounded-2xl border border-blue-400/25 bg-blue-500/10 px-3 py-1.5 text-left font-mono text-sm text-zinc-100"
             >
-              <span className="w-6 shrink-0 font-semibold text-orange-200">
+              <span className="w-6 shrink-0 font-semibold text-blue-200">
                 {pos + 1}.
               </span>
               <span className="flex-1">{items[itemIdx]}</span>
@@ -93,7 +93,7 @@ export function OrderStatements({ lessonId, quizId, answer, onSolved }: Props) {
               className={`w-full text-left px-3 py-1.5 rounded border text-sm font-mono ${
                 used
                   ? "border-white/10 bg-white/[0.04] text-zinc-600"
-                  : "border-white/10 bg-white/[0.03] text-zinc-100 hover:border-orange-400/40 hover:bg-orange-500/10"
+                  : "border-white/10 bg-white/[0.03] text-zinc-100 hover:border-blue-400/40 hover:bg-blue-500/10"
               }`}
             >
               {label}
@@ -107,18 +107,18 @@ export function OrderStatements({ lessonId, quizId, answer, onSolved }: Props) {
           <button
             onClick={check}
             disabled={order.length !== items.length}
-            className="rounded-2xl bg-orange-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-orange-400 disabled:bg-zinc-700"
+            className="rounded-2xl bg-blue-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-400 disabled:bg-zinc-700"
           >
             {t("ui.check")}
           </button>
         )}
         {state === "right" && (
-          <span className="text-sm font-medium text-emerald-300">
+          <span className="text-sm font-medium text-cyan-300">
             ✓ {t("ui.correct")}
           </span>
         )}
         {state === "wrong" && (
-          <span className="text-sm font-medium text-red-300">
+          <span className="text-sm font-medium text-indigo-300">
             ✗ {t("ui.tryAgain")}
           </span>
         )}

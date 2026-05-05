@@ -31,7 +31,7 @@ export function Header({ lessons }: Props) {
       <div className="flex flex-col gap-4 px-4 py-4 lg:flex-row lg:items-center lg:justify-between lg:px-6">
         <div className="flex items-center gap-4">
           <Link to="/" className="flex items-center gap-3">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl border border-orange-400/50 bg-orange-500/15 text-lg font-bold text-orange-200 shadow-lg shadow-orange-950/40">A</span>
+            <span className="grid h-11 w-11 place-items-center rounded-2xl border border-blue-400/50 bg-blue-500/15 text-lg font-bold text-blue-200 shadow-lg shadow-blue-950/40">A</span>
             <div>
               <div className="text-[11px] uppercase tracking-[0.16em] text-zinc-500">model practice</div>
               <span className="text-lg font-semibold text-zinc-50">{t("ui.appName")}</span>
@@ -41,25 +41,25 @@ export function Header({ lessons }: Props) {
             <div className="text-[11px] uppercase tracking-[0.14em] text-zinc-500">{t("ui.progress")}</div>
             <div className="text-sm font-medium text-zinc-200">{completed}/{lessons.length} cleared</div>
             <div className="h-2 w-28 overflow-hidden rounded-full bg-white/10">
-              <div className="h-full rounded-full bg-gradient-to-r from-orange-400 to-amber-300 transition-all" style={{ width: `${progress}%` }} />
+              <div className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-300 transition-all" style={{ width: `${progress}%` }} />
             </div>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <div className="rounded-full border border-emerald-400/25 bg-emerald-500/10 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-emerald-200">
+          <div className="rounded-full border border-cyan-400/25 bg-cyan-500/10 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-cyan-200">
             {t("ui.learnByDoing")}
           </div>
           <button
             onClick={cycle}
             title={t("ui.theme") + ": " + theme}
-            className="grid h-10 w-10 place-items-center rounded-2xl border border-white/10 bg-white/5 text-base text-zinc-200 transition hover:border-orange-400/40 hover:bg-orange-500/10"
+            className="grid h-10 w-10 place-items-center rounded-2xl border border-white/10 bg-white/5 text-base text-zinc-200 transition hover:border-blue-400/40 hover:bg-blue-500/10"
           >
             {themeIcon}
           </button>
           <select
             value={i18n.language}
             onChange={(event) => i18n.changeLanguage(event.target.value)}
-            className="rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-zinc-100 outline-none transition hover:border-orange-400/40"
+            className="rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-zinc-100 outline-none transition hover:border-blue-400/40"
             aria-label="Language"
           >
             {LOCALES.map((locale) => (

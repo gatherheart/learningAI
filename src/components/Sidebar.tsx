@@ -35,16 +35,16 @@ export function Sidebar({ lessons }: Props) {
     <aside className="border-b border-white/10 bg-zinc-950/80 lg:w-[360px] lg:shrink-0 lg:border-b-0 lg:border-r">
       <div className="app-scrollbar flex h-full flex-col overflow-y-auto">
         <div className="border-b border-white/10 px-4 py-4 lg:px-5">
-          <div className="rounded-[24px] border border-orange-400/15 bg-gradient-to-br from-orange-500/12 via-zinc-950 to-zinc-950 px-4 py-4">
+          <div className="rounded-[24px] border border-blue-400/15 bg-gradient-to-br from-blue-500/12 via-zinc-950 to-zinc-950 px-4 py-4">
             <div className="mb-3 flex items-start justify-between gap-3">
               <div>
-                <div className="text-[11px] uppercase tracking-[0.14em] text-orange-200/70">Course map</div>
+                <div className="text-[11px] uppercase tracking-[0.14em] text-blue-200/70">Course map</div>
                 <h2 className="mt-1 text-xl font-semibold text-zinc-50">{t("ui.lessons")}</h2>
               </div>
               <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-zinc-300">{totalDone}/{lessons.length}</div>
             </div>
             <div className="mb-3 h-2 overflow-hidden rounded-full bg-white/10">
-              <div className="h-full rounded-full bg-gradient-to-r from-orange-500 via-amber-400 to-lime-300 transition-all" style={{ width: `${percent}%` }} />
+              <div className="h-full rounded-full bg-gradient-to-r from-blue-500 via-sky-400 to-cyan-300 transition-all" style={{ width: `${percent}%` }} />
             </div>
             <p className="text-sm leading-6 text-zinc-300">{t("ui.keyboardHint")}</p>
           </div>
@@ -70,9 +70,9 @@ export function Sidebar({ lessons }: Props) {
                 className={({ isActive }) => [
                   "block rounded-[22px] border px-4 py-4 transition",
                   unlocked
-                    ? "border-white/10 bg-white/[0.04] hover:border-orange-400/35 hover:bg-orange-500/8"
+                    ? "border-white/10 bg-white/[0.04] hover:border-blue-400/35 hover:bg-blue-500/8"
                     : "cursor-not-allowed border-white/6 bg-white/[0.02] opacity-60"
-                  , isActive && unlocked ? "border-orange-300/55 bg-orange-500/12 shadow-lg shadow-orange-950/25" : ""].filter(Boolean).join(" ")}
+                  , isActive && unlocked ? "border-blue-300/55 bg-blue-500/12 shadow-lg shadow-blue-950/25" : ""].filter(Boolean).join(" ")}
               >
                 <div className="mb-3 flex items-center justify-between gap-3">
                   <div>
@@ -87,7 +87,7 @@ export function Sidebar({ lessons }: Props) {
                 </div>
                 <div className="mb-3 text-xs uppercase tracking-[0.2em] text-zinc-500">{t(`topics.${lesson.topic}`)}</div>
                 <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
-                  <div className="h-full rounded-full bg-gradient-to-r from-orange-400 to-amber-300 transition-all" style={{ width: `${Math.round((progress.completed / progress.total) * 100) || 0}%` }} />
+                  <div className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-300 transition-all" style={{ width: `${Math.round((progress.completed / progress.total) * 100) || 0}%` }} />
                 </div>
               </NavLink>
             );
@@ -97,8 +97,8 @@ export function Sidebar({ lessons }: Props) {
             className={({ isActive }) =>
               [
                 "block rounded-[22px] border px-4 py-4 transition",
-                "border-sky-400/18 bg-sky-500/8 hover:border-sky-300/35 hover:bg-sky-500/12",
-                isActive && "border-sky-300/55 bg-sky-500/14 shadow-lg shadow-sky-950/25",
+                "border-blue-400/18 bg-blue-500/8 hover:border-blue-300/35 hover:bg-blue-500/12",
+                isActive && "border-blue-300/55 bg-blue-500/14 shadow-lg shadow-blue-950/25",
               ]
                 .filter(Boolean)
                 .join(" ")
@@ -106,7 +106,7 @@ export function Sidebar({ lessons }: Props) {
           >
             <div className="mb-2 flex items-center justify-between gap-3">
               <div>
-                <div className="text-[10px] uppercase tracking-[0.14em] text-sky-100/70">
+                <div className="text-[10px] uppercase tracking-[0.14em] text-blue-100/70">
                   interview mode
                 </div>
                 <div className="text-sm font-medium text-zinc-100">Interview Deep Dive</div>
@@ -120,7 +120,7 @@ export function Sidebar({ lessons }: Props) {
             </div>
             <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-sky-400 to-cyan-300"
+                className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-300"
                 style={{
                   width: `${Math.round((solvedInterview / interviewQuestions.length) * 100) || 0}%`,
                 }}

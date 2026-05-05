@@ -39,15 +39,15 @@ export function CodeBlock({ code }: Props) {
     <div className="overflow-hidden rounded-[30px] border border-white/10 bg-[#0d1117] shadow-2xl shadow-black/20">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-zinc-950/90 px-4 py-3">
         <div className="flex items-center gap-3">
-          <div className="flex gap-2"><span className="h-3 w-3 rounded-full bg-red-400/80" /><span className="h-3 w-3 rounded-full bg-amber-300/80" /><span className="h-3 w-3 rounded-full bg-emerald-400/80" /></div>
+          <div className="flex gap-2"><span className="h-3 w-3 rounded-full bg-blue-300/80" /><span className="h-3 w-3 rounded-full bg-sky-400/80" /><span className="h-3 w-3 rounded-full bg-cyan-300/80" /></div>
           <span className="font-mono text-xs uppercase tracking-[0.28em] text-zinc-500">{t("ui.workspaceFile")}</span>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <button type="button" onClick={resetCode} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-zinc-200 transition hover:border-white/20 hover:bg-white/10">{t("ui.resetCode")}</button>
-          <a href={playgroundUrl(draft)} target="_blank" rel="noreferrer" className="rounded-full border border-orange-400/25 bg-orange-500/10 px-3 py-1 text-xs font-medium text-orange-100 transition hover:border-orange-300/45 hover:bg-orange-500/15">{t("ui.openWorkspace")} ↗</a>
+          <a href={playgroundUrl(draft)} target="_blank" rel="noreferrer" className="rounded-full border border-blue-400/25 bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-100 transition hover:border-blue-300/45 hover:bg-blue-500/15">{t("ui.openWorkspace")} ↗</a>
         </div>
       </div>
-      <div className="border-b border-white/10 bg-orange-500/8 px-4 py-2 text-xs text-orange-100">{t("ui.workspaceNote")}</div>
+      <div className="border-b border-white/10 bg-blue-500/8 px-4 py-2 text-xs text-blue-100">{t("ui.workspaceNote")}</div>
       <CodeMirror
         value={draft}
         extensions={[EditorState.tabSize.of(4), indentUnit.of("    ")]}

@@ -56,8 +56,8 @@ export function MultipleChoice({
               key={i}
               className={`flex items-start gap-2 p-2 rounded border cursor-pointer text-sm ${
                 selected === i
-                  ? "border-orange-400/60 bg-orange-500/10"
-                  : "border-white/10 bg-white/[0.03] hover:border-orange-400/30"
+                  ? "border-blue-400/60 bg-blue-500/10"
+                  : "border-white/10 bg-white/[0.03] hover:border-blue-400/30"
               } ${alreadyDone ? "cursor-default" : ""}`}
             >
               <input
@@ -79,21 +79,21 @@ export function MultipleChoice({
           <button
             onClick={check}
             disabled={selected === null}
-            className="rounded-2xl bg-orange-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-orange-400 disabled:bg-zinc-700"
+            className="rounded-2xl bg-blue-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-400 disabled:bg-zinc-700"
           >
             {t("ui.check")}
           </button>
         )}
         {state === "right" && (
-          <span className="text-sm font-medium text-emerald-300">
+          <span className="text-sm font-medium text-cyan-300">
             ✓ {t("ui.correct")}
           </span>
         )}
         {state === "wrong" && (
-          <div className="space-y-2 rounded-2xl border border-red-400/25 bg-red-500/10 px-4 py-3 text-sm text-red-100">
+          <div className="space-y-2 rounded-2xl border border-indigo-400/25 bg-indigo-500/10 px-4 py-3 text-sm text-indigo-100">
             <div className="font-medium">✗ {t("ui.tryAgain")}</div>
             <div>{wrongReason}</div>
-            {answerReason && <div className="text-red-100/90">{answerReason}</div>}
+            {answerReason && <div className="text-indigo-100/90">{answerReason}</div>}
           </div>
         )}
       </div>

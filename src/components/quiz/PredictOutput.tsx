@@ -42,25 +42,25 @@ export function PredictOutput({ lessonId, question, quizId, expectedOutput, onSo
         onChange={(e) => setValue(e.target.value)}
         readOnly={alreadyDone}
         rows={Math.max(3, expectedOutput.split("\n").length)}
-        className="w-full rounded-2xl border border-white/10 bg-white/[0.04] p-3 font-mono text-sm text-zinc-100 outline-none focus:border-orange-400/45"
+        className="w-full rounded-2xl border border-white/10 bg-white/[0.04] p-3 font-mono text-sm text-zinc-100 outline-none focus:border-blue-400/45"
         placeholder={t("ui.predictPlaceholder") ?? ""}
       />
       <div className="flex items-center gap-3 mt-3">
         {!alreadyDone && (
           <button
             onClick={check}
-            className="rounded-2xl bg-orange-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-orange-400"
+            className="rounded-2xl bg-blue-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-400"
           >
             {t("ui.check")}
           </button>
         )}
         {state === "right" && (
-          <span className="text-sm font-medium text-emerald-300">
+          <span className="text-sm font-medium text-cyan-300">
             ✓ {t("ui.correct")}
           </span>
         )}
         {state === "wrong" && (
-          <span className="text-sm font-medium text-red-300">
+          <span className="text-sm font-medium text-indigo-300">
             ✗ {t("ui.tryAgain")}
           </span>
         )}
