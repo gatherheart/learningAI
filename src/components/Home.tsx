@@ -12,8 +12,8 @@ export function Home({ lessons }: Props) {
   const { t } = useTranslation();
   useProgressVersion();
   const firstLesson = lessons[0];
-  const completed = lessons.filter((lesson) => lessonProgress(lesson.id, lesson.quizzes.length).done).length;
-  const nextLesson = lessons.find((lesson) => !lessonProgress(lesson.id, lesson.quizzes.length).done);
+  const completed = lessons.filter((lesson) => lessonProgress(lesson.id, lesson.quizzes).done).length;
+  const nextLesson = lessons.find((lesson) => !lessonProgress(lesson.id, lesson.quizzes).done);
 
   return (
     <main className="app-scrollbar flex-1 overflow-y-auto bg-[radial-gradient(circle_at_top_right,rgba(251,146,60,0.16),transparent_28%),linear-gradient(180deg,rgba(9,9,11,0.92),rgba(9,9,11,0.98))]">
@@ -51,7 +51,7 @@ export function Home({ lessons }: Props) {
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {lessons.map((lesson, index) => {
-                const done = lessonProgress(lesson.id, lesson.quizzes.length).done;
+                const done = lessonProgress(lesson.id, lesson.quizzes).done;
                 return (
                   <Link key={lesson.id} to={`/lesson/${lesson.id}`} className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4 transition hover:border-orange-400/35 hover:bg-orange-500/8">
                     <div className="mb-2 flex items-center justify-between">

@@ -1,3 +1,5 @@
+import type { Quiz } from "@/types";
+
 const KEY = "learningAI:progress:v1";
 const EVENT_NAME = "learningAI:progress";
 
@@ -31,19 +33,19 @@ export function markQuizCompleted(lessonId: string, quizId: string): void {
   write(progress);
 }
 
-export function lessonProgress(lessonId: string, quizCount: number): { completed: number; total: number; done: boolean } {
+export function lessonProgress(lessonId: string, quizzes: Quiz[]): { completed: number; total: number; done: boolean } {
   const progress = read();
   let completed = 0;
   for (const key of Object.keys(progress.completedQuizzes)) {
     if (key.startsWith(`${lessonId}:`)) completed++;
   }
-  return { completed, total: quizCount, done: completed >= quizCount };
+  return { completed, total: quizzes.length, done: completed >= quizzes.length };
 }
 
-export function isLessonUnlocked(lessonIndex: number, lessons: { id: string; quizzes: { id: string }[] }[]): boolean {
+export function isLessonUnlocked(lessonIndex: number, lessons: { id: string; quizzes: Quiz[] }[]): boolean {
   if (lessonIndex === 0) return true;
   const previous = lessons[lessonIndex - 1];
-  return lessonProgress(previous.id, previous.quizzes.length).done;
+  return lessonProgress(previous.id, previous.quizzes).done;
 }
 
 export function resetProgress(): void {

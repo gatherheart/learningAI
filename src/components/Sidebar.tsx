@@ -15,7 +15,7 @@ export function Sidebar({ lessons }: Props) {
   const [query, setQuery] = useState("");
   const progressVersion = useProgressVersion();
 
-  const totalDone = useMemo(() => lessons.filter((lesson) => lessonProgress(lesson.id, lesson.quizzes.length).done).length, [lessons, progressVersion]);
+  const totalDone = useMemo(() => lessons.filter((lesson) => lessonProgress(lesson.id, lesson.quizzes).done).length, [lessons, progressVersion]);
   const percent = lessons.length === 0 ? 0 : Math.round((totalDone / lessons.length) * 100);
   const solvedInterview = useMemo(() => interviewQuestions.filter((question) => interviewSolved(question.id)).length, [progressVersion]);
 
@@ -61,7 +61,7 @@ export function Sidebar({ lessons }: Props) {
         <div className="space-y-3 px-3 py-4 lg:px-4">
           {filtered.map(({ lesson, index }) => {
             const unlocked = isLessonUnlocked(index, lessons);
-            const progress = lessonProgress(lesson.id, lesson.quizzes.length);
+            const progress = lessonProgress(lesson.id, lesson.quizzes);
             return (
               <NavLink
                 key={lesson.id}

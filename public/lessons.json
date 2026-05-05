@@ -10,11 +10,6 @@
     "expectedOutput": "330",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of the simple model?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Which statement best describes machine learning?",
@@ -60,11 +55,6 @@
     "code": "tasks = {\n    \"house_price\": \"supervised\",\n    \"customer_segments\": \"unsupervised\",\n    \"game_agent\": \"reinforcement\"\n}\nprint(tasks[\"customer_segments\"])\nprint(len(set(tasks.values())))",
     "expectedOutput": "unsupervised\n3",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What does the program print?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -112,11 +102,6 @@
     "expectedOutput": "event counts\n3",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why do distributions matter in machine learning?",
@@ -162,11 +147,6 @@
     "code": "import pandas as pd\n\nsales = pd.DataFrame(\n    {\n        \"date\": [\"2025-01-01\", \"2025-01-02\", \"2025-01-03\"],\n        \"revenue\": [1200, 1500, 900],\n        \"orders\": [24, 30, 18],\n    }\n).set_index(\"date\")\n\ncosts = pd.DataFrame(\n    {\n        \"date\": [\"2025-01-01\", \"2025-01-03\", \"2025-01-04\"],\n        \"cost\": [700, 500, 650],\n    }\n).set_index(\"date\")\n\nsummary = sales.join(costs, how=\"left\")\nsummary[\"profit\"] = summary[\"revenue\"] - summary[\"cost\"].fillna(0)\nsummary[\"avg_order_value\"] = (summary[\"revenue\"] / summary[\"orders\"]).round(2)\n\nprint(summary.loc[\"2025-01-02\", \"avg_order_value\"])\nprint(summary[\"profit\"].sum())",
     "expectedOutput": "50.0\n2400.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -214,11 +194,6 @@
     "expectedOutput": "[1, 0]\n['and', 'bad', 'battery', 'blurry']",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is TF-IDF often a strong baseline for text classification?",
@@ -264,11 +239,6 @@
     "code": "from sklearn.datasets import make_classification\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.metrics import accuracy_score\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_classification(\n    n_samples=300,\n    n_features=8,\n    n_informative=4,\n    n_redundant=0,\n    random_state=7,\n)\n\nX_train, X_temp, y_train, y_temp = train_test_split(\n    X, y, test_size=0.4, stratify=y, random_state=7\n)\nX_valid, X_test, y_valid, y_test = train_test_split(\n    X_temp, y_temp, test_size=0.5, stratify=y_temp, random_state=7\n)\n\nmodel = LogisticRegression(max_iter=400)\nmodel.fit(X_train, y_train)\n\nvalid_acc = accuracy_score(y_valid, model.predict(X_valid))\ntest_acc = accuracy_score(y_test, model.predict(X_test))\n\nprint(X_train.shape[0], X_valid.shape[0], X_test.shape[0])\nprint(round(valid_acc, 3), round(test_acc, 3))",
     "expectedOutput": "180 60 60\n0.767 0.75",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -316,11 +286,6 @@
     "expectedOutput": "{'age': 29.0, 'income': 61000.0, 'age_missing': 1.0, 'income_missing': 0.0}\n2",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why might you add a missing-indicator feature after imputation?",
@@ -366,11 +331,6 @@
     "code": "import pandas as pd\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import OneHotEncoder, OrdinalEncoder\n\nX = pd.DataFrame(\n    {\n        \"color\": [\"red\", \"blue\", \"green\", \"blue\"],\n        \"size\": [\"S\", \"M\", \"L\", \"S\"],\n    }\n)\n\ntransformer = ColumnTransformer(\n    transformers=[\n        (\"color\", OneHotEncoder(sparse_output=False, handle_unknown=\"ignore\"), [\"color\"]),\n        (\"size\", OrdinalEncoder(categories=[[\"S\", \"M\", \"L\"]]), [\"size\"]),\n    ]\n)\n\nencoded = transformer.fit_transform(X)\nprint(encoded.shape)\nprint(encoded[0].tolist())",
     "expectedOutput": "(4, 4)\n[0.0, 0.0, 1.0, 0.0]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -418,11 +378,6 @@
     "expectedOutput": "{'no': 3, 'yes': 1}\n3.75 0.153",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does the chi-square test of independence ask?",
@@ -468,11 +423,6 @@
     "code": "import pandas as pd\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.impute import SimpleImputer\n\norders = pd.DataFrame(\n    {\n        \"items\": [1, 4, 2, 5],\n        \"basket_value\": [12.0, 80.0, 30.0, 110.0],\n        \"channel\": [\"ads\", \"organic\", \"organic\", \"ads\"],\n    }\n)\norders[\"value_per_item\"] = orders[\"basket_value\"] / orders[\"items\"]\n\nnumeric_features = [\"items\", \"basket_value\", \"value_per_item\"]\ncategorical_features = [\"channel\"]\n\npreprocess = ColumnTransformer(\n    transformers=[\n        (\n            \"num\",\n            Pipeline([\n                (\"imputer\", SimpleImputer(strategy=\"median\")),\n                (\"scaler\", StandardScaler()),\n            ]),\n            numeric_features,\n        ),\n        (\"cat\", OneHotEncoder(sparse_output=False), categorical_features),\n    ]\n)\n\nX = preprocess.fit_transform(orders)\nprint(X.shape)\nprint(round(float(orders[\"value_per_item\"].iloc[1]), 2))",
     "expectedOutput": "(4, 5)\n20.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -520,11 +470,6 @@
     "expectedOutput": "40 13\n0.5 0.846",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is accuracy often misleading on imbalanced datasets?",
@@ -570,11 +515,6 @@
     "code": "import numpy as np\nfrom tensorflow.keras.preprocessing.image import ImageDataGenerator\n\nimages = np.arange(2 * 4 * 4 * 1).reshape(2, 4, 4, 1).astype(\"float32\")\nlabels = np.array([0, 1])\n\ngen = ImageDataGenerator(rescale=1.0 / 255.0, horizontal_flip=True)\niterator = gen.flow(images, labels, batch_size=2, shuffle=False)\n\nbatch_x, batch_y = next(iterator)\nprint(batch_x.shape)\nprint(batch_y.tolist())\nprint(round(float(batch_x.max()), 3))",
     "expectedOutput": "(2, 4, 4, 1)\n[0, 1]\n0.122",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -622,11 +562,6 @@
     "expectedOutput": "2 2\n{'cat': 0, 'dog': 1}\nimages/cat_001.jpg",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why might a DataFrame-based image loader be preferable to folder-only loading?",
@@ -672,11 +607,6 @@
     "code": "import numpy as np\n\nA = np.array([[1, 2], [0, 1], [1, 3]])\nx = np.array([2, -1])\nb = A @ x\nrank = np.linalg.matrix_rank(A)\n\nprint(b.tolist())\nprint(rank)\nprint((A[:, 0] * 2 + A[:, 1] * -1).tolist())",
     "expectedOutput": "[0, -1, -1]\n2\n[0, -1, -1]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -724,11 +654,6 @@
     "expectedOutput": "[0, 0]\n[3, 6]\n[3, 6]",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does a nontrivial null space imply about a linear system?",
@@ -774,11 +699,6 @@
     "code": "import numpy as np\n\nA = np.array([[1, 2], [2, 4], [1, 2]])\nrank = np.linalg.matrix_rank(A)\nrows, cols = A.shape\n\nnullity = cols - rank\nleft_nullity = rows - rank\n\nprint(rank)\nprint(nullity, left_nullity)\nprint(rows, cols)",
     "expectedOutput": "1\n1 2\n3 2",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -826,11 +746,6 @@
     "expectedOutput": "2\n[1, 1, 2]\n[2, -1, 1]",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why are `v1`, `v2`, and `v3 = v1 + v2` linearly dependent?",
@@ -876,11 +791,6 @@
     "code": "import numpy as np\n\nA = np.array([[2, 1], [1, 1]], dtype=float)\nA_inv = np.linalg.inv(A)\nidentity = A @ A_inv\n\nprint(A.T.tolist())\nprint(np.round(identity, 3).tolist())\nprint(np.round(A_inv, 3).tolist())",
     "expectedOutput": "[[2.0, 1.0], [1.0, 1.0]]\n[[1.0, 0.0], [0.0, 1.0]]\n[[1.0, -1.0], [-1.0, 2.0]]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -928,11 +838,6 @@
     "expectedOutput": "[[1.0, 0.0], [0.5, 1.0]]\n[[4.0, 3.0], [0.0, -0.5]]\nTrue",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is LU decomposition useful when solving many systems with the same matrix `A`?",
@@ -978,11 +883,6 @@
     "code": "import numpy as np\nfrom sklearn.decomposition import PCA\nfrom sklearn.discriminant_analysis import LinearDiscriminantAnalysis\n\nX = np.array([\n    [2.0, 1.0],\n    [3.0, 1.5],\n    [2.5, 0.8],\n    [7.0, 6.0],\n    [8.0, 5.5],\n    [7.5, 6.2],\n])\ny = np.array([0, 0, 0, 1, 1, 1])\n\npca = PCA(n_components=1)\nlda = LinearDiscriminantAnalysis(n_components=1)\n\nX_pca = pca.fit_transform(X)\nX_lda = lda.fit_transform(X, y)\n\nprint(X_pca.shape, X_lda.shape)\nprint(round(float(pca.explained_variance_ratio_[0]), 3))",
     "expectedOutput": "(6, 1) (6, 1)\n0.989",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -1030,11 +930,6 @@
     "expectedOutput": "[3.076, 0.274, 0.126]\n(4, 1)\n3",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "When is SVD often the better first tool than a discriminant method?",
@@ -1080,11 +975,6 @@
     "code": "import numpy as np\n\nA = np.array([[1, 2], [3, 4]])\nx1 = np.array([1, 0])\nx2 = np.array([0, 1])\nleft = A @ (x1 + x2)\nright = A @ x1 + A @ x2\nscaled = A @ (2 * x1)\n\nprint(left.tolist())\nprint(right.tolist())\nprint(scaled.tolist())",
     "expectedOutput": "[3, 7]\n[3, 7]\n[2, 6]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -1132,11 +1022,6 @@
     "expectedOutput": "[2.0, 1.0]\n1\n1",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does a missing pivot usually indicate during elimination?",
@@ -1182,11 +1067,6 @@
     "code": "values = [1, 2, 2, 4, 5]\nthreshold = 2\ncdf = sum(x <= threshold for x in values) / len(values)\nprint(cdf)",
     "expectedOutput": "0.6",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What fraction of the sample is less than or equal to the threshold?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -1234,11 +1114,6 @@
     "expectedOutput": "0.25",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What probability is assigned to an interval of width 0.5 under this uniform density?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does a PDF value f(x) mean?",
@@ -1284,11 +1159,6 @@
     "code": "joint = {\n    (0, 0): 0.1,\n    (0, 1): 0.2,\n    (1, 0): 0.3,\n    (1, 1): 0.4,\n}\np_y1 = joint[(0, 1)] + joint[(1, 1)]\np_x1_given_y1 = joint[(1, 1)] / p_y1\nprint(round(p_x1_given_y1, 2))",
     "expectedOutput": "0.67",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is P(X=1 | Y=1) rounded to two decimals?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -1336,11 +1206,6 @@
     "expectedOutput": "3.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the average of the pairwise sums?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does convolution answer in probability?",
@@ -1386,11 +1251,6 @@
     "code": "p = 0.25\nexpected_trials = 1 / p\nprint(expected_trials)",
     "expectedOutput": "4.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the expected number of trials until first success?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -1438,11 +1298,6 @@
     "expectedOutput": "0.088",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the posterior probability after a positive test?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does Bayes' rule fundamentally do?",
@@ -1488,11 +1343,6 @@
     "code": "p = 0.6\nn = 5\nexpected_successes = n * p\nprint(expected_successes)",
     "expectedOutput": "3.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the expected number of successes?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -1540,11 +1390,6 @@
     "expectedOutput": "0.7\n0.21",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What are the mean and variance of this Bernoulli variable?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What kind of outcome does a Bernoulli variable represent?",
@@ -1590,11 +1435,6 @@
     "code": "from math import comb\nn = 4\nk = 2\np = 0.5\nprob = comb(n, k) * (p ** k) * ((1 - p) ** (n - k))\nprint(prob)",
     "expectedOutput": "0.375",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the probability of exactly 2 successes?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -1642,11 +1482,6 @@
     "expectedOutput": "6\n0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What does the code print about the category counts?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does a multinomial distribution model?",
@@ -1692,11 +1527,6 @@
     "code": "rate_per_hour = 3\nhours = 4\nexpected_events = rate_per_hour * hours\nprint(expected_events)",
     "expectedOutput": "12",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "How many events are expected over 4 hours at this rate?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -1744,11 +1574,6 @@
     "expectedOutput": "0.5\n1.5",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What are the expected waiting times for one event and for three events?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "How are exponential and Erlang models related?",
@@ -1794,11 +1619,6 @@
     "code": "rate = 4\nmean = 1 / rate\nprob_wait_more_than_half = 2.718281828 ** (-rate * 0.5)\nprint(mean)\nprint(round(prob_wait_more_than_half, 3))",
     "expectedOutput": "0.25\n0.135",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What are the mean waiting time and the probability of waiting more than 0.5 units?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -1846,11 +1666,6 @@
     "expectedOutput": "3\nbeta: probabilities",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What summary of the distribution families is printed?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Which distribution is naturally defined on the interval [0, 1]?",
@@ -1896,11 +1711,6 @@
     "code": "shape = 3\nrate = 2\nmean = shape / rate\nprint(mean)",
     "expectedOutput": "1.5",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the gamma mean for this shape-rate parameterization?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -1948,11 +1758,6 @@
     "expectedOutput": "0.4",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the mean of this beta distribution?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is the beta distribution common in Bayesian models?",
@@ -1998,11 +1803,6 @@
     "code": "mean = 10\nstd = 2\nz = (14 - mean) / std\nprint(z)",
     "expectedOutput": "2.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the z-score of 14 under this Gaussian model?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -2050,11 +1850,6 @@
     "expectedOutput": "10.0\n2.67",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What are the mean and population variance of the sample?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What parameters define a normal distribution?",
@@ -2100,11 +1895,6 @@
     "code": "values = [1, 10, 100]\nlogs = [0, 1, 2]\nprint(sum(logs) / len(logs))\nprint(min(values) > 0)",
     "expectedOutput": "1.0\nTrue",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What does the code print about the logged values and positivity?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -2152,11 +1942,6 @@
     "expectedOutput": "20",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the scaled variance quantity?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why does chi-square appear in variance inference?",
@@ -2202,11 +1987,6 @@
     "code": "die = {1: 1/6, 2: 1/6, 3: 1/6, 4: 1/6, 5: 1/6, 6: 1/6}\nprob_sum_7 = sum(die[a] * die[b] for a in die for b in die if a + b == 7)\nprint(round(prob_sum_7, 3))",
     "expectedOutput": "0.167",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the probability that two fair dice sum to 7?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -2254,11 +2034,6 @@
     "expectedOutput": "-1.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the real part of the characteristic function at t = pi for this symmetric two-point distribution?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why are characteristic functions useful?",
@@ -2304,11 +2079,6 @@
     "code": "import math\np = [0.25, 0.25, 0.5]\nentropy = -sum(x * math.log2(x) for x in p if x > 0)\nprint(round(entropy, 2))",
     "expectedOutput": "1.5",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the entropy of this distribution in bits?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -2356,11 +2126,6 @@
     "expectedOutput": "0.5",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the marginal probability P(X=1)?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does a joint distribution provide that marginals alone do not?",
@@ -2406,11 +2171,6 @@
     "code": "xs = [1, 2, 3]\nys = [x ** 2 for x in xs]\nprint(ys)\nprint(sum(ys) / len(ys))",
     "expectedOutput": "[1, 4, 9]\n4.666666666666667",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What transformed values and average are printed?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -2458,11 +2218,6 @@
     "expectedOutput": "[2.0, 4.0, 3.0]\n4.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What are the transformed ratios and their maximum?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why can transformed pairs become difficult to analyze?",
@@ -2508,11 +2263,6 @@
     "code": "sample = [10, 12, 9, 11, 13]\nmean = sum(sample) / len(sample)\nprint(mean)",
     "expectedOutput": "11.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the sample mean?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -2560,11 +2310,6 @@
     "expectedOutput": "0.85\n0.75\n0.86",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What are the accuracy, precision, and recall values?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why can accuracy be misleading?",
@@ -2610,11 +2355,6 @@
     "code": "scores = [0.9, 0.8, 0.4, 0.3]\nlabels = [1, 0, 1, 0]\nthreshold = 0.5\npreds = [int(s >= threshold) for s in scores]\ntp = sum(p == 1 and y == 1 for p, y in zip(preds, labels))\nfp = sum(p == 1 and y == 0 for p, y in zip(preds, labels))\nprecision = tp / (tp + fp)\nprint(precision)",
     "expectedOutput": "0.5",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What precision results from this threshold?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -2662,11 +2402,6 @@
     "expectedOutput": "0.67\n0.67",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What are the MAE and MSE values?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the practical difference between MAE and MSE?",
@@ -2712,11 +2447,6 @@
     "code": "weights = [1.2, 0.1, -0.05]\nl1 = sum(abs(w) for w in weights)\nl2 = sum(w * w for w in weights)\nalpha = 0.5\npenalty = alpha * l1 + (1 - alpha) * l2\nprint(round(penalty, 3))",
     "expectedOutput": "1.396",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What combined regularization penalty is printed?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -2764,11 +2494,6 @@
     "expectedOutput": "0.5",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the average out-of-fold prediction?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why are out-of-fold predictions useful?",
@@ -2814,11 +2539,6 @@
     "code": "scores = [0.81, 0.79, 0.83, 0.80, 0.77]\ncv_score = sum(scores) / len(scores)\nprint(round(cv_score, 3))",
     "expectedOutput": "0.8",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the mean cross-validation score?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -2866,11 +2586,6 @@
     "expectedOutput": "0.33",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is Precision@3 for this ranked list?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why are ranking metrics preferred in recommenders?",
@@ -2916,11 +2631,6 @@
     "code": "intersection = 20\nunion = 50\niou = intersection / union\nprint(iou)",
     "expectedOutput": "0.4",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the intersection-over-union score?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -2968,11 +2678,6 @@
     "expectedOutput": "0.2",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What false discovery rate is printed?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does controlling FDR try to limit?",
@@ -3019,11 +2724,6 @@
     "expectedOutput": "2.0\n6.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Which pattern is the clearest warning that a linear model is missing a changing error variance?",
@@ -3052,11 +2752,6 @@
     "code": "coeffs = [3.0, -1.5, 0.5]\nlambda_ridge = 0.2\nridge_update = [round(w / (1 + lambda_ridge), 3) for w in coeffs]\nprint(ridge_update)\nprint(sum(1 for w in ridge_update if abs(w) < abs(coeffs[0])))",
     "expectedOutput": "[2.5, -1.25, 0.417]\n3",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -3087,11 +2782,6 @@
     "expectedOutput": "1.2\n0.769",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "A coefficient of 0.69 in logistic regression means, approximately:",
@@ -3120,11 +2810,6 @@
     "code": "import math\nscores = [1.2, 0.2, -0.4]\nexps = [math.exp(s) for s in scores]\ntotal = sum(exps)\nprobs = [round(v / total, 3) for v in exps]\nprint(probs)\nprint(probs.index(max(probs)))",
     "expectedOutput": "[0.619, 0.228, 0.153]\n0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -3155,11 +2840,6 @@
     "expectedOutput": "0.119\n0.5\n0.881",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is the logistic function a better final step than a raw linear output for binary probability?",
@@ -3188,11 +2868,6 @@
     "code": "import math\nscores = [2.0, 1.0, 0.0]\nexps = [math.exp(s) for s in scores]\nprobs = [round(e / sum(exps), 3) for e in exps]\nprint(probs)\nprint(round(sum(probs), 3))",
     "expectedOutput": "[0.665, 0.245, 0.09]\n1.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -3223,11 +2898,6 @@
     "expectedOutput": "[-1, 0]\n[0.269, 0.731]",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why subtract the maximum score before exponentiating in softmax?",
@@ -3256,11 +2926,6 @@
     "code": "points = [2.0, 2.5, 4.0, 4.5]\nmargin = points[2] - points[1]\nwidth = margin / 2\nprint(margin)\nprint(width)",
     "expectedOutput": "1.5\n0.75",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -3291,11 +2956,6 @@
     "expectedOutput": "0.633\n1",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Which statement best separates bagging from boosting?",
@@ -3324,11 +2984,6 @@
     "code": "tree_scores = [0.72, 0.68, 0.75, 0.73]\nforest_score = sum(tree_scores) / len(tree_scores)\nspread = max(tree_scores) - min(tree_scores)\nprint(round(forest_score, 3))\nprint(round(spread, 3))",
     "expectedOutput": "0.72\n0.07",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -3359,11 +3014,6 @@
     "expectedOutput": "3\n3",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What problem is ordered boosting designed to reduce?",
@@ -3393,11 +3043,6 @@
     "expectedOutput": "0.41",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why are MCMC methods relevant in Bayesian networks?",
@@ -3426,11 +3071,6 @@
     "code": "class Variable:\n    def __init__(self, data):\n        self.data = float(data)\n        self.grad = 0.0\n\nclass Square:\n    def __call__(self, x):\n        y = Variable(x.data ** 2)\n        self.input = x\n        return y\n\n    def backward(self, gy):\n        return 2 * self.input.data * gy\n\nx = Variable(3.0)\nf = Square()\ny = f(x)\nprint(y.data)\nprint(f.backward(1.0))",
     "expectedOutput": "9.0\n6.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -3478,11 +3118,6 @@
     "expectedOutput": "8.0\n8.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "If one variable feeds two later branches, what must the backward pass do?",
@@ -3528,11 +3163,6 @@
     "code": "def f(x):\n    return x ** 3\n\nx = 2.0\nfirst = 3 * x ** 2\nsecond = 6 * x\nprint(first)\nprint(second)",
     "expectedOutput": "12.0\n12.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -3580,11 +3210,6 @@
     "expectedOutput": "3.75\n3.75",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is affine-plus-activation the standard layer pattern?",
@@ -3630,11 +3255,6 @@
     "code": "class Parameter:\n    def __init__(self, value):\n        self.data = value\n        self.grad = 0.0\n\nparams = [Parameter(0.2), Parameter(-0.5)]\nfor p, g in zip(params, [1.5, -0.25]):\n    p.grad += g\nfor p in params:\n    p.data -= 0.1 * p.grad\nprint(round(params[0].data, 3))\nprint(round(params[1].data, 3))",
     "expectedOutput": "0.05\n-0.475",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -3682,11 +3302,6 @@
     "expectedOutput": "16.0\n4.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why does storing each value's creator matter?",
@@ -3732,11 +3347,6 @@
     "code": "# y = x * x + x\nx = 3.0\nbranch_one = 2 * x\nbranch_two = 1.0\nprint(branch_one + branch_two)",
     "expectedOutput": "7.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What gradient value is printed?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -3784,11 +3394,6 @@
     "expectedOutput": "6.0\n12.0\n18.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What usually grows when you enable higher-order derivatives?",
@@ -3834,11 +3439,6 @@
     "code": "def mse(pred, target):\n    return (pred - target) ** 2\n\nhidden = max(0.0, 1.0 * 0.8 + 0.2)\npred = hidden * 1.5 - 0.1\nloss = mse(pred, 1.0)\nprint(round(hidden, 2))\nprint(round(pred, 2))\nprint(round(loss, 4))",
     "expectedOutput": "1.0\n1.4\n0.16",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -3886,11 +3486,6 @@
     "expectedOutput": "0.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is an explicit `zero_grad`-style method useful?",
@@ -3937,11 +3532,6 @@
     "expectedOutput": "0.18\nTrue",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Which validation choice is most obviously wrong for one-step-ahead forecasting?",
@@ -3970,11 +3560,6 @@
     "code": "rows = [\n    {'income': 30, 'owns': 0},\n    {'income': 42, 'owns': 0},\n    {'income': 70, 'owns': 1},\n    {'income': 85, 'owns': 1},\n]\nleft = [r for r in rows if r['income'] < 50]\nright = [r for r in rows if r['income'] >= 50]\nprint(len(left), len(right))\nprint(sum(r['owns'] for r in right) / len(right))",
     "expectedOutput": "2 2\n1.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What does the split summary print?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -4022,11 +3607,6 @@
     "expectedOutput": "4\n20",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the main reason a test set must remain untouched until the end?",
@@ -4055,11 +3635,6 @@
     "code": "import math\n\npermutations = math.perm(5, 2)\ncombinations = math.comb(5, 2)\nprint(permutations)\nprint(combinations)",
     "expectedOutput": "20\n10",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -4107,11 +3682,6 @@
     "expectedOutput": "5.0\n4.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "When is a Poisson model usually appropriate?",
@@ -4157,11 +3727,6 @@
     "code": "xs = [1, 2, 3]\nys = [2, 4, 5]\nmx = sum(xs) / len(xs)\nmy = sum(ys) / len(ys)\ncov = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / len(xs)\nprint(round(mx, 2))\nprint(round(my, 2))\nprint(round(cov, 2))",
     "expectedOutput": "2.0\n3.67\n1.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -4209,11 +3774,6 @@
     "expectedOutput": "3\ndiscrete label",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the best first question before choosing an algorithm?",
@@ -4242,11 +3802,6 @@
     "code": "samples = [\n    {'x': 1, 'label': 0},\n    {'x': 2, 'label': 0},\n    {'x': 8, 'label': 1},\n    {'x': 9, 'label': 1},\n]\nthreshold = 5\npreds = [int(s['x'] >= threshold) for s in samples]\ncorrect = sum(int(p == s['label']) for p, s in zip(preds, samples))\nprint(preds)\nprint(correct / len(samples))",
     "expectedOutput": "[0, 0, 1, 1]\n1.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -4294,11 +3849,6 @@
     "expectedOutput": "0.1",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the clearest conceptual difference between MLE and MAP?",
@@ -4328,11 +3878,6 @@
     "expectedOutput": "0.8\n0.44",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why can accuracy be misleading on imbalanced data?",
@@ -4361,11 +3906,6 @@
     "code": "series = [100, 103, 107, 110]\nnaive_forecast = series[-1]\ndrift_forecast = series[-1] + (series[-1] - series[0]) / (len(series) - 1)\nprint(naive_forecast)\nprint(round(drift_forecast, 2))",
     "expectedOutput": "110\n113.33",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -4413,11 +3953,6 @@
     "expectedOutput": "0.06\n0.2",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What makes an HMM different from an ordinary classifier on independent examples?",
@@ -4463,11 +3998,6 @@
     "code": "model_a = [0.2, 0.8, 0.6]\nmodel_b = [0.4, 0.7, 0.3]\nstacked = [(a + b) / 2 for a, b in zip(model_a, model_b)]\nprint([round(x, 2) for x in stacked])",
     "expectedOutput": "[0.3, 0.75, 0.45]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -4515,11 +4045,6 @@
     "expectedOutput": "[0, 1]\n1",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is DBSCAN attractive for messy real-world data?",
@@ -4565,11 +4090,6 @@
     "code": "text = 'good movie but slow ending'.split()\npositive_words = {'good', 'great', 'excellent'}\nscore = sum(1 for token in text if token in positive_words)\nprint(score)\nprint('positive' if score > 0 else 'neutral_or_negative')",
     "expectedOutput": "1\npositive",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -4617,11 +4137,6 @@
     "expectedOutput": "3.25",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does a restricted versus unrestricted F-test answer?",
@@ -4651,11 +4166,6 @@
     "expectedOutput": "7.4",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why might PLS beat ordinary multiple regression on a high-collinearity dataset?",
@@ -4684,11 +4194,6 @@
     "code": "baseline = 0.30\nwith_income = 0.55\nwith_age = 0.40\nwith_both = 0.70\nshap_income = ((with_income - baseline) + (with_both - with_age)) / 2\nprint(round(shap_income, 3))",
     "expectedOutput": "0.275",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -4736,11 +4241,6 @@
     "expectedOutput": "[2.5, 3.5]",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is a NumPy-only implementation worth studying?",
@@ -4786,11 +4286,6 @@
     "code": "import numpy as np\n\nX = np.array([[1.0, 2.0]])\nW = np.array([[0.1, 0.2], [0.3, 0.4]])\nZ = X @ W\nprint(Z.shape)\nprint(np.round(Z, 2).tolist())",
     "expectedOutput": "(1, 2)\n[[0.7, 1.0]]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -4838,11 +4333,6 @@
     "expectedOutput": "[1.0, 0.5]\n1.25",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why are embeddings often more useful than one-hot vectors?",
@@ -4888,11 +4378,6 @@
     "code": "points = [1.0, 1.5, 8.0, 9.0]\ncenters = [1.25, 8.5]\nassignments = [0 if abs(p - centers[0]) < abs(p - centers[1]) else 1 for p in points]\nprint(assignments)",
     "expectedOutput": "[0, 0, 1, 1]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -4940,11 +4425,6 @@
     "expectedOutput": "[[1, -1, 0], [-1, 2, -1], [0, -1, 1]]",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why can spectral clustering separate shapes that k-means struggles with?",
@@ -4990,11 +4470,6 @@
     "code": "import math\n\nx1, x2 = 0.0, 1.0\nsigma = 1.0\naffinity = math.exp(-((x1 - x2) ** 2) / (2 * sigma ** 2))\nprint(round(affinity, 4))",
     "expectedOutput": "0.6065",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -5042,11 +4517,6 @@
     "expectedOutput": "1.5\n9.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What objective is k-means implicitly optimizing?",
@@ -5092,11 +4562,6 @@
     "code": "points = ['A', 'B', 'C']\nedges = {('A', 'B'): 0.9, ('B', 'C'): 0.8, ('A', 'C'): 0.1}\nstrong = [pair for pair, w in edges.items() if w >= 0.5]\nprint(strong)",
     "expectedOutput": "[('A', 'B'), ('B', 'C')]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -5144,11 +4609,6 @@
     "expectedOutput": "0.8825\n0.0439",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What practical advantage do GMMs have over k-means?",
@@ -5194,11 +4654,6 @@
     "code": "weights = [0.7, 0.3]\nlikelihoods = [0.2, 0.5]\nunnormalized = [w * l for w, l in zip(weights, likelihoods)]\nZ = sum(unnormalized)\nresponsibilities = [round(x / Z, 3) for x in unnormalized]\nprint(responsibilities)",
     "expectedOutput": "[0.483, 0.517]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -5246,11 +4701,6 @@
     "expectedOutput": "[0.75, 0.196, 0.054]",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does the first principal component maximize?",
@@ -5296,11 +4746,6 @@
     "code": "explained = [0.52, 0.24, 0.14, 0.10]\nrunning = []\ntotal = 0.0\nfor x in explained:\n    total += x\n    running.append(round(total, 2))\nprint(running)",
     "expectedOutput": "[0.52, 0.76, 0.9, 1.0]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -5348,11 +4793,6 @@
     "expectedOutput": "0.143",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is a major advantage of LDA over one-cluster-per-document approaches?",
@@ -5398,11 +4838,6 @@
     "code": "docs = [\n    ['market', 'stocks', 'growth'],\n    ['recipe', 'kitchen', 'dinner'],\n]\nvocab = sorted({token for doc in docs for token in doc})\nprint(len(vocab))\nprint(vocab[:3])",
     "expectedOutput": "6\n['dinner', 'growth', 'kitchen']",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -5450,11 +4885,6 @@
     "expectedOutput": "5.0\n7",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why can changing the distance metric change the cluster assignment itself?",
@@ -5500,11 +4930,6 @@
     "code": "from collections import Counter\n\nd1 = Counter('cat sat sat'.split())\nd2 = Counter('cat sat mat'.split())\nshared = sum(min(d1[w], d2[w]) for w in d1)\nprint(shared)",
     "expectedOutput": "2",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -5552,11 +4977,6 @@
     "expectedOutput": "-0.12\n4.88",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What problem does gradient clipping primarily address?",
@@ -5585,11 +5005,6 @@
     "code": "fan_in = 64\nxavier_std = (1 / fan_in) ** 0.5\nhe_std = (2 / fan_in) ** 0.5\nprint(round(xavier_std, 3))\nprint(round(he_std, 3))",
     "expectedOutput": "0.125\n0.177",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -5620,11 +5035,6 @@
     "expectedOutput": "6",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why are learning rates often searched on a log scale?",
@@ -5653,11 +5063,6 @@
     "code": "mean = [0.82, 0.79, 0.81]\nuncertainty = [0.01, 0.08, 0.03]\nacq = [round(m + u, 3) for m, u in zip(mean, uncertainty)]\nprint(acq)\nprint(acq.index(max(acq)))",
     "expectedOutput": "[0.83, 0.87, 0.84]\n1",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -5688,11 +5093,6 @@
     "expectedOutput": "7\n0.125",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is mutation important in a genetic algorithm?",
@@ -5721,11 +5121,6 @@
     "code": "weights = [0.6, -0.4]\ninputs = [2.0, 1.0]\nbias = -0.1\nscore = sum(w * x for w, x in zip(weights, inputs)) + bias\npred = int(score > 0)\nprint(round(score, 2))\nprint(pred)",
     "expectedOutput": "0.7\n1",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -5773,11 +5168,6 @@
     "expectedOutput": "0.7685\n0.6141",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What do hidden layers add compared with a single perceptron?",
@@ -5823,11 +5213,6 @@
     "code": "inputs = [0.2, 0.8]\nweights = [[0.5, -0.4], [0.3, 0.9]]\nhidden = [sum(i * w for i, w in zip(inputs, col)) for col in zip(*weights)]\nprint([round(x, 2) for x in hidden])",
     "expectedOutput": "[0.34, 0.64]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -5875,11 +5260,6 @@
     "expectedOutput": "-8.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is numerical differentiation too expensive for real network training?",
@@ -5925,11 +5305,6 @@
     "code": "x = 2.0\nw = 3.0\ny = x * w\nloss = (y - 5.0) ** 2\ndloss_dy = 2 * (y - 5.0)\ndloss_dw = dloss_dy * x\nprint(loss)\nprint(dloss_dw)",
     "expectedOutput": "1.0\n4.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -5977,11 +5352,6 @@
     "expectedOutput": "0.0\n0.0",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why does activation choice affect training stability or speed?",
@@ -6027,11 +5397,6 @@
     "code": "w = 1.0\nfor _ in range(2):\n    grad = 2 * (w - 3.0)\n    w -= 0.1 * grad\nprint(round(w, 3))",
     "expectedOutput": "1.72",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -6079,11 +5444,6 @@
     "expectedOutput": "2145",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the main benefit of using a framework such as TensorFlow for DNNs?",
@@ -6129,11 +5489,6 @@
     "code": "train_loss = [1.2, 0.9, 0.7]\nval_loss = [1.1, 0.95, 1.05]\nprint(min(train_loss))\nprint(val_loss[-1] > val_loss[-2])",
     "expectedOutput": "0.7\nTrue",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -6181,11 +5536,6 @@
     "expectedOutput": "False\n387",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why does fine-tuning often help on a small target dataset?",
@@ -6231,11 +5581,6 @@
     "code": "linear_can_model_xor = False\ndeep_can_model_xor = True\nprint(linear_can_model_xor)\nprint(deep_can_model_xor)",
     "expectedOutput": "False\nTrue",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -6283,11 +5628,6 @@
     "expectedOutput": "154",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the most important conceptual habit when building networks in a framework?",
@@ -6333,11 +5673,6 @@
     "code": "image = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nkernel = [[1, 0], [0, -1]]\nvalue = image[0][0] * kernel[0][0] + image[0][1] * kernel[0][1] + image[1][0] * kernel[1][0] + image[1][1] * kernel[1][1]\nprint(value)",
     "expectedOutput": "-4",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -6385,11 +5720,6 @@
     "expectedOutput": "2.5",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What makes an RNN different from a feed-forward network on sequence data?",
@@ -6435,11 +5765,6 @@
     "code": "original = [1.0, 0.0, 1.0]\nreconstructed = [0.9, 0.1, 0.8]\nerror = sum((a - b) ** 2 for a, b in zip(original, reconstructed))\nprint(round(error, 2))",
     "expectedOutput": "0.06",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -6487,11 +5812,6 @@
     "expectedOutput": "2.7",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output of this code?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the core idea of a residual block?",
@@ -6537,11 +5857,6 @@
     "code": "def iou(a, b):\n    ax1, ay1, ax2, ay2 = a\n    bx1, by1, bx2, by2 = b\n    ix1, iy1 = max(ax1, bx1), max(ay1, by1)\n    ix2, iy2 = min(ax2, bx2), min(ay2, by2)\n    inter = max(0, ix2 - ix1) * max(0, iy2 - iy1)\n    area_a = (ax2 - ax1) * (ay2 - ay1)\n    area_b = (bx2 - bx1) * (by2 - by1)\n    union = area_a + area_b - inter\n    return inter / union\n\ngt = (20, 20, 80, 80)\nproposals = [(18, 18, 78, 78), (0, 0, 30, 30), (25, 25, 70, 70)]\nscores = [round(iou(p, gt), 3) for p in proposals]\nprint(scores.index(max(scores)))\nprint(max(scores))",
     "expectedOutput": "0\n0.877",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -6589,11 +5904,6 @@
     "expectedOutput": "[[6, 8], [14, 16]]\n44",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is RoI pooling important in Fast R-CNN?",
@@ -6639,11 +5949,6 @@
     "code": "def iou(a, b):\n    ax1, ay1, ax2, ay2 = a\n    bx1, by1, bx2, by2 = b\n    ix1, iy1 = max(ax1, bx1), max(ay1, by1)\n    ix2, iy2 = min(ax2, bx2), min(ay2, by2)\n    inter = max(0, ix2 - ix1) * max(0, iy2 - iy1)\n    area_a = (ax2 - ax1) * (ay2 - ay1)\n    area_b = (bx2 - bx1) * (by2 - by1)\n    union = area_a + area_b - inter\n    return inter / union\n\ngt = (30, 30, 90, 90)\nanchors = [(28, 28, 88, 88), (0, 0, 40, 40), (35, 35, 95, 95), (60, 60, 120, 120)]\nlabels = [iou(a, gt) >= 0.5 for a in anchors]\nprint(labels.count(True))\nprint([round(iou(a, gt), 2) for a in anchors])",
     "expectedOutput": "2\n[0.88, 0.03, 0.53, 0.14]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -6691,11 +5996,6 @@
     "expectedOutput": "6\n(0, 0, 2, 2)",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What extra prediction head makes Mask R-CNN different from Faster R-CNN?",
@@ -6741,11 +6041,6 @@
     "code": "branches = {\n    '1x1': 64,\n    '3x3': 128,\n    '5x5': 32,\n    'pool_proj': 32,\n}\nprint(sum(branches.values()))\nprint(max(branches, key=branches.get))",
     "expectedOutput": "256\n3x3",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -6793,11 +6088,6 @@
     "expectedOutput": "[1.1, 1.8, 3.4]\n6.3",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What problem do residual connections mainly address?",
@@ -6843,11 +6133,6 @@
     "code": "feature_maps = [(38, 4), (19, 6), (10, 6)]\nboxes = sum(size * size * defaults for size, defaults in feature_maps)\nsmallest_map = min(feature_maps, key=lambda x: x[0])[0]\nprint(boxes)\nprint(smallest_map)",
     "expectedOutput": "8542\n10",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -6895,11 +6180,6 @@
     "expectedOutput": "48\n72",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the main advantage of the YOLO family?",
@@ -6945,11 +6225,6 @@
     "code": "import math\n\ndef focal_loss(pt, alpha=0.25, gamma=2.0):\n    return -alpha * ((1 - pt) ** gamma) * math.log(pt)\n\neasy = round(focal_loss(0.9), 4)\nhard = round(focal_loss(0.2), 4)\nprint(easy)\nprint(hard)",
     "expectedOutput": "0.0003\n0.2575",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -6997,11 +6272,6 @@
     "expectedOutput": "[[0.7, 1.7], [0.6, 1.0]]\n1.7",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What question do CAM-style methods answer best?",
@@ -7047,11 +6317,6 @@
     "code": "levels = [1, 2, 4]\nnum_bins = sum(level * level for level in levels)\nchannels = 64\nfeature_length = num_bins * channels\nprint(num_bins)\nprint(feature_length)",
     "expectedOutput": "21\n1344",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -7099,11 +6364,6 @@
     "expectedOutput": "['NNS', 'VBG', 'RB']",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the main strength of a rule-based tagger?",
@@ -7149,11 +6409,6 @@
     "code": "transitions = {'START->NOUN': 0.5, 'START->VERB': 0.2}\nemissions = {'flies|NOUN': 0.4, 'flies|VERB': 0.6}\nscores = {\n    'NOUN': transitions['START->NOUN'] * emissions['flies|NOUN'],\n    'VERB': transitions['START->VERB'] * emissions['flies|VERB'],\n}\nbest = max(scores, key=scores.get)\nprint(best)\nprint(round(scores[best], 2))",
     "expectedOutput": "NOUN\n0.2",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -7201,11 +6456,6 @@
     "expectedOutput": "1.1\n0.6",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the practical advantage of a CRF over independent per-token classification?",
@@ -7251,11 +6501,6 @@
     "code": "forward = {'can': 0.3, 'fish': 0.9}\nbackward = {'can': 0.8, 'fish': 0.2}\ncontext_can = forward['can'] + backward['can']\ncontext_fish = forward['fish'] + backward['fish']\nprint(round(context_can, 1))\nprint(round(context_fish, 1))",
     "expectedOutput": "1.1\n1.1",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -7303,11 +6548,6 @@
     "expectedOutput": "0.69\nright_context",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the main advantage of transformer tagging over recurrent tagging?",
@@ -7353,11 +6593,6 @@
     "code": "from math import sqrt\n\ndef cosine(a, b):\n    dot = sum(x * y for x, y in zip(a, b))\n    na = sqrt(sum(x * x for x in a))\n    nb = sqrt(sum(y * y for y in b))\n    return dot / (na * nb)\n\nuser = [0.8, 0.2, 0.6]\nitems = {'movie_a': [0.9, 0.1, 0.5], 'movie_b': [0.2, 0.9, 0.1]}\nscores = {k: round(cosine(user, v), 3) for k, v in items.items()}\nprint(max(scores, key=scores.get))\nprint(scores['movie_a'])",
     "expectedOutput": "movie_a\n0.991",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -7405,11 +6640,6 @@
     "expectedOutput": "4.0\n5.2",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What kind of signal does collaborative filtering use most directly?",
@@ -7455,11 +6685,6 @@
     "code": "candidates = {\n    'spelling': {'prior': 0.0008, 'error': 0.09},\n    'spilling': {'prior': 0.0005, 'error': 0.03},\n    'spieling': {'prior': 0.0001, 'error': 0.01},\n}\nposterior = {w: round(v['prior'] * v['error'], 8) for w, v in candidates.items()}\nprint(max(posterior, key=posterior.get))\nprint(posterior['spelling'])",
     "expectedOutput": "spelling\n7.2e-05",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -7507,11 +6732,6 @@
     "expectedOutput": "spelling\n120",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the main idea behind a Norvig-style spell checker?",
@@ -7557,11 +6777,6 @@
     "code": "trans = {'START': {'NOUN': 0.6, 'VERB': 0.4}, 'NOUN': {'VERB': 0.7}, 'VERB': {'NOUN': 0.3}}\nemit = {'time': {'NOUN': 0.5, 'VERB': 0.1}, 'flies': {'NOUN': 0.2, 'VERB': 0.6}}\nscore_n_v = trans['START']['NOUN'] * emit['time']['NOUN'] * trans['NOUN']['VERB'] * emit['flies']['VERB']\nscore_v_n = trans['START']['VERB'] * emit['time']['VERB'] * trans['VERB']['NOUN'] * emit['flies']['NOUN']\nprint(round(score_n_v, 4))\nprint(round(score_v_n, 4))",
     "expectedOutput": "0.126\n0.0024",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -7609,11 +6824,6 @@
     "expectedOutput": "('deep', 'learning')\n6",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What training signal does skip-gram Word2Vec use?",
@@ -7659,11 +6869,6 @@
     "code": "import math\n\npositive = math.log(1 / (1 + math.exp(-2.0)))\nnegative_1 = math.log(1 / (1 + math.exp(1.0)))\nnegative_2 = math.log(1 / (1 + math.exp(0.5)))\nloss = -(positive + negative_1 + negative_2)\nprint(round(loss, 3))\nprint(3)",
     "expectedOutput": "2.414\n3",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -7711,11 +6916,6 @@
     "expectedOutput": "0.2\n3",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the central modeling idea of an RNN?",
@@ -7761,11 +6961,6 @@
     "code": "forget = 0.8\ninput_gate = 0.6\ncell_prev = 1.0\ncandidate = 0.5\ncell = round(forget * cell_prev + input_gate * candidate, 2)\noutput_gate = 0.7\nhidden = round(output_gate * cell, 2)\nprint(cell)\nprint(hidden)",
     "expectedOutput": "1.1\n0.77",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -7813,11 +7008,6 @@
     "expectedOutput": "0.41\n0.7",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What role does the update gate play in a GRU?",
@@ -7863,11 +7053,6 @@
     "code": "encoder_states = [0.2, 0.5, 0.9]\ncontext = max(encoder_states)\ndecoder_logits = {'hello': 0.3 + context, 'world': 0.1 + context / 2}\nbest = max(decoder_logits, key=decoder_logits.get)\nprint(round(context, 1))\nprint(best)",
     "expectedOutput": "0.9\nhello",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -7915,11 +7100,6 @@
     "expectedOutput": "5\n1",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why are dependency paths shorter in attention-based models than in plain RNNs?",
@@ -7965,11 +7145,6 @@
     "code": "scores = [1.0, 2.0, 1.0]\nweights = [round(s / sum(scores), 2) for s in scores]\nencoder_states = [2.0, 5.0, 1.0]\ncontext = round(sum(w * h for w, h in zip(weights, encoder_states)), 2)\nprint(weights)\nprint(context)",
     "expectedOutput": "[0.25, 0.5, 0.25]\n3.25",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -8017,11 +7192,6 @@
     "expectedOutput": "A y\nA x",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why can beam search outperform greedy decoding?",
@@ -8067,11 +7237,6 @@
     "code": "import math\nq = [1.0, 0.0]\nkeys = [[1.0, 0.0], [0.0, 1.0]]\nvalues = [[2.0, 0.0], [0.0, 4.0]]\nscores = [sum(a * b for a, b in zip(q, k)) / math.sqrt(2) for k in keys]\nexp_scores = [math.exp(s) for s in scores]\nweights = [v / sum(exp_scores) for v in exp_scores]\ncontext = [round(sum(w * v[i] for w, v in zip(weights, values)), 3) for i in range(2)]\nprint([round(w, 3) for w in weights])\nprint(context)",
     "expectedOutput": "[0.67, 0.33]\n[1.34, 1.321]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -8119,11 +7284,6 @@
     "expectedOutput": "0.141\n-0.99",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why do transformers need positional information?",
@@ -8169,11 +7329,6 @@
     "code": "left = 0.7\nright = 0.9\nscore_bank = left + right\nscore_river = 0.2 + 0.1\nprint(round(score_bank, 1))\nprint('bank' if score_bank > score_river else 'river')",
     "expectedOutput": "1.6\nbank",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -8221,11 +7376,6 @@
     "expectedOutput": "262144\n4194304",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What stayed conceptually stable across GPT-1, GPT-2, and GPT-3?",
@@ -8271,11 +7421,6 @@
     "code": "import math\nlogits = [2.0, 1.0, 0.1]\nfor temp in [0.5, 1.5]:\n    scaled = [x / temp for x in logits]\n    exps = [math.exp(x) for x in scaled]\n    probs = [round(x / sum(exps), 3) for x in exps]\n    print(probs[0])",
     "expectedOutput": "0.863\n0.563",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -8323,11 +7468,6 @@
     "expectedOutput": "7.6\nARMA",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does an AR term model?",
@@ -8373,11 +7513,6 @@
     "code": "query = {'vector': 0.8, 'database': 0.7}\ndocs = {\n    'doc_a': {'vector': 0.9, 'database': 0.6},\n    'doc_b': {'vector': 0.2, 'database': 0.1},\n}\ndef score(q, d):\n    return round(sum(q[k] * d[k] for k in q), 2)\nscores = {k: score(query, v) for k, v in docs.items()}\nprint(max(scores, key=scores.get))\nprint(scores['doc_a'])",
     "expectedOutput": "doc_a\n1.14",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -8425,11 +7560,6 @@
     "expectedOutput": "1.0\nhello world",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What tradeoff dominates streaming speech-to-text design?",
@@ -8475,11 +7605,6 @@
     "code": "intents = ['search docs', 'write patch', 'summarize result']\nroutes = []\nfor intent in intents:\n    if 'search' in intent:\n        routes.append('retriever')\n    elif 'write' in intent:\n        routes.append('coder')\n    else:\n        routes.append('reporter')\nprint(routes)\nprint(routes.count('coder'))",
     "expectedOutput": "['retriever', 'coder', 'reporter']\n1",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -8527,11 +7652,6 @@
     "expectedOutput": "270\nbonjour",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the main reason end-to-end latency is hard in speech translation?",
@@ -8577,11 +7697,6 @@
     "code": "participants = ['alice', 'bob']\ntranslation_channels = {name: f'{name}_tts' for name in participants}\nprint(translation_channels['alice'])\nprint(len(translation_channels))",
     "expectedOutput": "alice_tts\n2",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -8629,11 +7744,6 @@
     "expectedOutput": "0.59\n3",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What is the main reason to use neural collaborative filtering instead of plain matrix factorization?",
@@ -8679,11 +7789,6 @@
     "code": "w = [0.2, 0.4, -0.1]\nv = [[0.5, 0.1], [0.3, 0.4], [0.2, -0.2]]\nx = [1, 1, 1]\nlinear = sum(wi * xi for wi, xi in zip(w, x))\ninteraction = 0\nfor f in range(2):\n    s1 = sum(v[i][f] * x[i] for i in range(3))\n    s2 = sum((v[i][f] * x[i]) ** 2 for i in range(3))\n    interaction += 0.5 * (s1 ** 2 - s2)\nprint(round(linear, 2))\nprint(round(interaction, 2))",
     "expectedOutput": "0.5\n0.2",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -8731,11 +7836,6 @@
     "expectedOutput": "0.93\nclick",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why combine FM and deep components in one model?",
@@ -8781,11 +7881,6 @@
     "code": "wide = 0.55\ndeep = 0.28\nscore = round(wide + deep, 2)\nprint(score)\nprint(score > 0.8)",
     "expectedOutput": "0.83\nTrue",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -8833,11 +7928,6 @@
     "expectedOutput": "0.92\nrecommend",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is cold start hard for recommenders?",
@@ -8883,11 +7973,6 @@
     "code": "global_mean = 3.7\nuser_bias = 0.2\nitem_bias = -0.1\nuser_vec = [0.5, 0.1]\nitem_vec = [0.6, 0.4]\ndot = sum(a * b for a, b in zip(user_vec, item_vec))\npred = round(global_mean + user_bias + item_bias + dot, 2)\nprint(round(dot, 2))\nprint(pred)",
     "expectedOutput": "0.34\n4.14",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -8935,11 +8020,6 @@
     "expectedOutput": "[2, 1, 2]\n1.6666666666666667",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is a unit root a serious issue in time-series modeling?",
@@ -8968,11 +8048,6 @@
     "code": "observed = [110, 130, 120]\ntrend = [100, 110, 120]\nseasonal = [10, 20, 0]\nresidual = [o - t - s for o, t, s in zip(observed, trend, seasonal)]\nprint(residual)",
     "expectedOutput": "[0, 0, 0]",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -9003,11 +8078,6 @@
     "expectedOutput": "-3",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does strong residual serial correlation mean after fitting a forecasting model?",
@@ -9036,11 +8106,6 @@
     "code": "series = [5, 7, 10, 14]\ndiff1 = [series[i] - series[i - 1] for i in range(1, len(series))]\nprint(diff1)\nprint(len(diff1))",
     "expectedOutput": "[2, 3, 4]\n3",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -9071,11 +8136,6 @@
     "expectedOutput": "SARIMA(1,1,1)(1,0,1,12)\n198.9",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "When is an ARCH-style model the natural next step?",
@@ -9105,11 +8165,6 @@
     "expectedOutput": "([10, 11, 12], 13)\n2",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "What does the window length control most directly?",
@@ -9138,11 +8193,6 @@
     "code": "tokens = [('cat', 0.2), ('dog', 0.5), ('bird', 0.3)]\nu = 0.72\nrunning = 0.0\nchoice = None\nfor token, p in tokens:\n    running += p\n    if u <= running:\n        choice = token\n        break\nprint(choice)\nprint(round(running, 1))",
     "expectedOutput": "bird\n1.0",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -9190,11 +8240,6 @@
     "expectedOutput": "1\n-0.5",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is a VAE more generative than a plain autoencoder?",
@@ -9240,11 +8285,6 @@
     "code": "critic_real = 1.2\ncritic_fake = -0.4\nwasserstein_gap = round(critic_real - critic_fake, 1)\ngp = 0.3\nloss = round(-wasserstein_gap + gp, 1)\nprint(wasserstein_gap)\nprint(loss)",
     "expectedOutput": "1.6\n-1.3",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",
@@ -9292,11 +8332,6 @@
     "expectedOutput": "0.2\nTrue",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is cycle consistency useful in unpaired image translation?",
@@ -9343,11 +8378,6 @@
     "expectedOutput": "6.5\nBellman backup",
     "quizzes": [
       {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
-      {
         "id": "q2",
         "type": "multiple-choice",
         "question": "Why is discounted future value part of the MDP objective?",
@@ -9393,11 +8423,6 @@
     "code": "reward = 1.0\ngamma = 0.9\nmax_next_q = 4.0\nold_q = 2.0\nalpha = 0.5\ntarget = reward + gamma * max_next_q\nnew_q = old_q + alpha * (target - old_q)\nprint(round(target, 1))\nprint(round(new_q, 1))",
     "expectedOutput": "4.6\n3.3",
     "quizzes": [
-      {
-        "id": "q1",
-        "type": "predict-output",
-        "question": "What is the output?"
-      },
       {
         "id": "q2",
         "type": "multiple-choice",

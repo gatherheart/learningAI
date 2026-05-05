@@ -15,7 +15,7 @@ export function Header({ lessons }: Props) {
   const { t, i18n } = useTranslation();
   const [theme, setLocal] = useState<Theme>(getTheme());
   useProgressVersion();
-  const completed = lessons.filter((lesson) => lessonProgress(lesson.id, lesson.quizzes.length).done).length;
+  const completed = lessons.filter((lesson) => lessonProgress(lesson.id, lesson.quizzes).done).length;
   const progress = lessons.length === 0 ? 0 : Math.round((completed / lessons.length) * 100);
 
   function cycle() {

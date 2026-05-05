@@ -27,9 +27,9 @@ export function Lesson({ lessons }: Props) {
   }
 
   const refresh = () => setRefresh((value) => value + 1);
-  const progress = lessonProgress(lesson.id, lesson.quizzes.length);
+  const progress = lessonProgress(lesson.id, lesson.quizzes);
   const lessonIndex = lessons.findIndex((entry) => entry.id === lesson.id);
-  const allDone = lessons.every((entry) => lessonProgress(entry.id, entry.quizzes.length).done);
+  const allDone = lessons.every((entry) => lessonProgress(entry.id, entry.quizzes).done);
 
   return (
     <main className="app-scrollbar flex-1 overflow-y-auto bg-[radial-gradient(circle_at_top_right,rgba(251,146,60,0.16),transparent_24%),linear-gradient(180deg,rgba(9,9,11,0.86),rgba(9,9,11,0.98))]">
