@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A code-first laboratory for mastering Transformer inference and LLM serving systems.">
+  <title>Inference Atlas — LLM Serving, From Tensor to Scheduler</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080b10'/%3E%3Cpath d='M13 42 25 20l8 15 8-10 10 17' fill='none' stroke='%235ce1b9' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='25' cy='20' r='4' fill='%23ffb86b'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#overview" aria-label="Inference Atlas home">
+      <span class="brand-mark">IA</span>
+      <span>Inference Atlas</span>
+    </a>
+    <div class="top-meta">
+      <span class="status"><i></i> code-first track</span>
+      <span id="progress-label">0 / 9 modules</span>
+      <button class="icon-button" id="theme-toggle" aria-label="Toggle light and dark theme">◐</button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar" aria-label="Curriculum navigation">
+      <div class="side-heading">Research curriculum</div>
+      <nav id="module-nav"></nav>
+      <div class="side-heading">Tools</div>
+      <nav class="tool-nav">
+        <a href="#lab-attention">Attention lab</a>
+        <a href="#lab-memory">KV memory estimator</a>
+        <a href="#lab-scheduler">Scheduler lab</a>
+        <a href="#paper-track">Paper track</a>
+      </nav>
+      <div class="sidebar-note">
+        <strong>Study rule</strong>
+        <span>Derive it. Implement it. Profile it. Explain the trade-off.</span>
+      </div>
+    </aside>
+
+    <main id="main">
+      <section class="hero" id="overview">
+        <div>
+          <p class="eyebrow">Systems curriculum · 9 modules · 4 laboratories</p>
+          <h1>From one attention score<br>to a production inference engine.</h1>
+          <p class="hero-copy">Master the tensor algebra, memory model, kernels, request lifecycle, and scheduling policies behind modern LLM serving—then turn the evidence into a publishable research question.</p>
+        </div>
+        <div class="hero-panel" aria-label="Learning loop">
+          <span>01</span><p><b>Reason</b> Derive shapes, complexity, and invariants.</p>
+          <span>02</span><p><b>Build</b> Implement the smallest correct mechanism.</p>
+          <span>03</span><p><b>Measure</b> Profile latency, throughput, and memory.</p>
+          <span>04</span><p><b>Research</b> Form a falsifiable systems claim.</p>
+        </div>
+      </section>
+
+      <section class="dashboard" aria-label="Course overview">
+        <article><span>Core path</span><strong>Tensor → runtime</strong><small>Start with correctness, finish with scheduling.</small></article>
+        <article><span>Primary metrics</span><strong>TTFT · TPOT · TPS</strong><small>Measure tails, not only averages.</small></article>
+        <article><span>Final artifact</span><strong>Research prototype</strong><small>Reproducible baseline, ablation, and paper.</small></article>
+      </section>
+
+      <section class="section" id="curriculum">
+        <div class="section-header">
+          <div><p class="eyebrow">The path</p><h2>Expert curriculum</h2></div>
+          <p>Complete modules in order. Each one ends with a concrete artifact and a falsification check.</p>
+        </div>
+        <div id="module-list" class="module-list"></div>
+      </section>
+
+      <section class="section lab-section" id="lab-attention">
+        <div class="section-header">
+          <div><p class="eyebrow">Lab 01</p><h2>Attention under a microscope</h2></div>
+          <p>Edit a two-token example and inspect the normalized attention weights.</p>
+        </div>
+        <div class="lab-grid">
+          <div class="control-card">
+            <label>Query Q <input id="q-input" value="1, 0; 0, 1" spellcheck="false"></label>
+            <label>Key K <input id="k-input" value="1, 0; 1, 1" spellcheck="false"></label>
+            <label>Value V <input id="v-input" value="1, 2; 3, 1" spellcheck="false"></label>
+            <label class="check"><input id="causal-input" type="checkbox" checked> Apply causal mask</label>
+            <button class="primary" id="run-attention">Run attention</button>
+            <p class="hint">Rows use semicolons; columns use commas. Matrices must be 2 × 2.</p>
+          </div>
+          <div class="result-card" aria-live="polite">
+            <div class="formula">softmax(QKᵀ / √d<sub>k</sub> + M)V</div>
+            <div class="matrix-row"><span>Scores</span><pre id="score-output"></pre></div>
+            <div class="matrix-row"><span>Weights</span><pre id="weight-output"></pre></div>
+            <div class="matrix-row"><span>Output</span><pre id="attention-output"></pre></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section lab-section" id="lab-memory">
+        <div class="section-header">
+          <div><p class="eyebrow">Lab 02</p><h2>KV-cache memory estimator</h2></div>
+          <p>Quantify the capacity cost before debating cache policies.</p>
+        </div>
+        <div class="lab-grid">
+          <div class="control-card range-controls">
+            <label>Layers <output id="layers-value">32</output><input id="layers" type="range" min="1" max="128" value="32"></label>
+            <label>KV heads <output id="heads-value">8</output><input id="heads" type="range" min="1" max="64" value="8"></label>
+            <label>Head dimension <output id="dim-value">128</output><input id="dim" type="range" min="32" max="256" step="32" value="128"></label>
+            <label>Sequence length <output id="seq-value">4096</output><input id="seq" type="range" min="128" max="32768" step="128" value="4096"></label>
+            <label>Concurrent sequences <output id="batch-value">16</output><input id="batch" type="range" min="1" max="256" value="16"></label>
+            <label>Precision <select id="bytes"><option value="2">FP16 / BF16</option><option value="1">FP8 / INT8</option><option value="4">FP32</option></select></label>
+          </div>
+          <div class="result-card memory-result">
+            <span>Total KV allocation</span>
+            <strong id="memory-total">—</strong>
+            <div class="equation-breakdown" id="memory-equation"></div>
+            <div class="callout"><b>Factor 2</b> is not precision. It accounts for both K and V.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section lab-section" id="lab-scheduler">
+        <div class="section-header">
+          <div><p class="eyebrow">Lab 03</p><h2>Iteration-level scheduler</h2></div>
+          <p>Compare static batching with continuous admission of waiting requests.</p>
+        </div>
+        <div class="scheduler-layout">
+          <div class="control-card scheduler-controls">
+            <label>Request output lengths <input id="requests" value="7, 2, 5, 9, 3, 6" spellcheck="false"></label>
+            <label>Batch capacity <input id="capacity" type="number" min="1" max="8" value="3"></label>
+            <button class="primary" id="run-scheduler">Simulate</button>
+          </div>
+          <div id="scheduler-results" class="scheduler-results"></div>
+        </div>
+      </section>
+
+      <section class="section paper" id="paper-track">
+        <div class="section-header">
+          <div><p class="eyebrow">Research track</p><h2>Turn implementation into a paper</h2></div>
+          <p>A paper begins with a measurable contradiction, not with a system name.</p>
+        </div>
+        <div class="paper-grid">
+          <article><span>01 · Observe</span><h3>Find an anomaly</h3><p>Locate a regime where a standard policy fails: long-context prefill interference, block waste, tail-latency collapse, or unfairness across request classes.</p></article>
+          <article><span>02 · Hypothesize</span><h3>Name the mechanism</h3><p>State the causal mechanism and a falsifiable prediction. Specify what result would prove you wrong.</p></article>
+          <article><span>03 · Compare</span><h3>Build honest baselines</h3><p>Hold model, hardware, workload, precision, and quality constant. Compare against the strongest relevant scheduler or cache policy.</p></article>
+          <article><span>04 · Ablate</span><h3>Isolate the contribution</h3><p>Remove each mechanism independently. Report median and tail latency, throughput, memory utilization, and quality impact.</p></article>
+        </div>
+        <div class="research-template">
+          <div>
+            <p class="eyebrow">Claim template</p>
+            <blockquote>Under <em>workload W</em>, existing policy <em>P</em> causes <em>measured failure F</em> because of <em>mechanism M</em>. Our method <em>X</em> changes M and improves <em>metric Y</em> by <em>Δ</em> without degrading <em>constraint Z</em>.</blockquote>
+          </div>
+          <ul>
+            <li><b>Workload:</b> arrival process, prompt/output distributions, SLO classes</li>
+            <li><b>Metrics:</b> TTFT, TPOT, p50/p95/p99 latency, goodput, memory waste</li>
+            <li><b>Controls:</b> model, GPU, parallelism, precision, sampling, warm-up</li>
+            <li><b>Evidence:</b> profiler traces, sensitivity analysis, confidence intervals</li>
+          </ul>
+        </div>
+      </section>
+
+      <footer>
+        <span>Inference Atlas</span>
+        <span>Understand the invariant before optimizing the implementation.</span>
+      </footer>
+    </main>
+  </div>
+  <script src="./content.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

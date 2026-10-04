@@ -1,32 +1,37 @@
-# Learning AI
+# Inference Atlas
 
-Interactive course app for AI, neural networks, attention, transformers, and training flow.
+A code-first curriculum and interactive laboratory for mastering LLM serving
+architecture, using [Learning AI](https://gatherheart.github.io/learningAI/) as
+the conceptual starting point.
+
+The site covers tensor and GPU foundations, attention, decoder-only
+Transformers, MHA/MQA/GQA, KV caching, FlashAttention, Orca-style continuous
+batching, PagedAttention, production serving, and research methodology.
+
+## Run locally
+
+```bash
+python3 -m http.server 8000 --directory dist
+```
+
+Then open `http://localhost:8000`.
+
+The site is dependency-free: all content, styling, calculators, and simulations
+are implemented in HTML, CSS, and JavaScript.
 
 ## Live Site
 
 - https://gatherheart.github.io/learningAI
 
-## Runtime
+## Original Learning AI Topics
 
-- Node.js 25.9.0
+- Vector dot products and perceptrons
+- Gradient descent and softmax
+- Attention and Transformer blocks
+- Training-loop flow and next-token prediction
 
-## Scripts
+## Legacy Runtime
 
-- `npm install`
-- `npm run dev`
-- `npm run build`
-
-## Lessons
-
-- Vector dot products
-- Perceptron decision rule
-- Gradient descent updates
-- Softmax probabilities
-- Attention scores
-- Transformer residual blocks
-- Training loop order
-- LLM next-token prediction
-
-## Workspace
-
-- Google Colab: https://colab.research.google.com/
+The original application uses Node.js 25.9.0 and the usual `npm install`,
+`npm run dev`, and `npm run build` workflow. The Inference Atlas materials in
+`dist/` are dependency-free and can also be served as static files.
