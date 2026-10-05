@@ -73,6 +73,16 @@ h1 { max-width: 900px; margin: 0; font-size: clamp(2.7rem, 6vw, 6.5rem); line-he
 .dashboard span, .result-card > span, .scheduler-results article span { color: var(--muted); font: .7rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .1em; }
 .dashboard strong { margin: 10px 0 3px; font-size: 1.35rem; }
 .dashboard small { color: var(--muted); }
+.notation { padding-top: 64px; padding-bottom: 64px; background: var(--panel); }
+.notation-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); }
+.notation-grid article { min-height: 150px; padding: 22px; border-right: 1px solid var(--line); }
+.notation-grid article:last-child { border-right: 0; }
+.notation-grid code { display: block; margin-bottom: 22px; color: var(--mint); font: .9rem ui-monospace, monospace; }
+.notation-grid b { display: block; }
+.notation-grid p, .notation-warning { color: var(--muted); font-size: .86rem; }
+.notation-grid p { margin: 5px 0 0; }
+.notation-warning { margin: 18px 0 0; }
+.notation-warning b { color: var(--orange); }
 
 .section { padding: 90px clamp(24px, 6vw, 96px); border-bottom: 1px solid var(--line); }
 .section-header { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 42px; }
@@ -223,6 +233,9 @@ footer { display: flex; justify-content: space-between; gap: 30px; padding: 38px
   .lab-grid, .scheduler-layout { grid-template-columns: 1fr; }
   .day-grid { grid-template-columns: repeat(2, 1fr); }
   .assessment-grid { grid-template-columns: repeat(2, 1fr); }
+  .notation-grid { grid-template-columns: repeat(2, 1fr); }
+  .notation-grid article:nth-child(2) { border-right: 0; }
+  .notation-grid article:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
 }
 
 @media (max-width: 680px) {
@@ -245,6 +258,9 @@ footer { display: flex; justify-content: space-between; gap: 30px; padding: 38px
   .memory-result strong { font-size: 3.5rem; }
   .course-intro { grid-template-columns: 1fr; }
   .day-grid, .assessment-grid { grid-template-columns: 1fr; }
+  .notation-grid { grid-template-columns: 1fr; }
+  .notation-grid article { border-right: 0; border-bottom: 1px solid var(--line); }
+  .notation-grid article:last-child { border-bottom: 0; }
   .lesson { grid-template-columns: 1fr; gap: 10px; }
   .lesson h3 { margin-top: 0; }
   .lesson-code { margin-left: -8px; margin-right: -8px; padding: 16px 12px; }
