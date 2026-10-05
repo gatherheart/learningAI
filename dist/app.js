@@ -20,11 +20,13 @@ function renderModules() {
       </button>
       <div class="module-detail" id="detail-${m.id}">
         <div class="concept-row">${m.concepts.map(c => `<span>${c}</span>`).join("")}</div>
+        ${m.longform ? `<div class="longform">${m.longform}</div>` : ""}
         <div class="detail-columns">
-          <div class="prose">${m.detail}</div>
+          <div class="prose">${m.longform ? `<h4>Module synthesis</h4>${m.detail}` : m.detail}</div>
           <div>
             <div class="code-head"><span>Reference implementation</span><button data-copy="${m.id}">Copy</button></div>
             <pre class="code"><code id="code-${m.id}">${escapeHtml(m.code)}</code></pre>
+            ${m.walkthrough ? `<section class="walkthrough"><h4>${m.walkthrough.title}</h4><p>${m.walkthrough.intro}</p><ol>${m.walkthrough.lines.map(item => `<li><code>${escapeHtml(item.line)}</code><span>${item.explanation}</span></li>`).join("")}</ol></section>` : ""}
             <div class="falsify"><b>Mastery check</b><p>${m.check}</p></div>
             <label class="complete-toggle"><input type="checkbox" data-complete="${m.id}" ${completed.has(m.id) ? "checked" : ""}> Mark module complete</label>
           </div>
